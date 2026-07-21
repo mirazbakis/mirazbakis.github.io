@@ -3,7 +3,7 @@
   <h1 style="color: #24292e; font-size: 2.5rem; margin-bottom: 10px;">Miraz Bakis</h1>
   <p style="color: #586069; font-size: 1.1rem; margin-bottom: 25px;"><strong>Official Portfolio & Project Hub</strong></p>
   
-  <p style="color: #24292e; max-width: 600px; line-height: 1.6; margin-bottom: 35px;">Welcome to the official website for Miraz Bakis! Here I will share my future and current projects publicly for everyone to see. The plan for the page includes a rock collection store and an AI tool for it.</p>
+  <p style="color: #24292e; max-width: 600px; line-height: 1.6; margin-bottom: 35px;">Welcome to the official website for Miraz Bakis! Here I will share my future and current projects publicly for everyone to see. The plan for the page includes a rock collection store and an AI tool that detects rare rocks or estimates value of it.</p>
 
   <!-- Sleek Static Buttons (Hover removed to prevent broken code) -->
   <a href="store/" style="background-color: #f1f8ff; color: #0366d6; padding: 12px 24px; border-radius: 9999px; text-decoration: none; font-weight: 600; display: inline-block; margin: 5px; border: 1px solid #c8e1ff;">🪨 Visit Rock Store</a>
