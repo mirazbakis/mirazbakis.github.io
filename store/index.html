@@ -17,9 +17,14 @@
         <p>Welcome to the Rock Collection Store! Here you can find rare and good-looking rocks collected from the beaches of Pelion.</p>
     </header>
 
-    <div class="store-grid">
+    <!-- Search Bar Input -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search products..." onkeyup="filterProducts()">
+    </div>
+
+    <div class="store-grid" id="storeGrid">
         <!-- Product Item 1 -->
-        <div class="product-card">
+        <div class="product-card" data-name="pelion quartz pebbles white shiny jar">
             <h3>Pelion Quartz Pebbles</h3>
             <p class="price">$6.50 per jar</p>
             <p class="desc">White and shiny quartz pebbles naturally smoothed by the Aegean waves.</p>
@@ -27,7 +32,7 @@
         </div>
 
         <!-- Product Item 2 -->
-        <div class="product-card">
+        <div class="product-card" data-name="aegean jasper earthy multi-colored stone">
             <h3>Aegean Jasper</h3>
             <p class="price">$22.50</p>
             <p class="desc">An earthy, multi-colored jasper stone with unique natural banding.</p>
@@ -35,7 +40,7 @@
         </div>
 
         <!-- Product Item 3 -->
-        <div class="product-card">
+        <div class="product-card" data-name="polished sea glass bundle frosted green white amber">
             <h3>Polished Sea Glass Bundle</h3>
             <p class="price">$10.00</p>
             <p class="desc">A selection of frosted green, white, and amber glass tumbled by the sea.</p>
@@ -43,6 +48,25 @@
         </div>
     </div>
 </div>
+
+<!-- Simple JavaScript to handle the live search filtering -->
+<script>
+function filterProducts() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let cards = document.getElementsByClassName('product-card');
+
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].getAttribute('data-name');
+        let textContent = cards[i].innerText.toLowerCase();
+        
+        if (name.includes(input) || textContent.includes(input)) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+</script>
 
 </body>
 </html>
