@@ -3,34 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Rock Collection Store</title>
-    <!-- This line right here connects your style.css file! -->
+    <title>Rock Collection Store</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>mirazbakis/mirazbakis.github.io Rock Store</h1>
-        <p>Collected from the beaches of Pelion.</p>
+<div class="container">
+    <!-- Return to Main Page Button -->
+    <a href="../" class="back-btn">← Back to Main Page</a>
+
+    <header class="store-header">
+        <h1>🪨 Rock Collection Store</h1>
+        <p>Welcome to the store! Browse our curated public catalog of rare minerals and stones collected from the beaches of Pelion.</p>
     </header>
-    
-    <main class="store-grid">
-        <!-- Item 1 -->
-        <div class="rock-card">
-            <img src="https://via.placeholder.com/200" alt="Amethyst Geode">
-            <h2>ROCK TYPE 1</h2>
-            <p class="price">$45.00</p>
-            <button>Buy Now</button>
-        </div>
-        
-        <!-- Item 2 -->
-        <div class="rock-card">
-            <img src="https://via.placeholder.com/200" alt="Rose Quartz">
-            <h2>ROCK TYPE 2</h2>
+
+    <div class="store-grid">
+        <!-- Product Item 1 -->
+        <div class="product-card">
+            <h3>Pelion Quartz Crystal</h3>
             <p class="price">$15.00</p>
-            <button>Buy Now</button>
+            <p class="desc">A clear, raw quartz crystal naturally smoothed by the Aegean waves.</p>
+            <a href="#" class="buy-btn">Buy Now</a>
         </div>
-    </main>
+
+        <!-- Product Item 2 -->
+        <div class="product-card">
+            <h3>Aegean Jasper</h3>
+            <p class="price">$22.50</p>
+            <p class="desc">An earthy, multi-colored jasper stone with unique natural banding.</p>
+            <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+
+        <!-- Product Item 3 -->
+        <div class="product-card">
+            <h3>Polished Sea Glass Bundle</h3>
+            <p class="price">$10.00</p>
+            <p class="desc">A selection of frosted green, white, and amber glass tumbled by the sea.</p>
+            <a href="#" class="buy-btn">Buy Now</a>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
