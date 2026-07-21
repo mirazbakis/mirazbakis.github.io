@@ -31,7 +31,7 @@ body {
 }
 
 .store-header {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 h1 {
@@ -43,6 +43,30 @@ h1 {
 p {
     color: #586069;
     line-height: 1.6;
+}
+
+/* Search Bar Styles */
+.search-container {
+    margin-bottom: 30px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 1rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 12px;
+    background-color: #f6f8fa;
+    color: #24292e;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+    border-color: #0366d6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
 }
 
 /* Store Grid Layout */
