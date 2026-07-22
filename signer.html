@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPA Web Signer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://unpkg.com/zsign-web@latest/dist/index.min.js"></script>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #121824;
-            --card-bg: #1a2232;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --bg-color: #030303;
+            --card-bg: #0d0d12;
+            --border-color: rgba(255, 255, 255, 0.15);
             --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
+            --text-secondary: #e2e8f0;
             --accent-blue: #3b82f6;
             --accent-hover: #2563eb;
+            --warning-bg: rgba(210, 153, 34, 0.1);
+            --warning-border: rgba(210, 153, 34, 0.4);
+            --warning-text: #fde047;
         }
 
         * {
@@ -30,42 +36,61 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
+        }
+
+        /* Return to Main Page Button */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            align-self: flex-start;
+            max-width: 540px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        
+        .back-link:hover { 
+            color: var(--text-primary); 
+            transform: translateX(-4px);
         }
 
         .container {
             width: 100%;
-            max-width: 520px;
+            max-width: 540px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
         }
 
         .title-section {
-            text-align: center;
             margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
         }
 
         .title-section h1 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .title-section p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .upload-group {
             display: flex;
             flex-direction: column;
             gap: 1.25rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .input-box {
@@ -76,140 +101,159 @@
 
         .input-box label {
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600; 
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         .file-input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed var(--border-color);
-            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
             color: var(--text-primary);
             font-size: 0.9rem;
-            cursor: pointer;
-            transition: border-color 0.2s ease, background 0.2s ease;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.2s ease;
         }
 
         .file-input:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .file-input:focus {
             border-color: var(--accent-blue);
-            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
 
         .file-input::file-selector-button {
-            background: var(--accent-blue);
-            border: none;
-            color: #ffffff;
-            padding: 0.4rem 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
             border-radius: 6px;
-            font-weight: 500;
-            margin-right: 0.75rem;
+            font-weight: 600;
+            margin-right: 1rem;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .file-input::file-selector-button:hover {
-            background: var(--accent-hover);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .btn-sign {
             width: 100%;
-            padding: 0.9rem;
+            padding: 1rem;
             background: var(--accent-blue);
             color: #ffffff;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s ease, transform 0.1s ease;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         .btn-sign:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
         }
 
         .btn-sign:active {
-            transform: translateY(0);
+            transform: translateY(1px);
         }
 
-        .status-box {
+        #status {
             margin-top: 1.5rem;
             padding: 1rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-color);
             font-size: 0.9rem;
+            font-weight: 600;
             color: var(--text-secondary);
             text-align: center;
-            display: none;
+            word-break: break-all;
+            transition: all 0.3s ease;
+        }
+
+        .processing {
+            color: #60a5fa !important;
+            border-color: rgba(96, 165, 250, 0.4) !important;
+            box-shadow: 0 0 12px rgba(96, 165, 250, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .success {
+            color: #4ade80 !important;
+            border-color: rgba(74, 222, 128, 0.4) !important;
+            background: rgba(74, 222, 128, 0.05) !important;
+        }
+
+        .error {
+            color: #f87171 !important;
+            border-color: rgba(248, 113, 113, 0.4) !important;
+            background: rgba(248, 113, 113, 0.05) !important;
+        }
+
+        .disclaimer {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            border-radius: 10px;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .disclaimer-icon {
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .disclaimer-content strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            color: var(--warning-text);
+        }
+        
+        .disclaimer-content p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
         .footer-credit {
             margin-top: 2rem;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
         }
 
         .footer-credit a {
-            color: var(--text-secondary);
+            color: var(--text-primary);
             text-decoration: underline;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="title-section">
-            <h1>IPA Web Signer</h1>
-            <p>Select your files below to sign your iOS application</p>
-        </div>
+    <a href="index.html" class="back-link">← Return to Main Page</a>
 
-        <div class="upload-group">
-            <div class="input-box">
-                <label>IPA File</label>
-                <input type="file" class="file-input" id="ipaFile" accept=".ipa">
-            </div>
-
-            <div class="input-box">
-                <label>Mobile Provision</label>
-                <input type="file" class="file-input" id="provFile" accept=".mobileprovision">
-            </div>
-
-            <div class="input-box">
-                <label>P12 Certificate</label>
-                <input type="file" class="file-input" id="p12File" accept=".p12">
-            </div>
-
-            <div class="input-box">
-                <label>P12 Password</label>
-                <input type="password" class="file-input" id="p12Password" placeholder="Enter certificate password">
-            </div>
-        </div>
-
-        <button class="btn-sign" onclick="startSigning()">Sign IPA</button>
-
-        <div class="status-box" id="statusBox">
-            Ready to sign.
-        </div>
-    </div>
-
-    <div class="footer-credit">
-        Powered by the open-source zsign engine by zhlynn (MIT License)
-    </div>
-
-    <script>
-        function startSigning() {
-            const statusBox = document.getElementById('statusBox');
-            statusBox.style.display = 'block';
-            statusBox.innerText = 'Processing files...';
-            // Your zsign signing logic goes here
-        }
-    </script>
-</body>
-</html>
+    
