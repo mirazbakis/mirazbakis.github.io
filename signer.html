@@ -9,158 +9,227 @@
     <script src="https://unpkg.com/zsign-web@latest/dist/index.min.js"></script>
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-primary: #c9d1d9;
-            --text-secondary: #8b949e;
+            --bg-dark: #09090b;
+            --bg-gradient: radial-gradient(circle at top right, #1a1a24, #09090b);
+            --card-bg: rgba(24, 24, 27, 0.65);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-focus: rgba(35, 134, 54, 0.6);
+            --text-primary: #ededed;
+            --text-secondary: #a1a1aa;
             --accent: #238636;
             --accent-hover: #2ea043;
-            --input-bg: #0d1117;
-            --warning-bg: rgba(210, 153, 34, 0.1);
-            --warning-border: rgba(210, 153, 34, 0.4);
-            --warning-text: #d29922;
+            --input-bg: rgba(9, 9, 11, 0.5);
+            --warning-bg: rgba(210, 153, 34, 0.08);
+            --warning-border: rgba(210, 153, 34, 0.3);
+            --warning-text: #e3b341;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-primary);
-            max-width: 520px;
-            margin: 60px auto;
-            padding: 20px;
-            line-height: 1.5;
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
         .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 24px;
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 14px;
-            transition: color 0.2s;
+            font-weight: 500;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
         
         .back-link:hover { 
             color: var(--text-primary); 
+            transform: translateX(-4px);
         }
 
         .box {
             background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            padding: 28px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         h2 {
             margin-top: 0;
-            font-size: 20px;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group {
             margin-bottom: 20px;
-            color: var(--text-primary);
         }
 
         label {
             display: block;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--text-secondary);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
         }
 
         input[type="file"],
         input[type="password"] {
             width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 16px;
+            padding: 12px 16px;
             background: var(--input-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--text-primary);
             box-sizing: border-box;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input[type="file"]:hover,
+        input[type="password"]:hover {
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         input[type="file"]:focus,
         input[type="password"]:focus {
-            border-color: var(--accent);
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(35, 134, 54, 0.15), inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
         input[type="file"]::file-selector-button {
-            background: var(--border-color);
+            background: rgba(255, 255, 255, 0.08);
             color: var(--text-primary);
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-right: 10px;
-            transition: background 0.2s;
+            margin-right: 12px;
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.2s ease;
         }
 
         input[type="file"]::file-selector-button:hover {
-            background: #484f58;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            background-color: var(--accent);
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent), #2ea043);
             color: white;
             border: none;
             font-weight: 600;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 15px;
-            transition: background-color 0.2s, transform 0.1s;
-            margin-top: 4px;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            margin-top: 8px;
+            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
         }
 
         button:hover {
-            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(35, 134, 54, 0.4);
+            background: linear-gradient(135deg, #27943c, #32ad49);
         }
 
         button:active {
-            transform: scale(0.99);
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(35, 134, 54, 0.3);
         }
 
         #status {
-            margin-top: 16px;
-            font-size: 13px;
+            margin-top: 20px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--text-secondary);
             background: var(--input-bg);
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
             text-align: center;
             word-break: break-all;
+            transition: all 0.3s ease;
         }
 
-        /* Disclaimer Styling */
+        /* Pulsing animation for loading states */
+        .processing {
+            color: #58a6ff !important;
+            border-color: rgba(88, 166, 255, 0.4) !important;
+            box-shadow: 0 0 12px rgba(88, 166, 255, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .success {
+            color: #3fb950 !important;
+            border-color: rgba(63, 185, 80, 0.4) !important;
+            background: rgba(63, 185, 80, 0.05) !important;
+        }
+
+        .error {
+            color: #f85149 !important;
+            border-color: rgba(248, 81, 73, 0.4) !important;
+            background: rgba(248, 81, 73, 0.05) !important;
+        }
+
         .disclaimer {
-            margin-top: 24px;
-            padding: 14px 16px;
+            margin-top: 28px;
+            padding: 16px;
             background-color: var(--warning-bg);
             border: 1px solid var(--warning-border);
-            border-radius: 6px;
-            font-size: 12.5px;
+            border-radius: 8px;
+            font-size: 13px;
             color: var(--warning-text);
-            line-height: 1.5;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
         }
 
-        .disclaimer strong {
+        .disclaimer-icon {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .disclaimer-content strong {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-size: 14px;
-            color: #e3b341;
+            color: #d29922;
         }
         
-        .disclaimer p {
+        .disclaimer-content p {
             margin: 0;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -169,38 +238,48 @@
     <a href="index.html" class="back-link">← Back to Hub</a>
 
     <div class="box">
-        <h2>Static IPA Web Signer</h2>
+        <h2>✨ Static IPA Web Signer</h2>
         
-        <label>1. Apple Certificate (.p12):</label>
-        <input type="file" id="p12File" accept=".p12">
+        <div class="input-group">
+            <label>1. Apple Certificate (.p12)</label>
+            <input type="file" id="p12File" accept=".p12">
+        </div>
         
-        <label>2. Certificate Password:</label>
-        <input type="password" id="p12Password" placeholder="Enter certificate password">
+        <div class="input-group">
+            <label>2. Certificate Password</label>
+            <input type="password" id="p12Password" placeholder="Enter certificate password">
+        </div>
         
-        <label>3. Provisioning Profile (.mobileprovision):</label>
-        <input type="file" id="provFile" accept=".mobileprovision">
+        <div class="input-group">
+            <label>3. Provisioning Profile (.mobileprovision)</label>
+            <input type="file" id="provFile" accept=".mobileprovision">
+        </div>
     
-        <label>4. Unsigned IPA File (.ipa):</label>
-        <input type="file" id="ipaFile" accept=".ipa">
+        <div class="input-group">
+            <label>4. Unsigned IPA File (.ipa)</label>
+            <input type="file" id="ipaFile" accept=".ipa">
+        </div>
     
         <button id="signButton" onclick="processAndSign()">Sign IPA File</button>
         <div id="status">Status: Ready</div>
 
-        <!-- Disclaimer Section -->
         <div class="disclaimer">
-            <strong>⚠️ Disclaimer & Privacy</strong>
-            <p>This tool runs entirely locally in your web browser. Your files, certificates, and passwords are <b>never</b> uploaded or transmitted to any external server. Use this tool at your own risk; we are not responsible for any revoked developer accounts or misused certificates.</p>
+            <div class="disclaimer-icon">🛡️</div>
+            <div class="disclaimer-content">
+                <strong>Privacy First</strong>
+                <p>This tool runs entirely locally in your web browser. Your files, certificates, and passwords are <b>never</b> uploaded to any external server.</p>
+            </div>
         </div>
     </div>
 
     <script>
         window.processAndSign = async function() {
             const statusEl = document.getElementById('status');
+            statusEl.className = 'processing'; // Add pulsing animation
             
             try {
-                // 1. Check if the WebAssembly engine script successfully loaded from unpkg
                 if (!window.zsignWeb) {
-                    throw new Error("Signing engine (zsignWeb) failed to load from CDN. Check your internet connection or script source.");
+                    throw new Error("Signing engine (zsignWeb) failed to load from CDN. Check your internet connection.");
                 }
 
                 const p12File = document.getElementById('p12File').files[0];
@@ -209,20 +288,17 @@
                 const ipaFile = document.getElementById('ipaFile').files[0];
 
                 if (!p12File || !provFile || !ipaFile) {
-                    alert("Please select all required files (.p12, .mobileprovision, and .ipa).");
-                    return;
+                    throw new Error("Please select all required files (.p12, .mobileprovision, and .ipa).");
                 }
 
                 statusEl.innerText = "Status: Initializing background signing engine...";
                 
-                // Read uploaded assets straight into Uint8Arrays
                 const p12Buffer = new Uint8Array(await p12File.arrayBuffer());
                 const provBuffer = new Uint8Array(await provFile.arrayBuffer());
                 const ipaBuffer = new Uint8Array(await ipaFile.arrayBuffer());
 
                 statusEl.innerText = "Status: Executing signature script inside browser thread...";
                 
-                // Call global unpkg engine wrapper directly 
                 const signedIpaBytes = await window.zsignWeb.sign({
                     ipa: ipaBuffer,
                     p12: p12Buffer,
@@ -246,11 +322,12 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
                 
-                statusEl.innerText = "Status: Done! Check downloads.";
+                statusEl.className = 'success';
+                statusEl.innerText = "Status: Done! Check your downloads folder.";
             } catch (e) {
                 console.error("Detailed Signing Error:", e);
-                // Displays the real error message instead of 'undefined'
                 const errorMessage = e.message || e.toString() || "Unknown error";
+                statusEl.className = 'error';
                 statusEl.innerText = "Status: Error - " + errorMessage;
             }
         }
