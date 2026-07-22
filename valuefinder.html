@@ -3,278 +3,113 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rock Identifier</title>
-    <!-- TensorFlow.js and MobileNet from CDN -->
+    <title>Rock Identifier & Value Estimator</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px; margin: 40px auto; padding: 20px;
-            background: #f5f0eb; color: #2d2a24;
-        }
-        h1 { text-align: center; margin-bottom: 10px; color: #4a3f35; }
-        .subtitle { text-align: center; color: #6b5f52; margin-bottom: 30px; }
-        .upload-area {
-            border: 3px dashed #b8a99a; border-radius: 16px; padding: 40px;
-            text-align: center; background: #faf8f5; cursor: pointer;
-            transition: background 0.2s;
-        }
-        .upload-area:hover { background: #f0ebe5; }
-        .upload-area input { display: none; }
-        .upload-area img { max-width: 100%; max-height: 300px; margin-top: 15px; border-radius: 8px; }
-        .results {
-            margin-top: 30px; padding: 20px; background: white;
-            border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-        .results h2 { font-size: 1.1rem; color: #4a3f35; margin-bottom: 12px; }
-        .result-item {
-            display: flex; justify-content: space-between; padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .result-item:last-child { border-bottom: none; }
-        .confidence-bar {
-            height: 6px; background: #d4c9bf; border-radius: 4px;
-            margin-top: 4px; width: 100%;
-        }
-        .confidence-fill {
-            height: 100%; background: #6b8c5c; border-radius: 4px;
-            transition: width 0.3s;
-        }
-        .value-estimate {
-            margin-top: 16px; padding: 14px; background: #e8f0e4;
-            border-radius: 8px; text-align: center;
-        }
-        .value-estimate strong { font-size: 1.4rem; color: #2d5a1e; }
-        .loading { text-align: center; color: #6b5f52; margin-top: 20px; display: none; }
-        .error { color: #b34a4a; text-align: center; margin-top: 10px; }
-        .rock-types {
-            display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;
+            font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-        }
-        .rock-types span {
-            background: #e8e0d8; padding: 4px 12px; border-radius: 20px;
-            font-size: 0.8rem; color: #4a3f35;
-        }
-        @media (max-width: 600px) { body { padding: 12px; } }
-    </style>
-</head>
-<body>
-
-    <h1>🪨 Rock Identifier</h1>
-    <p class="subtitle">Upload a photo to identify the rock type</p>
-
-    <div class="upload-area" id="uploadArea">
-        <p>📸 Click or drag an image here</p>
-        <input type="file" id="imageInput" accept="image/*" />
-        <img id="preview" style="display:none;" alt="Preview" />
-    </div>
-
-    <div class="loading" id="loading">🔍 Analyzing your rock...</div>
-    <div class="error" id="error"></div>
-
-    <div class="results" id="results" style="display:none;">
-        <h2>🔬 Identification Results</h2>
-        <div id="predictions"></div>
-        <div class="value-estimate" id="valueEstimate">
-            💎 Estimated Value: <strong id="valueAmount">—</strong>
-        </div>
-        <p style="font-size:0.8rem; color:#8a7e72; margin-top:10px; text-align:center;">
-            ⚠️ Value is an estimate based on rock type and visual features.
-        </p>
-    </div>
-
-    <script>
-        // ----- ROCK TYPES & VALUE MAPPING (heuristic) -----
-        // UPDATED: Minimum value is now $0.50 for common/low-value rocks
-        const ROCK_DATA = {
-            'granite':       { label: 'Granite',       baseValue: 15,   range: [5, 80] },
-            'marble':        { label: 'Marble',        baseValue: 25,   range: [10, 120] },
-            'sandstone':     { label: 'Sandstone',     baseValue: 8,    range: [2, 40] },
-            'slate':         { label: 'Slate',         baseValue: 10,   range: [3, 50] },
-            'basalt':        { label: 'Basalt',        baseValue: 6,    range: [0.50, 30] },   // Updated min to 0.50
-            'quartzite':     { label: 'Quartzite',     baseValue: 20,   range: [8, 100] },
-            'limestone':     { label: 'Limestone',     baseValue: 5,    range: [0.50, 25] },   // Updated min to 0.50
-            'gneiss':        { label: 'Gneiss',        baseValue: 12,   range: [4, 60] },
-            'schist':        { label: 'Schist',        baseValue: 10,   range: [3, 50] },
-            'obsidian':      { label: 'Obsidian',      baseValue: 30,   range: [15, 150] },
-            'jade':          { label: 'Jade',          baseValue: 80,   range: [40, 300] },    // Goes up to $300
-            'amethyst':      { label: 'Amethyst',      baseValue: 45,   range: [20, 200] },    // Goes up to $200
-            'quartz':        { label: 'Quartz',        baseValue: 15,   range: [5, 75] },
-            'feldspar':      { label: 'Feldspar',      baseValue: 8,    range: [2, 35] },
-            'mica':          { label: 'Mica',          baseValue: 5,    range: [0.50, 20] },   // Updated min to 0.50
-            'not_a_rock':    { label: 'Not a Rock',    baseValue: 0,    range: [0, 0] }
-        };
-
-        // Map MobileNet class names to rock types (fuzzy matching)
-        const CLASS_MAPPING = {
-            'granite': ['granite', 'stone', 'rock'],
-            'marble': ['marble', 'statue', 'sculpture'],
-            'sandstone': ['sandstone', 'sand', 'stone'],
-            'slate': ['slate', 'tile', 'roof'],
-            'basalt': ['basalt', 'volcanic', 'lava'],
-            'quartzite': ['quartzite', 'quartz'],
-            'limestone': ['limestone', 'chalk'],
-            'gneiss': ['gneiss'],
-            'schist': ['schist'],
-            'obsidian': ['obsidian', 'volcanic glass'],
-            'jade': ['jade', 'jadeite'],
-            'amethyst': ['amethyst', 'purple quartz'],
-            'quartz': ['quartz', 'crystal'],
-            'feldspar': ['feldspar'],
-            'mica': ['mica']
-        };
-
-        function getRockType(mobilenetLabel) {
-            const lower = mobilenetLabel.toLowerCase();
-            for (const [rock, keywords] of Object.entries(CLASS_MAPPING)) {
-                for (const kw of keywords) {
-                    if (lower.includes(kw)) return rock;
-                }
-            }
-            return null;
+            padding: 24px 16px;
         }
 
-        function estimateValue(rockType, confidence) {
-            if (!rockType || !ROCK_DATA[rockType]) return { value: 0, range: [0, 0] };
-            const data = ROCK_DATA[rockType];
-            // Confidence boosts the value (0.5 to 1.5 multiplier)
-            const confidenceBoost = 0.5 + (confidence * 1.0);
-            let raw = data.baseValue * confidenceBoost;
-            // Clamp to the range (min is now as low as 0.50)
-            const clamped = Math.min(Math.max(raw, data.range[0]), data.range[1]);
-            return { value: Math.round(clamped * 100) / 100, range: data.range };
+        .container {
+            width: 100%;
+            max-width: 540px;
+            background: #111827;
+            border: 1px solid #1f293d;
+            border-radius: 20px;
+            padding: 32px 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
         }
 
-        // ----- UI Elements -----
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('imageInput');
-        const preview = document.getElementById('preview');
-        const loading = document.getElementById('loading');
-        const error = document.getElementById('error');
-        const resultsDiv = document.getElementById('results');
-        const predictionsDiv = document.getElementById('predictions');
-        const valueAmount = document.getElementById('valueAmount');
-
-        let model = null;
-
-        // ----- Load MobileNet -----
-        async function loadModel() {
-            try {
-                model = await mobilenet.load();
-                console.log('✅ MobileNet loaded');
-            } catch (err) {
-                error.textContent = 'Failed to load AI model. Please refresh and try again.';
-                console.error(err);
-            }
-        }
-        loadModel();
-
-        // ----- Handle file upload -----
-        uploadArea.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); uploadArea.style.background = '#e8e0d8'; });
-        uploadArea.addEventListener('dragleave', () => { uploadArea.style.background = '#faf8f5'; });
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.style.background = '#faf8f5';
-            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-        });
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length) handleFile(e.target.files[0]);
-        });
-
-        function handleFile(file) {
-            if (!file.type.startsWith('image/')) {
-                error.textContent = 'Please upload an image file.';
-                return;
-            }
-            error.textContent = '';
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                resultsDiv.style.display = 'none';
-                classifyImage(e.target.result);
-            };
-            reader.readAsDataURL(file);
+        /* Top Header Nav */
+        .top-nav {
+            margin-bottom: 24px;
         }
 
-        // ----- Classify -----
-        async function classifyImage(imgData) {
-            if (!model) {
-                error.textContent = 'Model is still loading. Please wait a moment and try again.';
-                return;
-            }
-            loading.style.display = 'block';
-            predictionsDiv.innerHTML = '';
-            valueAmount.textContent = '—';
-
-            try {
-                const img = new Image();
-                img.src = imgData;
-                await new Promise((resolve) => { img.onload = resolve; });
-
-                const predictions = await model.classify(img);
-                loading.style.display = 'none';
-                resultsDiv.style.display = 'block';
-
-                // Show top predictions
-                let html = '';
-                let bestRock = null;
-                let bestConfidence = 0;
-
-                for (const pred of predictions) {
-                    const rock = getRockType(pred.className);
-                    const conf = (pred.probability * 100).toFixed(1);
-                    const displayName = rock && ROCK_DATA[rock] ? ROCK_DATA[rock].label : pred.className;
-                    const isRock = rock !== null;
-                    html += `
-                        <div class="result-item">
-                            <span>${displayName} ${isRock ? '🪨' : '🔍'}</span>
-                            <span>${conf}%</span>
-                        </div>
-                        <div class="confidence-bar">
-                            <div class="confidence-fill" style="width:${conf}%;"></div>
-                        </div>
-                    `;
-                    if (isRock && pred.probability > bestConfidence) {
-                        bestRock = rock;
-                        bestConfidence = pred.probability;
-                    }
-                }
-
-                // If no rock found in top predictions, check all classes
-                if (!bestRock) {
-                    const all = await model.classify(img, 100);
-                    for (const pred of all) {
-                        const rock = getRockType(pred.className);
-                        if (rock && pred.probability > bestConfidence) {
-                            bestRock = rock;
-                            bestConfidence = pred.probability;
-                        }
-                    }
-                }
-
-                predictionsDiv.innerHTML = html;
-
-                // Value estimate
-                if (bestRock && bestRock !== 'not_a_rock') {
-                    const result = estimateValue(bestRock, bestConfidence);
-                    const label = ROCK_DATA[bestRock]?.label || bestRock;
-                    valueAmount.textContent = `$${result.value.toFixed(2)} (${label})`;
-                } else {
-                    valueAmount.textContent = 'Not a recognizable rock';
-                }
-
-            } catch (err) {
-                loading.style.display = 'none';
-                error.textContent = 'Error analyzing image: ' + err.message;
-                console.error(err);
-            }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            transition: all 0.2s ease;
         }
 
-        console.log('🪨 Rock Identifier ready!');
-    </script>
-</body>
-</html>
+        .back-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+        }
+
+        /* Upload Dropzone */
+        .upload-area {
+            border: 2px dashed #2d3748;
+            border-radius: 16px;
+            padding: 36px 20px;
+            text-align: center;
+            background: #161e2e;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .upload-area:hover {
+            border-color: #3b82f6;
+            background: #1a2333;
+        }
+
+        .upload-area p {
+            color: #d1d5db;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .upload-area input {
+            display: none;
+        }
+
+        .upload-area img {
+            max-width: 100%;
+            max-height: 240px;
+            margin-top: 16px;
+            border-radius: 12px;
+            border: 1px solid #2d3748;
+            object-fit: cover;
+        }
