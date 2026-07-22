@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPA Web Signer</title>
+    <!-- Core Cryptography and Unzipping Libraries Loaded via CDN -->
+    <script src="https://cloudflare.com"></script>
+    <script src="https://cloudflare.com"></script>
+    <!-- Automated WebAssembly Signer Engine Hook -->
+    <script src="https://unpkg.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 500px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+        .box { border: 1px solid #ccc; padding: 20px; border-radius: 8px; background: #fafafa; }
+        input, button { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; border-radius: 4px; border: 1px solid #ccc; }
+        button { background: #0070f3; color: white; border: none; font-weight: bold; cursor: pointer; }
+        #status { font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>Static IPA Web Signer</h2>
+        
+        <label>1. Apple Certificate (.p12):</label>
+        <input type="file" id="p12File" accept=".p12">
+        
+        <label>2. Certificate Password:</label>
+        <input type="password" id="p12Password" placeholder="Enter password">
+        
+        <label>3. Provisioning Profile (.mobileprovision):</label>
+        <input type="file" id="provFile" accept=".mobileprovision">
+    
+        <label>4. Unsigned IPA File (.ipa):</label>
+        <input type="file" id="ipaFile" accept=".ipa">
+    
+        <button id="signButton" onclick="processAndSign()">Sign IPA File</button>
+        <p id="status">Status: Ready</p>
+    </div>
+
+    <script>
+        window.processAndSign = async function() {
+            const p12File = document.getElementById('p12File').files[0];
+            const password = document.getElementById('p12Password').value;
+            const provFile = document.getElementById('provFile').files[0];
+            const ipaFile = document.getElementById('ipaFile').files[0];
+
+            if (!p12File || !provFile || !ipaFile) return alert("Please select all required files.");
+
+            try {
+                document.getElementById('status').innerText = "Status: Initializing background signing engine...";
+                
+                // Read uploaded assets straight into Uint8Arrays
+                const p12Buffer = new Uint8Array(await p12File.arrayBuffer());
+                const provBuffer = new Uint8Array(await provFile.arrayBuffer());
+                const ipaBuffer = new Uint8Array(await ipaFile.arrayBuffer());
+
+                document.getElementById('status').innerText = "Status: Executing signature script inside browser thread...";
+                
+                // Call global unpkg engine wrapper directly 
+                const signedIpaBytes = await window.zsignWeb.sign({
+                    ipa: ipaBuffer,
+                    p12: p12Buffer,
+                    password: password,
+                    provision: provBuffer
+                });
+                
+                document.getElementById('status').innerText = "Status: Packing distribution package...";
+                const finalBlob = new Blob([signedIpaBytes], { type: "application/octet-stream" });
+                
+                const url = URL.createObjectURL(finalBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "Signed_" + ipaFile.name;
+                a.click();
+                
+                document.getElementById('status').innerText = "Status: Done! Check downloads.";
+            } catch (e) {
+                document.getElementById('status').innerText = "Status: Error - " + e.message;
+            }
+        }
+    </script>
+</body>
+</html>
