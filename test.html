@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miraz Bakis - Official Portfolio & Project Hub</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --card-bg: #18181b;
+      --border: #27272a;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --accent-link: #3b82f6;
+      --accent-orange: #f97316;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding: 2rem 1rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* SideStore Hero Styling */
+    .hero {
+      min-height: 45vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .hero p.subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .hero p.description {
+      color: var(--text);
+      max-width: 600px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--card-bg);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, opacity 0.2s, border-color 0.2s;
+    }
+
+    .btn-primary {
+      background-color: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      border-color: #3f3f46;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 30px 0;
+    }
+
+    /* Section Headings */
+    .section-title {
+      color: var(--text);
+      font-size: 1.75rem;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    /* Grid Layout */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: #3f3f46;
+    }
+
+    .card h4 {
+      color: var(--text);
+      margin-top: 0;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .card a {
+      color: var(--accent-link);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .card p.status {
+      color: var(--accent-orange);
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    /* FAQ Section */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: var(--card-bg);
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    details {
+      margin-bottom: 16px;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    details:last-child {
+      margin-bottom: 0;
+    }
+
+    details summary {
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--accent-link);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      color: var(--muted);
+      margin-top: 12px;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    /* SideStore Scroll Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <section class="hero reveal">
+      <h1>Miraz Bakis</h1>
+      <p class="subtitle"><strong>Official Portfolio & Project Hub</strong></p>
+      <p class="description">Welcome to the official website for Miraz Bakis! Here I will share my future and current projects publicly for everyone to see. The plan for the page includes a rock collection store and an AI tool that detects rare rocks or estimates value of it.</p>
+      <div class="button-group">
+        <a href="store/" class="btn btn-primary">Visit Rock Store</a>
+        <a href="#ai-tool" class="btn">AI Tool (Coming Soon)</a>
+      </div>
+    </section>
+
+    <hr>
+
+    <section class="reveal">
+      <h3 class="section-title">Current & Upcoming Projects</h3>
+      <div class="card-grid">
+        <div class="card">
+          <h4>Rock Collection Store</h4>
+          <p>A curated public catalog of rare minerals and stones collected from the beaches of Pelion.</p>
+          <a href="store/">Explore Store &rarr;</a>
+        </div>
+
+        <div class="card" id="ai-tool">
+          <h4>Store AI Companion</h4>
+          <p>An interactive assistant tailored specifically for the rock collection and mineral database.</p>
+          <p class="status"><em>In Development</em></p>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section class="reveal">
+      <h3 class="section-title">Frequently Asked Questions (FAQ)</h3>
+      <div class="faq-container">
+        <details>
+          <summary><b>1: Where are the rocks collected in the Rock Collection Store?</b></summary>
+          <p>Answer: The rocks are mostly collected from the beaches of Pelion.</p>
+        </details>
+
+        details>
+          <summary><b>2: What is this website for?</b></summary>
+          <p>Answer: This website is for my projects. You can see them above.</p>
+        </details>
+
+        <details>
+          <summary><b>3: What is the AI tool for?</b></summary>
+          <p>Answer: The AI tool is for estimating value of rocks. It is specifically made to help you find rare & unique rocks.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
