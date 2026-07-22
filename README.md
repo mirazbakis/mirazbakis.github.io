@@ -32,3 +32,20 @@
     </tr>
   </table>
 </div>
+
+### Frequently Asked Questions
+
+<details>
+<summary><b>QUESTION 1: [Type your first question here]</b></summary>
+<p>ANSWER 1: [Type your answer here]</p>
+</details>
+
+<details>
+<summary><b>QUESTION 2: [Type your second question here]</b></summary>
+<p>ANSWER 2: [Type your answer here]</p>
+</details>
+
+<details>
+<summary><b>QUESTION 3: [Type your third question here]</b></summary>
+<p>ANSWER 3: [Type your answer here]</p>
+</details>
