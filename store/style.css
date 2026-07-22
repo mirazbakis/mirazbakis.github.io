@@ -1,27 +1,24 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap');
-
-/* Base & Reset */
+/* Core Reset */
 * {
     box-sizing: border-box;
 }
 
 body {
-    background-color: #0d0d0d;
+    background-color: #0d0d0d !important;
     color: #f2f2f2;
-    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 40px 20px;
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
 }
 
-/* Layout Container */
+/* Layout */
 .container {
     max-width: 1080px;
     margin: 0 auto;
 }
 
-/* Header & Typography */
+/* Typography */
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -36,7 +33,6 @@ p.subtitle {
     margin-top: 0;
     margin-bottom: 30px;
     font-size: 1.1rem;
-    font-weight: 400;
 }
 
 /* Buttons */
@@ -50,7 +46,7 @@ p.subtitle {
     font-weight: 500;
     font-size: 0.95rem;
     border: 1px solid #2e2e2e;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
@@ -59,7 +55,6 @@ p.subtitle {
     color: #0d0d0d;
     border-color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
 .btn.primary {
@@ -77,10 +72,9 @@ p.subtitle {
     background-color: #d1d1d1;
     color: #000000;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
 }
 
-/* Search Bar */
+/* Search Container */
 .search-container {
     margin-bottom: 35px;
 }
@@ -92,9 +86,9 @@ p.subtitle {
     border: 1px solid #2a2a2a;
     background-color: #141414;
     color: #ffffff;
-    font-family: 'Satoshi', sans-serif;
+    font-family: inherit;
     font-size: 1rem;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
 }
 
 #searchInput::placeholder {
@@ -105,10 +99,9 @@ p.subtitle {
     outline: none;
     border-color: #555555;
     background-color: #1a1a1a;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive Product Grid */
+/* Product Grid */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -121,20 +114,17 @@ p.subtitle {
     border: 1px solid #262626;
     border-radius: 18px;
     padding: 20px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
-    position: relative;
-    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
     border-color: #404040;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-/* Card Image Placeholder & Hover Effect */
 .card-img {
     background-color: #1a1a1a;
     height: 190px;
@@ -143,8 +133,6 @@ p.subtitle {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #666666;
-    font-size: 0.9rem;
     overflow: hidden;
     border: 1px solid #222222;
 }
@@ -153,20 +141,13 @@ p.subtitle {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
 }
 
-.card:hover .card-img img {
-    transform: scale(1.04);
-}
-
-/* Card Typography */
 .card h3 {
     margin: 0 0 8px 0;
     font-size: 1.25rem;
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: -0.01em;
 }
 
 .card p {
@@ -182,108 +163,14 @@ p.subtitle {
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 12px;
-    letter-spacing: -0.01em;
 }
 
-/* Mobile Responsiveness */
+/* Mobile Layout */
 @media (max-width: 600px) {
     body {
-        padding: 25px 15px;
+        padding: 20px 15px;
     }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
     .grid {
         grid-template-columns: 1fr;
-        gap: 20px;
     }
-}h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: #24292e;
-}
-
-p {
-    color: #586069;
-    line-height: 1.6;
-}
-
-/* Search Bar Styles */
-.search-container {
-    margin-bottom: 30px;
-}
-
-.search-input {
-    width: 100%;
-    padding: 12px 18px;
-    font-size: 1rem;
-    border: 1px solid #e1e4e8;
-    border-radius: 12px;
-    background-color: #f6f8fa;
-    color: #24292e;
-    box-sizing: border-box;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.search-input:focus {
-    border-color: #0366d6;
-    background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
-}
-
-/* Store Grid Layout */
-.store-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.product-card {
-    background-color: #f6f8fa;
-    border: 1px solid #e1e4e8;
-    border-radius: 12px;
-    padding: 24px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.product-card h3 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: #24292e;
-}
-
-.price {
-    font-weight: 700;
-    color: #0366d6;
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-}
-
-.desc {
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    color: #586069;
-}
-
-.buy-btn {
-    display: inline-block;
-    background-color: #2ea44f;
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 9999px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-}
-
-.buy-btn:hover {
-    background-color: #2c974b;
 }
