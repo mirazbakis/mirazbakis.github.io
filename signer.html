@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPA Web Signer - Miraz Bakis</title>
+    <title>IPA Web Signer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://unpkg.com/zsign-web@latest/dist/index.min.js"></script>
@@ -256,4 +256,108 @@
 
     <a href="index.html" class="back-link">← Return to Main Page</a>
 
+    <div class="container">
+        <div class="title-section">
+            <h1>IPA Web Signer</h1>
+        </div>
+        
+        <div class="upload-group">
+            <div class="input-box">
+                <label>1. Apple Certificate (.p12)</label>
+                <input type="file" class="file-input" id="p12File" accept=".p12">
+            </div>
+            
+            <div class="input-box">
+                <label>2. Certificate Password</label>
+                <input type="password" class="file-input" id="p12Password" placeholder="Enter certificate password">
+            </div>
+            
+            <div class="input-box">
+                <label>3. Provisioning Profile (.mobileprovision)</label>
+                <input type="file" class="file-input" id="provFile" accept=".mobileprovision">
+            </div>
+        
+            <div class="input-box">
+                <label>4. Unsigned IPA File (.ipa)</label>
+                <input type="file" class="file-input" id="ipaFile" accept=".ipa">
+            </div>
+        </div>
     
+        <button class="btn-sign" id="signButton" onclick="processAndSign()">Sign IPA File</button>
+        <div id="status">Status: Ready</div>
+
+        <div class="disclaimer">
+            <div class="disclaimer-icon">🛡️</div>
+            <div class="disclaimer-content">
+                <strong>Privacy First</strong>
+                <p>This tool runs entirely locally in your web browser. Your files, certificates, and passwords are <b>never</b> uploaded to any external server.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-credit">
+        <p>IPA Signer is powered by the open-source engine <a href="https://github.com/zhlynn/zsign" target="_blank">zsign</a> by zhlynn (MIT License).</p>
+    </div>
+
+    <script>
+        window.processAndSign = async function() {
+            const statusEl = document.getElementById('status');
+            statusEl.className = 'processing';
+            
+            try {
+                if (!window.zsignWeb) {
+                    throw new Error("Signing engine (zsignWeb) failed to load from CDN. Check your internet connection.");
+                }
+
+                const p12File = document.getElementById('p12File').files[0];
+                const password = document.getElementById('p12Password').value || "";
+                const provFile = document.getElementById('provFile').files[0];
+                const ipaFile = document.getElementById('ipaFile').files[0];
+
+                if (!p12File || !provFile || !ipaFile) {
+                    throw new Error("Please select all required files (.p12, .mobileprovision, and .ipa).");
+                }
+
+                statusEl.innerText = "Status: Initializing background signing engine...";
+                
+                const p12Buffer = new Uint8Array(await p12File.arrayBuffer());
+                const provBuffer = new Uint8Array(await provFile.arrayBuffer());
+                const ipaBuffer = new Uint8Array(await ipaFile.arrayBuffer());
+
+                statusEl.innerText = "Status: Executing signature script inside browser thread...";
+                
+                const signedIpaBytes = await window.zsignWeb.sign({
+                    ipa: ipaBuffer,
+                    p12: p12Buffer,
+                    password: password,
+                    provision: provBuffer
+                });
+                
+                if (!signedIpaBytes) {
+                    throw new Error("Signing engine returned an empty output.");
+                }
+
+                statusEl.innerText = "Status: Packing distribution package...";
+                const finalBlob = new Blob([signedIpaBytes], { type: "application/octet-stream" });
+                
+                const url = URL.createObjectURL(finalBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "Signed_" + ipaFile.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                statusEl.className = 'success';
+                statusEl.innerText = "Status: Done! Check your downloads folder.";
+            } catch (e) {
+                console.error("Detailed Signing Error:", e);
+                const errorMessage = e.message || e.toString() || "Unknown error";
+                statusEl.className = 'error';
+                statusEl.innerText = "Status: Error - " + errorMessage;
+            }
+        }
+    </script>
+</body>
+</html>
