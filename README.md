@@ -5,7 +5,6 @@
   
   <p style="color: #24292e; max-width: 600px; line-height: 1.6; margin-bottom: 35px;">Welcome to the official website for Miraz Bakis! Here I will share my future and current projects publicly for everyone to see. The plan for the page includes a rock collection store and an AI tool that detects rare rocks or estimates value of it.</p>
 
-  <!-- Sleek Static Buttons (Hover removed to prevent broken code) -->
   <a href="store/" style="background-color: #f1f8ff; color: #0366d6; padding: 12px 24px; border-radius: 9999px; text-decoration: none; font-weight: 600; display: inline-block; margin: 5px; border: 1px solid #c8e1ff;"> Visit Rock Store</a>
   
   <a href="#ai-tool" style="background-color: #f6f8fa; color: #24292e; padding: 12px 24px; border-radius: 9999px; text-decoration: none; font-weight: 600; display: inline-block; margin: 5px; border: 1px solid #e1e4e8;"> AI Tool (Coming Soon)</a>
@@ -15,7 +14,7 @@
 <hr style="border: 0; height: 1px; background: #e1e4e8; margin: 20px 0;" />
 
 <div style="font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #24292e; background-color: #ffffff; padding: 0 10px 40px 10px;">
-  <h3 style="color: #24292e; font-size: 1.5rem; margin-bottom: 20px; text-align: center;"> Current & Upcoming Projects</h3>
+  <h3 style="color: #24292e; font-size: 1.75rem; margin-bottom: 25px; text-align: center;"> Current & Upcoming Projects</h3>
 
   <table width="100%" style="border-collapse: separate; border-spacing: 20px;">
     <tr>
@@ -33,19 +32,27 @@
   </table>
 </div>
 
-### Frequently Asked Questions
+<hr style="border: 0; height: 1px; background: #e1e4e8; margin: 20px 0;" />
 
-<details>
-<summary><b>QUESTION 1: [Type your first question here]</b></summary>
-<p>ANSWER 1: [Type your answer here]</p>
-</details>
+<div style="font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #24292e; background-color: #ffffff; padding: 10px 10px 50px 10px;">
+  <h3 style="color: #24292e; font-size: 1.75rem; margin-bottom: 25px; text-align: center;"> Frequently Asked Questions</h3>
 
-<details>
-<summary><b>QUESTION 2: [Type your second question here]</b></summary>
-<p>ANSWER 2: [Type your answer here]</p>
-</details>
+  <div style="max-width: 800px; margin: 0 auto; background-color: #f6f8fa; padding: 24px; border: 1px solid #e1e4e8; border-radius: 16px;">
+    
+    <details style="margin-bottom: 16px; padding: 12px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px;">
+      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>QUESTION 1: [Type your first question here]</b></summary>
+      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">ANSWER 1: [Type your answer here]</p>
+    </details>
 
-<details>
-<summary><b>QUESTION 3: [Type your third question here]</b></summary>
-<p>ANSWER 3: [Type your answer here]</p>
-</details>
+    <details style="margin-bottom: 16px; padding: 12px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px;">
+      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>QUESTION 2: [Type your second question here]</b></summary>
+      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">ANSWER 2: [Type your answer here]</p>
+    </details>
+
+    <details style="padding: 12px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px;">
+      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>QUESTION 3: [Type your third question here]</b></summary>
+      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">ANSWER 3: [Type your answer here]</p>
+    </details>
+
+  </div>
+</div>
