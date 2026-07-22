@@ -12,4 +12,4 @@ Welcome to my official GitHub space! I am an upcoming developer focused on build
 
 * **Upcoming Tools** — New projects, experimental builds, and web services currently being crafted.
 
-IPA Signer uses the open-source zsign engine by zhlynn. zsign is licensed under the MIT License.
+IPA Signer uses the open-source zsign engine by zhlynn. zsign is licensed under the MIT License. Parts of this project also uses TensorFlow.js and MobileNet, both licensed under Apache 2.0.
