@@ -162,18 +162,24 @@
 
     <script>
         window.processAndSign = async function() {
-            const p12File = document.getElementById('p12File').files[0];
-            const password = document.getElementById('p12Password').value;
-            const provFile = document.getElementById('provFile').files[0];
-            const ipaFile = document.getElementById('ipaFile').files[0];
             const statusEl = document.getElementById('status');
-
-            if (!p12File || !provFile || !ipaFile) {
-                alert("Please select all required files (.p12, .mobileprovision, and .ipa).");
-                return;
-            }
-
+            
             try {
+                // 1. Check if the WebAssembly engine script successfully loaded from unpkg
+                if (!window.zsignWeb) {
+                    throw new Error("Signing engine (zsignWeb) failed to load from CDN. Check your internet connection or script source.");
+                }
+
+                const p12File = document.getElementById('p12File').files[0];
+                const password = document.getElementById('p12Password').value || "";
+                const provFile = document.getElementById('provFile').files[0];
+                const ipaFile = document.getElementById('ipaFile').files[0];
+
+                if (!p12File || !provFile || !ipaFile) {
+                    alert("Please select all required files (.p12, .mobileprovision, and .ipa).");
+                    return;
+                }
+
                 statusEl.innerText = "Status: Initializing background signing engine...";
                 
                 // Read uploaded assets straight into Uint8Arrays
@@ -191,6 +197,10 @@
                     provision: provBuffer
                 });
                 
+                if (!signedIpaBytes) {
+                    throw new Error("Signing engine returned an empty output.");
+                }
+
                 statusEl.innerText = "Status: Packing distribution package...";
                 const finalBlob = new Blob([signedIpaBytes], { type: "application/octet-stream" });
                 
@@ -205,11 +215,12 @@
                 
                 statusEl.innerText = "Status: Done! Check downloads.";
             } catch (e) {
-                console.error(e);
-                statusEl.innerText = "Status: Error - " + (e.message || "Unknown signing failure");
+                console.error("Detailed Signing Error:", e);
+                // Displays the real error message instead of 'undefined'
+                const errorMessage = e.message || e.toString() || "Unknown error";
+                statusEl.innerText = "Status: Error - " + errorMessage;
             }
         }
     </script>
 </body>
 </html>
-
