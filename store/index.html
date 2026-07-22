@@ -4,62 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Collection Store</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-    <!-- Return to Main Page Button -->
-    <a href="../" class="back-btn">← Back to Main Page</a>
+    <a href="../" class="btn">← Back to Main Page</a>
+    
+    <br><br>
+    <h1>Rock Collection</h1>
+    <p class="subtitle">Hand-tumbled stones and specimens sourced directly from the Aegean coast of Pelion.</p>
 
-    <header class="store-header">
-        <h1>Rock Collection Store</h1>
-        <p>Welcome to the Rock Collection Store! Here you can find rare and good-looking rocks collected from the beaches of Pelion.</p>
-    </header>
-
-    <!-- Search Bar Input -->
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search products..." onkeyup="filterProducts()">
+        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search stones, colors, or types...">
     </div>
 
-    <div class="store-grid" id="storeGrid">
-        <!-- Product Item 1 -->
-        <div class="product-card" data-name="pelion quartz pebbles white shiny jar">
-            <h3>Pelion Quartz Pebbles</h3>
-            <p class="price">$6.50 per jar</p>
-            <p class="desc">White and shiny quartz pebbles naturally smoothed by the Aegean waves.</p>
-            <a href="#" class="buy-btn">Buy Now</a>
+    <div class="grid" id="productGrid">
+        
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=Pelion+Beach+Rock" alt="Beach Rock">
+            </div>
+            <h3>Pelion Beach Rock</h3>
+            <p>A natural, weathered fragment tumbled by the waves at Albatros beach. Features a unique, elongated shape and natural iron-oxide patina.</p>
+            <div class="price">$15.00</div>
+            <a href="#" class="btn primary">Buy Now</a>
         </div>
 
-        <!-- Product Item 2 -->
-        <div class="product-card" data-name="aegean jasper earthy multi-colored stone">
-            <h3>Aegean Jasper</h3>
-            <p class="price">$22.50</p>
-            <p class="desc">An earthy, multi-colored jasper stone with unique natural banding.</p>
-            <a href="#" class="buy-btn">Buy Now</a>
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=Pink+Quartz" alt="Pink Quartz">
+            </div>
+            <h3>Pink Quartz Pebble</h3>
+            <p>A smooth, wave-polished quartz pebble with pale pinkish-white tones. Naturally rounded by the Pagasetic Gulf.</p>
+            <div class="price">$5.00</div>
+            <a href="#" class="btn primary">Buy Now</a>
         </div>
 
-        <!-- Product Item 3 -->
-        <div class="product-card" data-name="polished sea glass bundle frosted green white amber">
-            <h3>Polished Sea Glass Bundle</h3>
-            <p class="price">$10.00</p>
-            <p class="desc">A selection of frosted green, white, and amber glass tumbled by the sea.</p>
-            <a href="#" class="buy-btn">Buy Now</a>
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=White+Quartz+Bag" alt="White Quartz Bag">
+            </div>
+            <h3>White Quartz Pebbles (Bag)</h3>
+            <p>A curated bag of smooth, white crystalline quartz and local marble pebbles, collected right from the shoreline.</p>
+            <div class="price">$3.00</div>
+            <a href="#" class="btn primary">Buy Now</a>
         </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=Pelion+Greenschist" alt="Greenschist">
+            </div>
+            <h3>Pelion Greenschist Specimen</h3>
+            <p>A classic metamorphic green stone fragment with subtle mineral layering, originating from Mount Pelion's regional bedrock.</p>
+            <div class="price">$8.00</div>
+            <a href="#" class="btn primary">Buy Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=Mica+Schist" alt="Mica Schist">
+            </div>
+            <h3>Shimmering Mica Schist</h3>
+            <p>A fine-grained metamorphic specimen with visible muscovite mica flakes that catch the light with a natural glittery sheen.</p>
+            <div class="price">$12.00</div>
+            <a href="#" class="btn primary">Buy Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=Pelion+Marble" alt="Crystalline Marble">
+            </div>
+            <h3>Pelion Crystalline Marble</h3>
+            <p>A wave-smoothed fragment of local platy white-and-gray marble, polished naturally along the shoreline.</p>
+            <div class="price">$4.50</div>
+            <a href="#" class="btn primary">Buy Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=Red+Jasper" alt="Red Jasper Pebble">
+            </div>
+            <h3>Pagasetic Red Jasper Pebble</h3>
+            <p>A rare, deep red microcrystalline chert/jasper pebble washed down from inland stream channels into the coastal waters.</p>
+            <div class="price">$6.00</div>
+            <a href="#" class="btn primary">Buy Now</a>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://via.placeholder.com/400x300/222222/555555?text=Phyllite+Stone" alt="Polished Phyllite">
+            </div>
+            <h3>Wave-Polished Phyllite</h3>
+            <p>A smooth, dark slate-gray stone displaying characteristic silvery sheen on its surface due to microscopic mica grains.</p>
+            <div class="price">$2.50</div>
+            <a href="#" class="btn primary">Buy Now</a>
+        </div>
+
     </div>
 </div>
 
-<!-- Simple JavaScript to handle the live search filtering -->
 <script>
 function filterProducts() {
     let input = document.getElementById('searchInput').value.toLowerCase();
-    let cards = document.getElementsByClassName('product-card');
+    let grid = document.getElementById('productGrid');
+    let cards = grid.getElementsByClassName('card');
 
     for (let i = 0; i < cards.length; i++) {
-        let name = cards[i].getAttribute('data-name');
-        let textContent = cards[i].innerText.toLowerCase();
-        
-        if (name.includes(input) || textContent.includes(input)) {
+        let cardText = cards[i].innerText.toLowerCase();
+        if (cardText.includes(input)) {
             cards[i].style.display = "";
         } else {
             cards[i].style.display = "none";
