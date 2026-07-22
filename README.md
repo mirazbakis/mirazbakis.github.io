@@ -40,18 +40,18 @@
   <div style="max-width: 800px; margin: 0 auto; background-color: #f6f8fa; padding: 24px; border: 1px solid #e1e4e8; border-radius: 16px;">
     
     <details style="margin-bottom: 16px; padding: 12px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px;">
-      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>QUESTION 1: [Type your first question here]</b></summary>
-      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">ANSWER 1: [Type your answer here]</p>
+      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>1.: [Where are the rocks collected in the Rock Collection Store? ]</b></summary>
+      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">Answer: [The rocks are mostly collected from the beaches of Pelion. ]</p>
     </details>
 
     <details style="margin-bottom: 16px; padding: 12px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px;">
-      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>QUESTION 2: [Type your second question here]</b></summary>
-      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">ANSWER 2: [Type your answer here]</p>
+      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>2.: [What is this website for?]</b></summary>
+      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">Answer: [This website is for my projects. You can see them above.]</p>
     </details>
 
     <details style="padding: 12px; background: #ffffff; border: 1px solid #e1e4e8; border-radius: 8px;">
-      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>QUESTION 3: [Type your third question here]</b></summary>
-      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">ANSWER 3: [Type your answer here]</p>
+      <summary style="font-size: 1.1rem; cursor: pointer; color: #0366d6;"><b>3.: [What is the AI tool for?]</b></summary>
+      <p style="color: #586069; margin-top: 12px; line-height: 1.5; margin-bottom: 0;">Answer: [The AI tool is for estimating value of rocks. It is specifically made to help you find rare & unique rocks.]</p>
     </details>
 
   </div>
