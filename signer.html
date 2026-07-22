@@ -17,6 +17,9 @@
             --accent: #238636;
             --accent-hover: #2ea043;
             --input-bg: #0d1117;
+            --warning-bg: rgba(210, 153, 34, 0.1);
+            --warning-border: rgba(210, 153, 34, 0.4);
+            --warning-text: #d29922;
         }
 
         body {
@@ -37,6 +40,7 @@
             font-size: 14px;
             transition: color 0.2s;
         }
+        
         .back-link:hover { 
             color: var(--text-primary); 
         }
@@ -135,6 +139,29 @@
             text-align: center;
             word-break: break-all;
         }
+
+        /* Disclaimer Styling */
+        .disclaimer {
+            margin-top: 24px;
+            padding: 14px 16px;
+            background-color: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            border-radius: 6px;
+            font-size: 12.5px;
+            color: var(--warning-text);
+            line-height: 1.5;
+        }
+
+        .disclaimer strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #e3b341;
+        }
+        
+        .disclaimer p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -158,6 +185,12 @@
     
         <button id="signButton" onclick="processAndSign()">Sign IPA File</button>
         <div id="status">Status: Ready</div>
+
+        <!-- Disclaimer Section -->
+        <div class="disclaimer">
+            <strong>⚠️ Disclaimer & Privacy</strong>
+            <p>This tool runs entirely locally in your web browser. Your files, certificates, and passwords are <b>never</b> uploaded or transmitted to any external server. Use this tool at your own risk; we are not responsible for any revoked developer accounts or misused certificates.</p>
+        </div>
     </div>
 
     <script>
