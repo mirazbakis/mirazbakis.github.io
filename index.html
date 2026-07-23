@@ -77,40 +77,48 @@
             color: var(--text-primary);
         }
 
+        /* Full-Width Row Grid Layout */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            width: 100%;
         }
 
-        /* Card Component */
+        /* Horizontal Card Component */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 1.5rem 1.75rem;
             transition: transform 0.2s ease, border-color 0.2s ease;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
             justify-content: space-between;
+            gap: 1.5rem;
+            width: 100%;
         }
 
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-2px);
             border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-content {
+            flex: 1;
         }
 
         .card h3 {
             font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
             color: #ffffff;
         }
 
         .card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            margin-bottom: 1.25rem;
-            flex-grow: 1;
+            margin-bottom: 0;
         }
 
         /* Badges */
@@ -120,7 +128,7 @@
             font-size: 0.75rem;
             font-weight: 600;
             border-radius: 20px;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             width: fit-content;
         }
 
@@ -139,7 +147,7 @@
         /* Buttons */
         .btn {
             display: inline-block;
-            padding: 0.6rem 1.2rem;
+            padding: 0.65rem 1.25rem;
             border-radius: 8px;
             background-color: var(--accent-color);
             color: #ffffff;
@@ -147,7 +155,9 @@
             font-weight: 500;
             font-size: 0.9rem;
             text-align: center;
+            white-space: nowrap;
             transition: background-color 0.2s ease;
+            align-self: center;
         }
 
         .btn:hover {
@@ -159,6 +169,20 @@
             color: var(--text-secondary);
             border: 1px solid var(--card-border);
             cursor: not-allowed;
+        }
+
+        /* Mobile Responsive adjustments */
+        @media (max-width: 640px) {
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
         }
 
         /* Footer */
@@ -194,7 +218,7 @@
             <h2 class="section-title">Current Projects</h2>
             <div class="grid">
                 <div class="card">
-                    <div>
+                    <div class="card-content">
                         <span class="badge badge-active">Live Storefront</span>
                         <h3>Rock Store</h3>
                         <p>A sleek, minimalist catalog showcasing authentic hand-picked metamorphic beach stones from Pelion, Greece.</p>
@@ -202,7 +226,7 @@
                     <a href="./store/" class="btn">Access Project &rarr;</a>
                 </div>
                 <div class="card">
-                    <div>
+                    <div class="card-content">
                         <span class="badge badge-active">Live Tool</span>
                         <h3>IPA Web Signer</h3>
                         <p>Directly sign your iOS applications right in the browser using a sleek utility tool.</p>
@@ -210,7 +234,7 @@
                     <a href="./signer.html" class="btn">Access Project &rarr;</a>
                 </div>
                 <div class="card">
-                    <div>
+                    <div class="card-content">
                         <span class="badge badge-active">Live Tool</span>
                         <h3>AI Rock Value Estimator</h3>
                         <p>Upload a photo of a rock to automatically identify its geological type and estimate its market value.</p>
@@ -224,7 +248,7 @@
             <h2 class="section-title">Upcoming Projects</h2>
             <div class="grid">
                 <div class="card">
-                    <div>
+                    <div class="card-content">
                         <span class="badge badge-upcoming">In Development</span>
                         <h3>Advanced AI Tool</h3>
                         <p>An intelligent web application currently under active development to optimize workflow and user interactions. Downloadable as an .ipa or .apk file depending on your phone.</p>
@@ -240,4 +264,3 @@
     </footer>
 
 </body>
-</html>
