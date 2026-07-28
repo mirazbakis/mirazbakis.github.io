@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPA Web Signer</title>
-    <!-- External Scripts for Signing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://unpkg.com/zsign-web@latest/dist/index.min.js"></script>
@@ -37,9 +36,9 @@
             padding: 3rem 1rem;
         }
 
-        /* Bulletproof centering wrapper */
+        /* Expanded wrapper for horizontal layout */
         .wrapper {
-            max-width: 540px;
+            max-width: 850px;
             margin: 0 auto;
             width: 100%;
         }
@@ -80,10 +79,11 @@
             color: var(--text-primary);
         }
 
+        /* Switched to responsive CSS Grid for horizontal inputs */
         .upload-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
@@ -211,26 +211,20 @@
             border-radius: 10px;
             display: flex;
             gap: 0.75rem;
-            align-items: flex-start;
+            align-items: center;
         }
 
         .disclaimer-icon {
             font-size: 1.25rem;
             line-height: 1;
         }
-
-        .disclaimer-content strong {
-            display: block;
-            margin-bottom: 0.25rem;
-            font-size: 0.9rem;
-            color: var(--warning-text);
-        }
         
         .disclaimer-content p {
             margin: 0;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.9rem;
+            color: var(--warning-text);
             line-height: 1.5;
+            font-weight: 500;
         }
 
         .footer-credit {
@@ -249,7 +243,6 @@
 </head>
 <body>
 
-    <!-- Main Centered Wrapper -->
     <div class="wrapper">
         <a href="index.html" class="back-link">← Return to Main Page</a>
 
@@ -275,19 +268,18 @@
                 </div>
             
                 <div class="input-box">
-                    <label>4.  IPA File (.ipa)</label>
+                    <label>4. IPA File (.ipa)</label>
                     <input type="file" class="file-input" id="ipaFile" accept=".ipa">
                 </div>
             </div>
         
-            <button class="btn-sign" id="signButton" onclick="processAndSign()">Sign IPA File</button>
+            <button class="btn-sign" id="signButton" onclick="processAndSign()">Start Signing</button>
             <div id="status">Status: Ready</div>
 
             <div class="disclaimer">
-                <div class="disclaimer-icon">🛡️</div>
+                <div class="disclaimer-icon">⚠️</div>
                 <div class="disclaimer-content">
-                    <strong>Privacy First</strong>
-                    <p>This tool runs entirely locally in your web browser. Your files, certificates, and passwords are <b>never</b> uploaded to any external server.</p>
+                    <p>If you are using enterprise certificates, make sure to use an Anti-Revoke DNS.</p>
                 </div>
             </div>
         </div>
@@ -297,7 +289,6 @@
         </div>
     </div>
 
-    <!-- Signing Logic -->
     <script>
         window.processAndSign = async function() {
             const statusEl = document.getElementById('status');
