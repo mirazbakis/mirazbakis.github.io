@@ -6,60 +6,64 @@
     <title>Miraz Bakis - Portfolio</title>
     <style>
         :root {
-            --bg-color: #0b0f17;
+            --bg-color: #080a0f;
             --card-bg: rgba(255, 255, 255, 0.03);
+            --card-bg-hover: rgba(255, 255, 255, 0.05);
             --card-border: rgba(255, 255, 255, 0.08);
+            --card-border-hover: rgba(255, 255, 255, 0.18);
             --accent-color: #3b82f6;
             --accent-hover: #60a5fa;
-            --text-primary: #f3f4f6;
-            --text-secondary: #9ca3af;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.6;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 760px;
             width: 100%;
         }
 
         /* Hero Header */
         header {
             text-align: center;
-            padding: 3rem 1rem 2rem 1rem;
-            margin-bottom: 2rem;
+            padding: 2.5rem 1rem 3rem 1rem;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.75rem;
             font-weight: 700;
-            letter-spacing: -0.025em;
-            margin-bottom: 0.75rem;
-            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.125rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
+            font-weight: 400;
         }
 
         /* Sections Layout */
@@ -67,31 +71,40 @@
             margin-bottom: 3rem;
         }
 
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 600;
+        .section-header {
+            display: flex;
+            align-items: center;
             margin-bottom: 1.25rem;
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-            color: var(--text-primary);
         }
 
-        /* Full-Width Row Grid Layout */
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        /* Horizontal Card Layout */
         .grid {
             display: flex;
             flex-direction: column;
-            gap: 1.25rem;
+            gap: 1rem;
             width: 100%;
         }
 
-        /* Horizontal Card Component */
+        /* Modern Glassmorphic Card */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 1.5rem 1.75rem;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -101,8 +114,10 @@
         }
 
         .card:hover {
+            background: var(--card-bg-hover);
+            border-color: var(--card-border-hover);
             transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         .card-content {
@@ -110,99 +125,111 @@
         }
 
         .card h3 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 0.35rem;
             color: #ffffff;
+            letter-spacing: -0.01em;
         }
 
         .card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.925rem;
+            line-height: 1.5;
             margin-bottom: 0;
         }
 
         /* Badges */
         .badge {
             display: inline-block;
-            padding: 0.25rem 0.6rem;
-            font-size: 0.75rem;
+            padding: 0.2rem 0.65rem;
+            font-size: 0.725rem;
             font-weight: 600;
-            border-radius: 20px;
-            margin-bottom: 0.5rem;
+            border-radius: 9999px;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.02em;
             width: fit-content;
         }
 
         .badge-active {
-            background: rgba(59, 130, 246, 0.15);
+            background: rgba(59, 130, 246, 0.12);
             color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.25);
         }
 
         .badge-upcoming {
-            background: rgba(168, 85, 247, 0.15);
+            background: rgba(168, 85, 247, 0.12);
             color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            border: 1px solid rgba(168, 85, 247, 0.25);
         }
 
-        /* Buttons */
+        /* Modern Rounded Buttons */
         .btn {
-            display: inline-block;
-            padding: 0.65rem 1.25rem;
-            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
             background-color: var(--accent-color);
             color: #ffffff;
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
-            text-align: center;
+            font-size: 0.875rem;
             white-space: nowrap;
-            transition: background-color 0.2s ease;
+            transition: all 0.2s ease;
             align-self: center;
+            border: 1px solid transparent;
         }
 
         .btn:hover {
             background-color: var(--accent-hover);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
         }
 
         .btn-disabled {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
+            background-color: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
             border: 1px solid var(--card-border);
             cursor: not-allowed;
+            box-shadow: none;
         }
 
-        /* Mobile Responsive adjustments */
+        /* Mobile Responsiveness */
         @media (max-width: 640px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+
             .card {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 1rem;
+                gap: 1.25rem;
+                padding: 1.25rem 1.5rem;
             }
 
             .btn {
                 width: 100%;
-                margin-top: 0.5rem;
             }
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem 0;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            border-top: 1px solid var(--card-border);
+            padding: 2.5rem 0 1rem 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
             width: 100%;
             margin-top: auto;
         }
 
         footer a {
-            color: var(--accent-color);
+            color: var(--text-secondary);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
 
         footer a:hover {
-            text-decoration: underline;
+            color: var(--accent-hover);
         }
     </style>
 </head>
@@ -211,11 +238,13 @@
     <div class="container">
         <header>
             <h1>Miraz Bakis</h1>
-            <p class="subtitle">Building modern web applications, tools, and stores.</p>
+            <p class="subtitle">Developing applications, tools, and storefronts.</p>
         </header>
 
         <section>
-            <h2 class="section-title">Current Projects</h2>
+            <div class="section-header">
+                <h2 class="section-title">Current Projects</h2>
+            </div>
             <div class="grid">
                 <div class="card">
                     <div class="card-content">
@@ -245,21 +274,15 @@
         </section>
 
         <section>
-            <h2 class="section-title">Upcoming Projects</h2>
+            <div class="section-header">
+                <h2 class="section-title">Upcoming Projects</h2>
+            </div>
             <div class="grid">
                 <div class="card">
                     <div class="card-content">
                         <span class="badge badge-upcoming">In Development</span>
                         <h3>XSign</h3>
-                        <p>XSign is an user-friendly, easy-to-use tool that allows you to sign & install .ipa files permanently with certificates.</p>
-                    </div>
-                    <span class="btn btn-disabled">Coming Soon</span>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-upcoming">In Development</span>
-                        <h3>Advanced AI Tool</h3>
-                        <p>An intelligent web application currently under active development to optimize workflow and user interactions. Downloadable as an .ipa or .apk file depending on your phone.</p>
+                        <p>A codesigning app that allows you to permanently Sign & Install apps without revokes.</p>
                     </div>
                     <span class="btn btn-disabled">Coming Soon</span>
                 </div>
@@ -268,7 +291,7 @@
     </div>
 
     <footer>
-        <p>Hosted on <a href="https://github.com" target="_blank" rel="noopener">GitHub Pages</a>.</p>
+        <p>Hosted on <a href="https://github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
     </footer>
 
 </body>
