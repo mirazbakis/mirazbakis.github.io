@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Miraz Bakis - Portfolio</title>
     <style>
         :root {
-            --bg-color: #080a0f;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-bg-hover: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --card-border-hover: rgba(255, 255, 255, 0.18);
-            --accent-color: #3b82f6;
-            --accent-hover: #60a5fa;
-            --text-primary: #f8fafc;
+            --bg: #000000;
+            --card: rgba(22, 27, 38, 0.62);
+            --card-hover: rgba(30, 37, 52, 0.8);
+            --stroke: rgba(255, 255, 255, 0.08);
+            --stroke-strong: rgba(255, 255, 255, 0.16);
+            --text-primary: #f3f5f9;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
+            --accent: #2563eb;
+            --accent-light: #60a5fa;
+            --brand-gradient: linear-gradient(135deg, var(--accent), var(--accent-light));
+            --radius-lg: 20px;
+            --radius-md: 12px;
         }
 
         * {
@@ -25,16 +28,47 @@
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
+        html {
+            background-color: var(--bg);
+            overflow-x: hidden;
+        }
+
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg);
             color: var(--text-primary);
             line-height: 1.6;
-            padding: 2.5rem 1rem;
+            padding: max(2.5rem, env(safe-area-inset-top)) 1.25rem 4rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Ambient Mesh Background */
+        .bg-mesh {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                radial-gradient(70% 45% at 50% 10%, rgba(37, 99, 235, 0.32), transparent 70%),
+                radial-gradient(100% 60% at 50% 60%, rgba(15, 23, 42, 0.7), transparent 85%),
+                #000000;
+        }
+
+        .bg-mesh::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 35% at 50% 15%, rgba(96, 165, 250, 0.18), transparent 65%);
+            animation: breathe 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes breathe {
+            from { opacity: 0.25; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1.02); }
         }
 
         .container {
@@ -45,79 +79,78 @@
         /* Hero Header */
         header {
             text-align: center;
-            padding: 2.5rem 1rem 3rem 1rem;
+            padding: 3rem 1rem 3.5rem 1rem;
         }
 
         h1 {
-            font-size: 2.75rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 800;
             letter-spacing: -0.03em;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 500px;
+            max-width: 520px;
             margin: 0 auto;
             font-weight: 400;
         }
 
         /* Sections Layout */
         section {
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-header {
             display: flex;
             align-items: center;
             margin-bottom: 1.25rem;
+            padding-left: 0.25rem;
         }
 
         .section-title {
-            font-size: 1.15rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            color: var(--text-primary);
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
             color: var(--text-muted);
         }
 
-        /* Horizontal Card Layout */
+        /* Horizontal Card Grid Layout */
         .grid {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.25rem;
             width: 100%;
         }
 
-        /* Modern Glassmorphic Card */
+        /* Glassmorphic Cards */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem 1.75rem;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: var(--card);
+            border: 1px solid var(--stroke);
+            border-radius: var(--radius-lg);
+            padding: 1.6rem 1.85rem;
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            gap: 1.5rem;
+            gap: 1.75rem;
             width: 100%;
         }
 
         .card:hover {
-            background: var(--card-bg-hover);
-            border-color: var(--card-border-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+            background: var(--card-hover);
+            border-color: var(--stroke-strong);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(37, 99, 235, 0.15);
         }
 
         .card-content {
@@ -125,8 +158,8 @@
         }
 
         .card h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-size: 1.25rem;
+            font-weight: 700;
             margin-bottom: 0.35rem;
             color: #ffffff;
             letter-spacing: -0.01em;
@@ -134,33 +167,46 @@
 
         .card p {
             color: var(--text-secondary);
-            font-size: 0.925rem;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            line-height: 1.55;
             margin-bottom: 0;
         }
 
         /* Badges */
         .badge {
-            display: inline-block;
-            padding: 0.2rem 0.65rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.25rem 0.75rem;
             font-size: 0.725rem;
             font-weight: 600;
             border-radius: 9999px;
-            margin-bottom: 0.6rem;
-            letter-spacing: 0.02em;
+            margin-bottom: 0.7rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
             width: fit-content;
         }
 
         .badge-active {
-            background: rgba(59, 130, 246, 0.12);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.25);
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--accent-light);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            box-shadow: 0 0 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .badge-active::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-light);
+            box-shadow: 0 0 8px var(--accent-light);
         }
 
         .badge-upcoming {
             background: rgba(168, 85, 247, 0.12);
             color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, 0.25);
+            border: 1px solid rgba(168, 85, 247, 0.28);
         }
 
         /* Modern Rounded Buttons */
@@ -168,43 +214,56 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.6rem 1.2rem;
-            border-radius: 10px;
-            background-color: var(--accent-color);
+            gap: 6px;
+            padding: 0.7rem 1.35rem;
+            border-radius: var(--radius-md);
+            background: var(--brand-gradient);
             color: #ffffff;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.875rem;
             white-space: nowrap;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             align-self: center;
-            border: 1px solid transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
         }
 
         .btn:hover {
-            background-color: var(--accent-hover);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         .btn-disabled {
-            background-color: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             color: var(--text-muted);
-            border: 1px solid var(--card-border);
+            border: 1px solid var(--stroke);
             cursor: not-allowed;
             box-shadow: none;
+            transform: none !important;
+            filter: none !important;
         }
 
         /* Mobile Responsiveness */
         @media (max-width: 640px) {
             body {
-                padding: 1.5rem 1rem;
+                padding: 1.5rem 1rem 3rem;
+            }
+
+            h1 {
+                font-size: 2.35rem;
             }
 
             .card {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1.25rem;
-                padding: 1.25rem 1.5rem;
+                padding: 1.35rem 1.5rem;
             }
 
             .btn {
@@ -229,11 +288,14 @@
         }
 
         footer a:hover {
-            color: var(--accent-hover);
+            color: var(--accent-light);
         }
     </style>
 </head>
 <body>
+
+    <!-- Ambient Radial Mesh Layer -->
+    <div class="bg-mesh" aria-hidden="true"></div>
 
     <div class="container">
         <header>
