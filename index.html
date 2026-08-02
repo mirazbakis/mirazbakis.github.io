@@ -29,7 +29,7 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.6;
-            padding: 2.5rem 1rem;
+            padding: 3rem 1.5rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,18 +40,18 @@
         }
 
         .container {
-            max-width: 760px;
+            max-width: 850px;
             width: 100%;
         }
 
         /* Hero Header */
         header {
             text-align: center;
-            padding: 2.5rem 1rem 3rem 1rem;
+            padding: 3rem 1rem 3.5rem 1rem;
         }
 
         h1 {
-            font-size: 2.75rem;
+            font-size: 3rem;
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 0.5rem;
@@ -62,29 +62,29 @@
         }
 
         .subtitle {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
-            max-width: 500px;
+            max-width: 540px;
             margin: 0 auto;
             font-weight: 400;
         }
 
         /* Sections Layout */
         section {
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         .section-title {
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            font-size: 0.875rem;
+            letter-spacing: 0.06em;
             color: var(--text-muted);
         }
 
@@ -92,32 +92,47 @@
         .grid {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.25rem;
             width: 100%;
         }
 
-        /* Enhanced Glassmorphic Card */
+        /* Glassmorphic Card (Original Larger Size) */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem 1.75rem;
+            border-radius: 18px;
+            padding: 2rem 2.25rem;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            gap: 1.5rem;
+            gap: 2rem;
             width: 100%;
             box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+            /* Scroll-reveal animation initial state */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        background-color 0.25s ease,
+                        border-color 0.25s ease,
+                        box-shadow 0.25s ease;
         }
 
-        .card:hover {
+        /* Reveal state triggered on scroll */
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover effect when revealed */
+        .card.visible:hover {
             background: var(--card-bg-hover);
             border-color: var(--card-border-hover);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.7), 0 0 24px -4px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
@@ -126,28 +141,28 @@
         }
 
         .card h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.4rem;
             color: #ffffff;
             letter-spacing: -0.01em;
         }
 
         .card p {
             color: var(--text-secondary);
-            font-size: 0.925rem;
-            line-height: 1.5;
+            font-size: 0.975rem;
+            line-height: 1.55;
             margin-bottom: 0;
         }
 
-        /* Badges with Subtle Glow */
+        /* Badges */
         .badge {
             display: inline-block;
-            padding: 0.2rem 0.65rem;
-            font-size: 0.725rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
             font-weight: 600;
             border-radius: 9999px;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.75rem;
             letter-spacing: 0.02em;
             width: fit-content;
         }
@@ -166,18 +181,18 @@
             box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
         }
 
-        /* Enhanced Buttons */
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.65rem 1.25rem;
-            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
             background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             white-space: nowrap;
             transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             align-self: center;
@@ -188,7 +203,6 @@
         .btn:hover {
             background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
             box-shadow: 0 6px 22px rgba(59, 130, 246, 0.55);
-            transform: translateY(-1px);
         }
 
         .btn:active {
@@ -201,7 +215,6 @@
             border: 1px solid var(--card-border);
             cursor: not-allowed;
             box-shadow: none;
-            transform: none;
         }
 
         /* Mobile Responsiveness */
@@ -213,8 +226,8 @@
             .card {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 1.25rem;
-                padding: 1.25rem 1.5rem;
+                gap: 1.5rem;
+                padding: 1.5rem;
             }
 
             .btn {
@@ -279,6 +292,31 @@
             </div>
         </section>
     </div>
+
+    <!-- Scroll Reveal Observer Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".card");
+
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -40px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Subtle stagger delay for cards visible at the same time
+                        setTimeout(() => {
+                            entry.target.classList.add("visible");
+                        }, index * 80);
+                    }
+                });
+            }, observerOptions);
+
+            cards.forEach(card => observer.observe(card));
+        });
+    </script>
 
 </body>
 </html>
