@@ -5,270 +5,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraz Bakis - Portfolio</title>
     <style>
-        /*  Theme Variables */
+        /* Navy Palette Tokens */
         :root {
-            --page: #011a5c;
-            --bg-base: #010c22;
-            --bg-gradient-bottom: #000511;
+            --card: rgba(23, 28, 42, 0.62);
+            --card-hover: rgba(32, 38, 58, 0.72);
+            --stroke: rgba(255, 255, 255, 0.07);
+            --stroke-strong: rgba(255, 255, 255, 0.14);
+            
+            --text: #f4f6fb;
+            --muted: #9ba3b8;
+            --faint: #6c7386;
             
             --accent: #2170f5;
-            --accent-hover: #3b82f6;
-            --accent-glow: rgba(33, 112, 245, 0.4);
+            --accent2: #4dadff;
+            --glow: #011a5c;
             
-            /* Dark Translucent Card Surfaces */
-            --card-bg: rgba(10, 16, 28, 0.7);
-            --card-bg-hover: rgba(15, 23, 40, 0.9);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --card-border-hover: rgba(33, 112, 245, 0.55);
-            
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.65);
-            --text-muted: rgba(255, 255, 255, 0.4);
+            --brand: linear-gradient(135deg, var(--accent), var(--accent2));
+            --badge-bg: rgba(33, 112, 245, 0.12);
+            --badge-border: rgba(33, 112, 245, 0.28);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+        html {
+            -webkit-text-size-adjust: 100%;
+            overflow-x: clip;
+            background: #000;
         }
 
         body {
-            background-color: var(--bg-base);
-            background-image: 
-                radial-gradient(circle at 50% -10%, var(--page) 0%, transparent 65%),
-                radial-gradient(circle at 50% 110%, var(--bg-gradient-bottom) 0%, transparent 70%);
-            background-attachment: fixed;
-            color: var(--text-primary);
-            line-height: 1.5;
-            padding: 3.5rem 1.5rem;
+            margin: 0;
             min-height: 100vh;
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+            line-height: 1.55;
+            background: transparent;
+            overflow-x: clip;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 3rem 1rem;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Exact SideInstaller Radial Glow Atmosphere */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                radial-gradient(75% 42% at 50% 16%, rgba(33, 112, 245, 0.38), transparent 65%),
+                radial-gradient(140% 80% at 50% 50%, rgba(14, 44, 110, 0.35), transparent 78%),
+                radial-gradient(55% 32% at 82% 70%, rgba(77, 173, 255, 0.10), transparent 70%),
+                radial-gradient(60% 50% at 50% 100%, var(--glow), transparent 100%);
+        }
+
         .container {
-            max-width: 900px;
+            max-width: 540px;
             width: 100%;
         }
 
-        /* Hero Header */
+        /* Header UI */
         header {
             text-align: center;
-            padding: 1rem 1rem 3rem 1rem;
-            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            padding: 1rem 0 2.5rem 0;
         }
 
         h1 {
-            font-size: 2.75rem;
+            font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: -0.03em;
-            margin-bottom: 0.4rem;
-            color: var(--text-primary);
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+            margin-bottom: 0.35rem;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            max-width: 480px;
+            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 420px;
             margin: 0 auto;
-            font-weight: 400;
         }
 
-        /* Sections Layout */
+        /* Section Layout */
         section {
-            margin-bottom: 3.5rem;
+            margin-bottom: 2.25rem;
         }
 
         .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.85rem;
             padding-left: 0.25rem;
         }
 
         .section-title {
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
+            font-size: 0.725rem;
+            letter-spacing: 0.1em;
+            color: var(--faint);
         }
 
-        /* Square Grid Layout for Desktop */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
             width: 100%;
         }
 
-        /* Square SideInstaller Box Design */
+        /* SideInstaller Exact Card Style */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
+            background: var(--card);
+            border: 1px solid var(--stroke);
             border-radius: 18px;
-            padding: 1.75rem;
-            aspect-ratio: 1 / 1; /* Forces square aspect ratio */
-            backdrop-filter: blur(24px) saturate(140%);
-            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            padding: 1.35rem 1.45rem;
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            width: 100%;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-
-            /* Scroll-reveal state */
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        background-color 0.2s ease,
-                        border-color 0.2s ease,
-                        box-shadow 0.2s ease;
+            gap: 1.25rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .card.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .card:hover {
+            background: var(--card-hover);
+            border-color: var(--stroke-strong);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), 0 0 24px rgba(33, 112, 245, 0.25);
         }
 
-        .card.visible:hover {
-            background: var(--card-bg-hover);
-            border-color: var(--card-border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
-        }
-
-        .card-content {
+        .card-top {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .card h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-            letter-spacing: -0.01em;
-            line-height: 1.3;
+        .icon-box {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
         }
 
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            line-height: 1.45;
-            margin-bottom: 0;
-        }
-
-        /* Badges */
         .badge {
             display: inline-block;
-            padding: 0.25rem 0.65rem;
-            font-size: 0.68rem;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
             font-weight: 600;
             border-radius: 9999px;
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.03em;
-            width: fit-content;
+            letter-spacing: 0.02em;
         }
 
         .badge-active {
-            background: rgba(33, 112, 245, 0.15);
-            color: #60a5fa;
-            border: 1px solid rgba(33, 112, 245, 0.3);
+            background: var(--badge-bg);
+            color: var(--accent2);
+            border: 1px solid var(--badge-border);
         }
 
         .badge-upcoming {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--faint);
+            border: 1px solid var(--stroke);
         }
 
-        /* SideInstaller Accent Action Buttons */
+        .card-body h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 0.5rem 0 0.3rem 0;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .card-body p {
+            color: var(--muted);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* SideInstaller Brand Button */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             width: 100%;
-            padding: 0.7rem 1rem;
+            padding: 0.75rem 1rem;
             border-radius: 12px;
-            background: var(--accent);
+            background: var(--brand);
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 3px 12px var(--accent-glow);
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 14px rgba(33, 112, 245, 0.35);
         }
 
         .btn:hover {
-            background: var(--accent-hover);
+            opacity: 0.92;
             box-shadow: 0 6px 20px rgba(33, 112, 245, 0.5);
         }
 
         .btn:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
 
         .btn-disabled {
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-muted);
-            border: 1px solid var(--card-border);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--faint);
+            border: 1px solid var(--stroke);
             cursor: not-allowed;
             box-shadow: none;
         }
 
-        /* Keyframes */
-        @keyframes rise {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile Layout Adjustments */
         @media (max-width: 640px) {
-            body {
-                padding: 2rem 1rem;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card {
-                aspect-ratio: auto; /* Relaxes square constraint on small mobile screens */
-                padding: 1.5rem;
-                gap: 1.25rem;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            header, .card {
-                animation: none !important;
-                transition: none !important;
-                opacity: 1 !important;
-                transform: none !important;
-            }
+            body { padding: 2rem 0.85rem; }
+            h1 { font-size: 2.1rem; }
+            .card { padding: 1.25rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Fixed SideInstaller Background Canvas -->
+    <div class="bg"></div>
 
     <div class="container">
         <header>
@@ -278,30 +244,47 @@
 
         <section>
             <div class="section-header">
-                <h2 class="section-title">Current Projects</h2>
+                <span class="section-title">Current Projects</span>
             </div>
             <div class="grid">
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-active">Live Storefront</span>
-                        <h3>Rock Collection Store</h3>
-                        <p>A sleek, minimalist catalog showcasing authentic hand-picked metamorphic beach stones from Pelion, Greece.</p>
+                    <div>
+                        <div class="card-top">
+                            <div class="icon-box">💎</div>
+                            <span class="badge badge-active">Live Storefront</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Rock Collection Store</h3>
+                            <p>A sleek catalog showcasing authentic hand-picked metamorphic beach stones from Pelion, Greece.</p>
+                        </div>
                     </div>
                     <a href="./store/" class="btn">Access Project &rarr;</a>
                 </div>
+
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-active">Live Tool</span>
-                        <h3>iOS App Installer</h3>
-                        <p>Directly sign your iOS applications right in the browser using a sleek utility tool.</p>
+                    <div>
+                        <div class="card-top">
+                            <div class="icon-box">📱</div>
+                            <span class="badge badge-active">Live Tool</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>iOS App Installer</h3>
+                            <p>Directly sign your iOS applications right in the browser using a sleek utility tool.</p>
+                        </div>
                     </div>
                     <a href="./signer.html" class="btn">Access Project &rarr;</a>
                 </div>
+
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-active">Live Tool</span>
-                        <h3>AI Rock Value Estimator</h3>
-                        <p>Upload a photo of a rock to automatically identify its geological type and estimate its market value.</p>
+                    <div>
+                        <div class="card-top">
+                            <div class="icon-box">🤖</div>
+                            <span class="badge badge-active">Live Tool</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>AI Rock Value Estimator</h3>
+                            <p>Upload a photo of a rock to automatically identify its geological type and estimate its market value.</p>
+                        </div>
                     </div>
                     <a href="./rock-identifier.html" class="btn">Access Project &rarr;</a>
                 </div>
@@ -310,46 +293,25 @@
 
         <section>
             <div class="section-header">
-                <h2 class="section-title">Upcoming Projects</h2>
+                <span class="section-title">Upcoming Projects</span>
             </div>
             <div class="grid">
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-upcoming">In Development</span>
-                        <h3>XSign</h3>
-                        <p>A codesigning app that allows you to permanently Sign & Install apps without revokes.</p>
+                    <div>
+                        <div class="card-top">
+                            <div class="icon-box">⚙️</div>
+                            <span class="badge badge-upcoming">In Development</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>XSign</h3>
+                            <p>A codesigning app that allows you to permanently Sign & Install apps without revokes.</p>
+                        </div>
                     </div>
                     <span class="btn btn-disabled">Coming Soon</span>
                 </div>
             </div>
         </section>
     </div>
-
-    <!-- Scroll Reveal Observer Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const cards = document.querySelectorAll(".card");
-
-            const observerOptions = {
-                threshold: 0.15,
-                rootMargin: "0px 0px -40px 0px"
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add("visible");
-                        }, index * 80);
-                        
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            cards.forEach(card => observer.observe(card));
-        });
-    </script>
 
 </body>
 </html>
