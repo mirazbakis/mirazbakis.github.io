@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraz Bakis - Portfolio</title>
     <style>
+        /* Navy Theme & CSS Variables */
         :root {
-            --bg-color: #080a0f;
-            --card-bg: rgba(15, 21, 32, 0.55);
-            --card-bg-hover: rgba(22, 30, 46, 0.75);
+            --page: #011a5c;
+            --bg-base: #010c22;
+            --bg-gradient-bottom: #000714;
+            
+            --accent: #2170f5;
+            --accent-hover: #3b82f6;
+            --accent-glow: rgba(33, 112, 245, 0.4);
+            
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-bg-hover: rgba(255, 255, 255, 0.06);
             --card-border: rgba(255, 255, 255, 0.08);
-            --card-border-hover: rgba(59, 130, 246, 0.35);
-            --accent-color: #3b82f6;
-            --accent-hover: #60a5fa;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
+            --card-border-hover: rgba(33, 112, 245, 0.45);
+            
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.45);
         }
 
         * {
@@ -26,17 +33,19 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 50% 0%, var(--page) 0%, transparent 60%),
+                radial-gradient(circle at 85% 100%, var(--bg-gradient-bottom) 0%, transparent 50%);
+            background-attachment: fixed;
             color: var(--text-primary);
             line-height: 1.6;
-            padding: 3rem 1.5rem;
+            padding: 4rem 1.5rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             -webkit-font-smoothing: antialiased;
-            background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
-            background-repeat: no-repeat;
         }
 
         .container {
@@ -47,15 +56,16 @@
         /* Hero Header */
         header {
             text-align: center;
-            padding: 3rem 1rem 3.5rem 1rem;
+            padding: 2rem 1rem 3.5rem 1rem;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.25rem;
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.75) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
@@ -77,14 +87,15 @@
         .section-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
+            padding-left: 0.25rem;
         }
 
         .section-title {
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.875rem;
-            letter-spacing: 0.06em;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
             color: var(--text-muted);
         }
 
@@ -96,25 +107,25 @@
             width: 100%;
         }
 
-        /* Glassmorphic Card (Original Larger Size) */
+        /* Glassmorphic SideInstaller Cards */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 18px;
+            border-radius: 20px;
             padding: 2rem 2.25rem;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             gap: 2rem;
             width: 100%;
-            box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
-            /* Scroll-reveal animation initial state */
+            /* Scroll-reveal state */
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(24px);
             transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
                         background-color 0.25s ease,
@@ -122,18 +133,16 @@
                         box-shadow 0.25s ease;
         }
 
-        /* Reveal state triggered on scroll */
         .card.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Hover effect when revealed */
         .card.visible:hover {
             background: var(--card-bg-hover);
             border-color: var(--card-border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 18px 36px -10px rgba(0, 0, 0, 0.7), 0 0 24px -4px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .card-content {
@@ -144,13 +153,13 @@
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 0.4rem;
-            color: #ffffff;
+            color: var(--text-primary);
             letter-spacing: -0.01em;
         }
 
         .card p {
             color: var(--text-secondary);
-            font-size: 0.975rem;
+            font-size: 0.95rem;
             line-height: 1.55;
             margin-bottom: 0;
         }
@@ -158,27 +167,26 @@
         /* Badges */
         .badge {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
+            padding: 0.3rem 0.8rem;
             font-size: 0.75rem;
             font-weight: 600;
             border-radius: 9999px;
             margin-bottom: 0.75rem;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
             width: fit-content;
         }
 
         .badge-active {
-            background: rgba(59, 130, 246, 0.14);
+            background: rgba(33, 112, 245, 0.16);
             color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
+            border: 1px solid rgba(33, 112, 245, 0.35);
+            box-shadow: 0 0 14px rgba(33, 112, 245, 0.2);
         }
 
         .badge-upcoming {
-            background: rgba(168, 85, 247, 0.14);
-            color: #c084fc;
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         /* Buttons */
@@ -188,21 +196,22 @@
             justify-content: center;
             padding: 0.75rem 1.5rem;
             border-radius: 12px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            background: var(--accent);
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
             white-space: nowrap;
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             align-self: center;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 4px 16px var(--accent-glow);
         }
 
         .btn:hover {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-            box-shadow: 0 6px 22px rgba(59, 130, 246, 0.55);
+            background: var(--accent-hover);
+            box-shadow: 0 6px 24px rgba(33, 112, 245, 0.6);
+            transform: translateY(-1px);
         }
 
         .btn:active {
@@ -217,10 +226,26 @@
             box-shadow: none;
         }
 
+        /* Keyframes */
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 640px) {
             body {
-                padding: 1.5rem 1rem;
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
             }
 
             .card {
@@ -232,6 +257,15 @@
 
             .btn {
                 width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            header, .card {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
             }
         }
     </style>
@@ -306,10 +340,11 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        // Subtle stagger delay for cards visible at the same time
                         setTimeout(() => {
                             entry.target.classList.add("visible");
                         }, index * 80);
+                        
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
