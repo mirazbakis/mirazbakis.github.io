@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraz Bakis - Portfolio</title>
     <style>
-        /* Navy Theme & CSS Variables */
+        /*  Navy Theme & CSS Variables */
         :root {
             --page: #011a5c;
             --bg-base: #010c22;
@@ -39,8 +39,8 @@
                 radial-gradient(circle at 85% 100%, var(--bg-gradient-bottom) 0%, transparent 50%);
             background-attachment: fixed;
             color: var(--text-primary);
-            line-height: 1.6;
-            padding: 4rem 1.5rem;
+            line-height: 1.5;
+            padding: 3rem 1.5rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -48,20 +48,21 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Scaled down max-width for better desktop proportions */
         .container {
-            max-width: 850px;
+            max-width: 760px;
             width: 100%;
         }
 
         /* Hero Header */
         header {
             text-align: center;
-            padding: 2rem 1rem 3.5rem 1rem;
+            padding: 1.5rem 1rem 3rem 1rem;
             animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         h1 {
-            font-size: 3.25rem;
+            font-size: 2.75rem;
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 0.5rem;
@@ -72,62 +73,61 @@
         }
 
         .subtitle {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 540px;
+            max-width: 500px;
             margin: 0 auto;
             font-weight: 400;
         }
 
         /* Sections Layout */
         section {
-            margin-bottom: 3.5rem;
+            margin-bottom: 3rem;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
             padding-left: 0.25rem;
         }
 
         .section-title {
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 0.08em;
             color: var(--text-muted);
         }
 
-        /* Horizontal Card Layout */
+        /* PC Grid View: Responsive 2-column desktop layout */
         .grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
             width: 100%;
         }
 
-        /* Glassmorphic SideInstaller Cards */
+        /* Compact SideInstaller Card Design */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2rem 2.25rem;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
             backdrop-filter: blur(24px) saturate(140%);
             -webkit-backdrop-filter: blur(24px) saturate(140%);
             display: flex;
-            flex-direction: row;
-            align-items: center;
+            flex-direction: column;
             justify-content: space-between;
-            gap: 2rem;
+            gap: 1.25rem;
             width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
             /* Scroll-reveal state */
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                         background-color 0.25s ease,
                         border-color 0.25s ease,
                         box-shadow 0.25s ease;
@@ -142,7 +142,7 @@
             background: var(--card-bg-hover);
             border-color: var(--card-border-hover);
             transform: translateY(-3px);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .card-content {
@@ -150,28 +150,28 @@
         }
 
         .card h3 {
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.35rem;
             color: var(--text-primary);
             letter-spacing: -0.01em;
         }
 
         .card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.55;
+            font-size: 0.875rem;
+            line-height: 1.45;
             margin-bottom: 0;
         }
 
         /* Badges */
         .badge {
             display: inline-block;
-            padding: 0.3rem 0.8rem;
-            font-size: 0.75rem;
+            padding: 0.25rem 0.65rem;
+            font-size: 0.7rem;
             font-weight: 600;
             border-radius: 9999px;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.6rem;
             letter-spacing: 0.03em;
             width: fit-content;
         }
@@ -180,7 +180,7 @@
             background: rgba(33, 112, 245, 0.16);
             color: #60a5fa;
             border: 1px solid rgba(33, 112, 245, 0.35);
-            box-shadow: 0 0 14px rgba(33, 112, 245, 0.2);
+            box-shadow: 0 0 12px rgba(33, 112, 245, 0.2);
         }
 
         .badge-upcoming {
@@ -194,23 +194,24 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
+            padding: 0.6rem 1.15rem;
+            border-radius: 10px;
             background: var(--accent);
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             white-space: nowrap;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            align-self: center;
+            align-self: flex-start;
+            width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 16px var(--accent-glow);
+            box-shadow: 0 4px 14px var(--accent-glow);
         }
 
         .btn:hover {
             background: var(--accent-hover);
-            box-shadow: 0 6px 24px rgba(33, 112, 245, 0.6);
+            box-shadow: 0 6px 20px rgba(33, 112, 245, 0.6);
             transform: translateY(-1px);
         }
 
@@ -238,25 +239,22 @@
             }
         }
 
-        /* Mobile Responsiveness */
+        /* Mobile Responsiveness: Switches back to single-column layout */
         @media (max-width: 640px) {
             body {
                 padding: 2rem 1rem;
             }
 
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.25rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
             }
 
             .card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
-                padding: 1.5rem;
-            }
-
-            .btn {
-                width: 100%;
+                padding: 1.25rem;
             }
         }
 
