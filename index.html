@@ -5,42 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miraz Bakis - Portfolio</title>
     <style>
-        /*  Navy Theme & CSS Variables */
+        /*  Theme Variables */
         :root {
             --page: #011a5c;
             --bg-base: #010c22;
-            --bg-gradient-bottom: #000714;
+            --bg-gradient-bottom: #000511;
             
             --accent: #2170f5;
             --accent-hover: #3b82f6;
-            --accent-glow: rgba(33, 112, 245, 0.4);
+            --accent-glow: rgba(33, 112, 245, 0.35);
             
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-bg-hover: rgba(255, 255, 255, 0.06);
+            /* Neutral Dark Card Backgrounds (No color tint inside cards) */
+            --card-bg: rgba(10, 16, 28, 0.7);
+            --card-bg-hover: rgba(15, 23, 40, 0.85);
             --card-border: rgba(255, 255, 255, 0.08);
-            --card-border-hover: rgba(33, 112, 245, 0.45);
+            --card-border-hover: rgba(33, 112, 245, 0.5);
             
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-muted: rgba(255, 255, 255, 0.45);
+            --text-secondary: rgba(255, 255, 255, 0.65);
+            --text-muted: rgba(255, 255, 255, 0.4);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
         }
 
         body {
             background-color: var(--bg-base);
             background-image: 
-                radial-gradient(circle at 50% 0%, var(--page) 0%, transparent 60%),
-                radial-gradient(circle at 85% 100%, var(--bg-gradient-bottom) 0%, transparent 50%);
+                radial-gradient(circle at 50% -10%, var(--page) 0%, transparent 65%),
+                radial-gradient(circle at 50% 110%, var(--bg-gradient-bottom) 0%, transparent 70%);
             background-attachment: fixed;
             color: var(--text-primary);
             line-height: 1.5;
-            padding: 3rem 1.5rem;
+            padding: 3rem 1rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -48,47 +49,45 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Scaled down max-width for better desktop proportions */
+        /* Constrained container width to keep cards compact on PC */
         .container {
-            max-width: 760px;
+            max-width: 640px;
             width: 100%;
         }
 
         /* Hero Header */
         header {
             text-align: center;
-            padding: 1.5rem 1rem 3rem 1rem;
+            padding: 1rem 1rem 2.5rem 1rem;
             animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         h1 {
-            font-size: 2.75rem;
+            font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: -0.03em;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.75) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+            margin-bottom: 0.4rem;
+            color: var(--text-primary);
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
         }
 
         .subtitle {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--text-secondary);
-            max-width: 500px;
+            max-width: 460px;
             margin: 0 auto;
             font-weight: 400;
         }
 
-        /* Sections Layout */
+        /* Sections */
         section {
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         .section-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.85rem;
             padding-left: 0.25rem;
         }
 
@@ -100,37 +99,38 @@
             color: var(--text-muted);
         }
 
-        /* PC Grid View: Responsive 2-column desktop layout */
+        /* Grid Layout */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
             width: 100%;
         }
 
-        /* Compact SideInstaller Card Design */
+        /* Compact SideInstaller Style Cards */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.25rem 1.5rem;
-            backdrop-filter: blur(24px) saturate(140%);
-            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            border-radius: 14px;
+            padding: 1.15rem 1.35rem;
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
             justify-content: space-between;
             gap: 1.25rem;
             width: 100%;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 
             /* Scroll-reveal state */
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(16px);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        background-color 0.25s ease,
-                        border-color 0.25s ease,
-                        box-shadow 0.25s ease;
+                        background-color 0.2s ease,
+                        border-color 0.2s ease,
+                        box-shadow 0.2s ease;
         }
 
         .card.visible {
@@ -141,8 +141,7 @@
         .card.visible:hover {
             background: var(--card-bg-hover);
             border-color: var(--card-border-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 16px var(--accent-glow);
         }
 
         .card-content {
@@ -150,16 +149,16 @@
         }
 
         .card h3 {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 600;
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.25rem;
             color: var(--text-primary);
             letter-spacing: -0.01em;
         }
 
         .card p {
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             line-height: 1.45;
             margin-bottom: 0;
         }
@@ -167,52 +166,49 @@
         /* Badges */
         .badge {
             display: inline-block;
-            padding: 0.25rem 0.65rem;
-            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.68rem;
             font-weight: 600;
             border-radius: 9999px;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
             letter-spacing: 0.03em;
             width: fit-content;
         }
 
         .badge-active {
-            background: rgba(33, 112, 245, 0.16);
+            background: rgba(33, 112, 245, 0.15);
             color: #60a5fa;
-            border: 1px solid rgba(33, 112, 245, 0.35);
-            box-shadow: 0 0 12px rgba(33, 112, 245, 0.2);
+            border: 1px solid rgba(33, 112, 245, 0.3);
         }
 
         .badge-upcoming {
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Buttons */
+        /* SideInstaller Accent Action Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.6rem 1.15rem;
+            padding: 0.55rem 1.1rem;
             border-radius: 10px;
             background: var(--accent);
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.825rem;
             white-space: nowrap;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            align-self: flex-start;
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 14px var(--accent-glow);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            align-self: center;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 2px 10px var(--accent-glow);
         }
 
         .btn:hover {
             background: var(--accent-hover);
-            box-shadow: 0 6px 20px rgba(33, 112, 245, 0.6);
-            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(33, 112, 245, 0.5);
         }
 
         .btn:active {
@@ -220,7 +216,7 @@
         }
 
         .btn-disabled {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text-muted);
             border: 1px solid var(--card-border);
             cursor: not-allowed;
@@ -231,7 +227,7 @@
         @keyframes rise {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(16px);
             }
             to {
                 opacity: 1;
@@ -239,22 +235,25 @@
             }
         }
 
-        /* Mobile Responsiveness: Switches back to single-column layout */
+        /* Mobile Adjustments */
         @media (max-width: 640px) {
             body {
-                padding: 2rem 1rem;
+                padding: 2rem 0.85rem;
             }
 
             h1 {
-                font-size: 2.25rem;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
+                font-size: 2.1rem;
             }
 
             .card {
-                padding: 1.25rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.1rem;
+                padding: 1.15rem;
+            }
+
+            .btn {
+                width: 100%;
             }
         }
 
