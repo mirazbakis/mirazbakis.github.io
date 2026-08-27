@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+
+        <!-- KEEP APPS -->
+        <dict>
+            <key>DNSSettings</key>
+            <dict>
+                <key>DNSProtocol</key>
+                <string>HTTPS</string>
+                <key>ServerURL</key>
+                <string>https://dns.nextdns.io/cde27d</string>
+            </dict>
+
+            <key>PayloadDisplayName</key>
+            <string>mbakis (KEEP APPS)</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.mbakis.dns.keepapps</string>
+
+            <key>PayloadType</key>
+            <string>com.apple.dnsSettings.managed</string>
+
+            <key>PayloadUUID</key>
+            <string>7B5F9C2A-1D64-4E83-A7F0-9B31C6D85204</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+        </dict>
+
+        <!-- INSTALL APPS -->
+        <dict>
+            <key>DNSSettings</key>
+            <dict>
+                <key>DNSProtocol</key>
+                <string>HTTPS</string>
+                <key>ServerURL</key>
+                <string>https://dns.nextdns.io/da9c98</string>
+            </dict>
+
+            <key>PayloadDisplayName</key>
+            <string>mbakis (INSTALL APPS)</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.mbakis.dns.installapps</string>
+
+            <key>PayloadType</key>
+            <string>com.apple.dnsSettings.managed</string>
+
+            <key>PayloadUUID</key>
+            <string>3A7E1C95-84B2-46D0-AF31-6C9275E8B104</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+        </dict>
+
+        <!-- Web Clip -->
+        <dict>
+            <key>FullScreen</key>
+            <true/>
+
+            <key>IsRemovable</key>
+            <true/>
+
+            <key>Label</key>
+            <string>mbakis</string>
+
+            <key>PayloadDisplayName</key>
+            <string>mbakis Web Clip</string>
+
+            <key>PayloadIdentifier</key>
+            <string>com.mbakis.webclip</string>
+
+            <key>PayloadType</key>
+            <string>com.apple.webClip.managed</string>
+
+            <key>PayloadUUID</key>
+            <string>2E91A7C4-5D63-4B08-9F27-6A83C1D540BE</string>
+
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+
+            <key>URL</key>
+            <string>https://mirazbakis.github.io/</string>
+        </dict>
+
+    </array>
+
+    <key>PayloadDescription</key>
+    <string>mbakis switchable DNS configuration profile</string>
+
+    <key>PayloadDisplayName</key>
+    <string>mbakis</string>
+
+    <key>PayloadIdentifier</key>
+    <string>com.mbakis.profile</string>
+
+    <key>PayloadOrganization</key>
+    <string>mirazbakis.github.io</string>
+
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+
+    <key>PayloadType</key>
+    <string>Configuration</string>
+
+    <key>PayloadUUID</key>
+    <string>4E82A1D7-6C35-49F0-B28E-53D917AC604B</string>
+
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+</plist>
