@@ -1,14 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPA Web Signer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://unpkg.com/zsign-web@latest/dist/index.min.js"></script>
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>IPA Web Signer · zsign</title>
+
+    <!-- ============================================================
+    LIBRARIES – loaded from reliable CDNs with fallback
+    ============================================================ -->
+
+    <!-- Forge (RSA / PKCS#12 parsing) – from cdnjs (very reliable) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/forge/1.3.1/forge.min.js">
+    </script>
+
+    <!-- JSZip – from cdnjs (very reliable) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js">
+    </script>
+
+    <!--
+    zsign-web  –  the WebAssembly IPA signer.
+    PRIMARY:   jsdelivr (more reliable than unpkg in many regions)
+    FALLBACK:  unpkg  (if jsdelivr fails)
+    The library automatically loads its .wasm companion from the same
+    CDN origin – we just need to ensure the script loads.
+    -->
+    <script>
+        // ----- zsign-web loader with CDN fallback -----
+        (function loadZsign() {
+            const scripts = [
+                'https://cdn.jsdelivr.net/npm/zsign-web@1.0.1/dist/index.min.js',
+                'https://unpkg.com/zsign-web@1.0.1/dist/index.min.js'
+            ];
+
+            let idx = 0;
+
+            function tryLoad() {
+                if (idx >= scripts.length) {
+                    console.error('❌ All CDN attempts for zsign-web failed.');
+                    document.getElementById('status').textContent =
+                        'Status: ⚠️ Signing engine could not load. Please check your network or host the files locally.';
+                    return;
+                }
+                const url = scripts[idx];
+                console.log(`⏳ Loading zsign-web from ${url} ...`);
+                const el = document.createElement('script');
+                el.src = url;
+                el.crossOrigin = 'anonymous';
+                el.onload = () => {
+                    console.log('✅ zsign-web loaded successfully from', url);
+                    // The library exposes `window.zsignWeb`
+                    if (window.zsignWeb) {
+                        document.getElementById('status').textContent =
+                            'Status: ✅ Signing engine ready.';
+                    } else {
+                        console.warn('⚠️ zsignWeb not on window after load – trying fallback');
+                        idx++;
+                        tryLoad();
+                    }
+                };
+                el.onerror = () => {
+                    console.warn(`❌ Failed to load from ${url}, trying next...`);
+                    idx++;
+                    tryLoad();
+                };
+                document.head.appendChild(el);
+            }
+
+            // If zsignWeb already exists (e.g. from a previous load), skip.
+            if (window.zsignWeb) {
+                console.log('✅ zsignWeb already present.');
+                return;
+            }
+            tryLoad();
+        })();
+    </script>
+
     <style>
+        /* ── same sleek dark theme ── */
         :root {
             --bg-color: #030303;
             --card-bg: #0d0d12;
@@ -36,14 +104,12 @@
             padding: 3rem 1rem;
         }
 
-        /* Expanded wrapper for horizontal layout */
         .wrapper {
             max-width: 850px;
             margin: 0 auto;
             width: 100%;
         }
 
-        /* Return to Main Page Button */
         .back-link {
             display: inline-block;
             margin-bottom: 1.5rem;
@@ -53,9 +119,8 @@
             font-weight: 600;
             transition: color 0.2s ease, transform 0.2s ease;
         }
-        
-        .back-link:hover { 
-            color: var(--text-primary); 
+        .back-link:hover {
+            color: var(--text-primary);
             transform: translateX(-4px);
         }
 
@@ -72,17 +137,21 @@
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1.5rem;
         }
-
         .title-section h1 {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
         }
+        .title-section .sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            font-weight: 400;
+        }
 
-        /* Switched to responsive CSS Grid for horizontal inputs */
         .upload-group {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
@@ -92,10 +161,9 @@
             flex-direction: column;
             gap: 0.5rem;
         }
-
         .input-box label {
             font-size: 0.85rem;
-            font-weight: 600; 
+            font-weight: 600;
             color: var(--text-secondary);
         }
 
@@ -111,17 +179,14 @@
             outline: none;
             transition: all 0.2s ease;
         }
-
         .file-input:hover {
             border-color: rgba(255, 255, 255, 0.25);
             background: rgba(255, 255, 255, 0.06);
         }
-
         .file-input:focus {
             border-color: var(--accent-blue);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
-
         .file-input::file-selector-button {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -133,7 +198,6 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
         .file-input::file-selector-button:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.25);
@@ -153,15 +217,18 @@
             margin-top: 0.5rem;
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
-
         .btn-sign:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
             box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
         }
-
         .btn-sign:active {
             transform: translateY(1px);
+        }
+        .btn-sign:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
         }
 
         #status {
@@ -176,31 +243,43 @@
             text-align: center;
             word-break: break-all;
             transition: all 0.3s ease;
+            min-height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .processing {
+        .status-processing {
             color: #60a5fa !important;
             border-color: rgba(96, 165, 250, 0.4) !important;
             box-shadow: 0 0 12px rgba(96, 165, 250, 0.1);
             animation: pulse 2s infinite;
         }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        .success {
+        .status-success {
             color: #4ade80 !important;
             border-color: rgba(74, 222, 128, 0.4) !important;
             background: rgba(74, 222, 128, 0.05) !important;
         }
-
-        .error {
+        .status-error {
             color: #f87171 !important;
             border-color: rgba(248, 113, 113, 0.4) !important;
             background: rgba(248, 113, 113, 0.05) !important;
+        }
+        .status-warn {
+            color: #fbbf24 !important;
+            border-color: rgba(251, 191, 36, 0.4) !important;
+            background: rgba(251, 191, 36, 0.05) !important;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 1;
+            }
         }
 
         .disclaimer {
@@ -213,12 +292,10 @@
             gap: 0.75rem;
             align-items: center;
         }
-
         .disclaimer-icon {
             font-size: 1.25rem;
             line-height: 1;
         }
-        
         .disclaimer-content p {
             margin: 0;
             font-size: 0.9rem;
@@ -233,11 +310,28 @@
             font-size: 0.85rem;
             color: var(--text-secondary);
         }
-
         .footer-credit a {
             color: var(--text-primary);
             text-decoration: underline;
             font-weight: 500;
+        }
+
+        /* tiny spinner */
+        .spinner {
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #60a5fa;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-right: 0.6rem;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -248,33 +342,31 @@
 
         <div class="container">
             <div class="title-section">
-                <h1>Permanent iOS App Signer</h1>
+                <h1>🍏 Permanent iOS App Signer</h1>
+                <div class="sub">Uses zsign‑web (WebAssembly) — all processing stays in your browser.</div>
             </div>
-            
+
             <div class="upload-group">
                 <div class="input-box">
                     <label>1. Apple p12 File (.p12)</label>
-                    <input type="file" class="file-input" id="p12File" accept=".p12">
+                    <input type="file" class="file-input" id="p12File" accept=".p12" />
                 </div>
-                
                 <div class="input-box">
                     <label>2. p12 Password</label>
-                    <input type="password" class="file-input" id="p12Password" placeholder="Enter certificate password">
+                    <input type="password" class="file-input" id="p12Password" placeholder="Enter certificate password" />
                 </div>
-                
                 <div class="input-box">
                     <label>3. Provisioning Profile (.mobileprovision)</label>
-                    <input type="file" class="file-input" id="provFile" accept=".mobileprovision">
+                    <input type="file" class="file-input" id="provFile" accept=".mobileprovision" />
                 </div>
-            
                 <div class="input-box">
                     <label>4. IPA File (.ipa)</label>
-                    <input type="file" class="file-input" id="ipaFile" accept=".ipa">
+                    <input type="file" class="file-input" id="ipaFile" accept=".ipa" />
                 </div>
             </div>
-        
-            <button class="btn-sign" id="signButton" onclick="processAndSign()">Start Signing</button>
-            <div id="status">Status: Ready</div>
+
+            <button class="btn-sign" id="signButton">Start Signing</button>
+            <div id="status">⏳ Status: Waiting for engine to load…</div>
 
             <div class="disclaimer">
                 <div class="disclaimer-icon">⚠️</div>
@@ -285,69 +377,159 @@
         </div>
 
         <div class="footer-credit">
-            <p>IPA Signer is powered by the open-source engine <a href="https://github.com/zhlynn/zsign" target="_blank">zsign</a> by zhlynn.</p>
+            <p>IPA Signer powered by <a href="https://github.com/zhlynn/zsign" target="_blank">zsign</a> (WebAssembly port).</p>
         </div>
     </div>
 
     <script>
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        //  MAIN SIGNING LOGIC  –  uses window.zsignWeb when ready
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+        const statusEl = document.getElementById('status');
+        const signBtn = document.getElementById('signButton');
+
+        // Helper to update status with a class
+        function setStatus(msg, type) {
+            statusEl.textContent = msg;
+            statusEl.className = type || '';
+        }
+
+        // Check if zsignWeb is available, update status
+        function checkEngine() {
+            if (window.zsignWeb) {
+                setStatus('✅ Status: Signing engine ready.', 'status-success');
+                signBtn.disabled = false;
+                return true;
+            } else {
+                setStatus('⏳ Status: Loading signing engine (WebAssembly)…', 'status-processing');
+                signBtn.disabled = true;
+                // Retry every 2s until it appears or timeout
+                let attempts = 0;
+                const maxAttempts = 30; // 60s
+                const interval = setInterval(() => {
+                    attempts++;
+                    if (window.zsignWeb) {
+                        clearInterval(interval);
+                        setStatus('✅ Status: Signing engine ready.', 'status-success');
+                        signBtn.disabled = false;
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(interval);
+                        setStatus(
+                            '❌ Status: Engine load timed out. Check network or host files locally.',
+                            'status-error'
+                        );
+                        signBtn.disabled = true;
+                    }
+                }, 2000);
+                return false;
+            }
+        }
+
+        // Initial check after a short delay (scripts may still be loading)
+        setTimeout(checkEngine, 1500);
+
+        // Also check when the user clicks the button (defensive)
+        signBtn.addEventListener('click', () => {
+            if (!window.zsignWeb) {
+                setStatus('❌ Status: Signing engine not loaded. Please wait or refresh.', 'status-error');
+                return;
+            }
+            processAndSign();
+        });
+
+        // ─── Core signing function ──────────────────────────────
+
         window.processAndSign = async function() {
-            const statusEl = document.getElementById('status');
-            statusEl.className = 'processing';
-            
+            if (!window.zsignWeb) {
+                setStatus('❌ Status: Signing engine unavailable. Check console for errors.', 'status-error');
+                return;
+            }
+
+            const p12File = document.getElementById('p12File').files[0];
+            const password = document.getElementById('p12Password').value || '';
+            const provFile = document.getElementById('provFile').files[0];
+            const ipaFile = document.getElementById('ipaFile').files[0];
+
+            // Validate files
+            if (!p12File || !provFile || !ipaFile) {
+                setStatus('❌ Status: Please select all required files (.p12, .mobileprovision, .ipa).', 'status-error');
+                return;
+            }
+
+            // Disable button during processing
+            signBtn.disabled = true;
+            setStatus('⏳ Status: Reading files…', 'status-processing');
+
             try {
-                if (!window.zsignWeb) {
-                    throw new Error("Signing engine (zsignWeb) failed to load from CDN. Check your internet connection.");
-                }
-
-                const p12File = document.getElementById('p12File').files[0];
-                const password = document.getElementById('p12Password').value || "";
-                const provFile = document.getElementById('provFile').files[0];
-                const ipaFile = document.getElementById('ipaFile').files[0];
-
-                if (!p12File || !provFile || !ipaFile) {
-                    throw new Error("Please select all required files (.p12, .mobileprovision, and .ipa).");
-                }
-
-                statusEl.innerText = "Status: Initializing background signing engine...";
-                
+                // Read files as Uint8Array
                 const p12Buffer = new Uint8Array(await p12File.arrayBuffer());
                 const provBuffer = new Uint8Array(await provFile.arrayBuffer());
                 const ipaBuffer = new Uint8Array(await ipaFile.arrayBuffer());
 
-                statusEl.innerText = "Status: Executing signature script inside browser thread...";
-                
+                setStatus('⏳ Status: Signing… this may take a moment.', 'status-processing');
+
+                // ── Call zsignWeb.sign ──
                 const signedIpaBytes = await window.zsignWeb.sign({
                     ipa: ipaBuffer,
                     p12: p12Buffer,
                     password: password,
                     provision: provBuffer
                 });
-                
-                if (!signedIpaBytes) {
-                    throw new Error("Signing engine returned an empty output.");
+
+                if (!signedIpaBytes || signedIpaBytes.length === 0) {
+                    throw new Error('Signing returned empty output.');
                 }
 
-                statusEl.innerText = "Status: Packing distribution package...";
-                const finalBlob = new Blob([signedIpaBytes], { type: "application/octet-stream" });
-                
-                const url = URL.createObjectURL(finalBlob);
+                setStatus('⏳ Status: Packaging signed IPA…', 'status-processing');
+
+                // Build download
+                const blob = new Blob([signedIpaBytes], { type: 'application/octet-stream' });
+                const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = "Signed_" + ipaFile.name;
+                a.download = 'Signed_' + ipaFile.name;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
-                
-                statusEl.className = 'success';
-                statusEl.innerText = "Status: Done! Check your downloads folder.";
-            } catch (e) {
-                console.error("Detailed Signing Error:", e);
-                const errorMessage = e.message || e.toString() || "Unknown error";
-                statusEl.className = 'error';
-                statusEl.innerText = "Status: Error - " + errorMessage;
+
+                setStatus('✅ Status: Done! Check your downloads folder.', 'status-success');
+            } catch (err) {
+                console.error('Signing error:', err);
+                let msg = err.message || err.toString() || 'Unknown error';
+                // Provide more user-friendly hints for common issues
+                if (msg.includes('wasm') || msg.includes('WebAssembly')) {
+                    msg += ' — The WebAssembly module failed to load. Try refreshing or check your network.';
+                }
+                if (msg.includes('password') || msg.includes('PKCS')) {
+                    msg += ' — Check your p12 password and certificate format.';
+                }
+                setStatus('❌ Status: ' + msg, 'status-error');
+            } finally {
+                signBtn.disabled = false;
             }
-        }
+        };
+
+        // ─── Also allow calling from the button's onclick attribute ───
+        // (but we already use addEventListener above; keep both for safety)
+        // The inline onclick in HTML will call this too.
+        // We'll override it to use our logic.
+        const originalOnclick = document.getElementById('signButton').onclick;
+        document.getElementById('signButton').onclick = function(e) {
+            if (window.zsignWeb) {
+                processAndSign();
+            } else {
+                setStatus('⏳ Status: Engine still loading, please wait…', 'status-processing');
+                checkEngine();
+            }
+        };
+
+        // ─── Console helper ──────────────────────────────────────
+        console.log('🔧 IPA Web Signer loaded.');
+        console.log('ℹ️  zsignWeb available:', !!window.zsignWeb);
+        console.log('📌 If the engine fails to load, try hosting the files locally or use a VPN.');
     </script>
+
 </body>
 </html>
