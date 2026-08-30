@@ -7,11 +7,487 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./style.css?v=3">
+    <style>
+/* ---- Theme tokens ---- */
+:root {
+    --bg-base: #07090c;
+    --hue-a: #5ec8d8;
+    --hue-b: #c4a86e;
+    --hue-c: #508c78;
+    --hue-d: #466ebe;
+    --aurora-opacity: 0.5;
+    --grain-blend: overlay;
+    --grain-opacity: 0.035;
+
+    --text-primary: #f2f2f2;
+    --text-heading: #ffffff;
+    --text-secondary: #a8b0b6;
+    --text-muted: #8a9096;
+    --text-card-body: #b7bec4;
+
+    --glass-fill: rgba(255, 255, 255, 0.09);
+    --glass-fill-strong: rgba(255, 255, 255, 0.20);
+    --glass-fill-soft: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-border-hover: rgba(255, 255, 255, 0.30);
+    --glass-highlight: rgba(255, 255, 255, 0.18);
+    --glass-highlight-strong: rgba(255, 255, 255, 0.25);
+    --glass-sheen: rgba(255, 255, 255, 0.14);
+
+    --card-ring-a: rgba(94, 200, 216, 0.5);
+    --card-ring-b: rgba(196, 168, 110, 0.4);
+
+    --shadow-color: rgba(0, 0, 0, 0.45);
+    --shadow-color-strong: rgba(0, 0, 0, 0.55);
+
+    --accent: #5ec8d8;
+    --accent-dim: rgba(94, 200, 216, 0.85);
+    --accent-glow: rgba(94, 200, 216, 0.25);
+    --accent-text-on: #06181c;
+
+    color-scheme: dark;
+}
+
+html[data-theme="light"] {
+    --bg-base: #eef1f8;
+    --hue-a: #a9dbe6;
+    --hue-b: #e6d3a0;
+    --hue-c: #a8d0c0;
+    --hue-d: #aab8e6;
+    --aurora-opacity: 0.65;
+    --grain-blend: multiply;
+    --grain-opacity: 0.02;
+
+    --text-primary: #232a33;
+    --text-heading: #10151b;
+    --text-secondary: #4c5560;
+    --text-muted: #7a828c;
+    --text-card-body: #4c5560;
+
+    --glass-fill: rgba(255, 255, 255, 0.55);
+    --glass-fill-strong: rgba(255, 255, 255, 0.78);
+    --glass-fill-soft: rgba(255, 255, 255, 0.35);
+    --glass-border: rgba(20, 30, 60, 0.12);
+    --glass-border-hover: rgba(20, 30, 60, 0.24);
+    --glass-highlight: rgba(255, 255, 255, 0.65);
+    --glass-highlight-strong: rgba(255, 255, 255, 0.85);
+    --glass-sheen: rgba(255, 255, 255, 0.5);
+
+    --card-ring-a: rgba(47, 143, 166, 0.45);
+    --card-ring-b: rgba(196, 150, 80, 0.35);
+
+    --shadow-color: rgba(30, 40, 70, 0.14);
+    --shadow-color-strong: rgba(30, 40, 70, 0.2);
+
+    --accent: #2f8fa6;
+    --accent-dim: rgba(47, 143, 166, 0.9);
+    --accent-glow: rgba(47, 143, 166, 0.2);
+    --accent-text-on: #ffffff;
+
+    color-scheme: light;
+}
+
+/* Core Reset */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    background: var(--bg-base);
+    transition: background 0.35s ease;
+}
+
+body {
+    background-color: var(--bg-base) !important;
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    line-height: 1.6;
+    min-height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Drifting color fields — the light source the glass bends */
+.aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+}
+.aurora span {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: var(--aurora-opacity);
+    will-change: transform;
+    transition: opacity 0.35s ease;
+}
+.aurora span:nth-child(1) {
+    width: 48vw; height: 48vw;
+    top: -16vw; left: -12vw;
+    background: var(--hue-a);
+    animation: drift1 26s ease-in-out infinite alternate;
+}
+.aurora span:nth-child(2) {
+    width: 40vw; height: 40vw;
+    top: 4vw; right: -14vw;
+    background: var(--hue-c);
+    animation: drift2 32s ease-in-out infinite alternate;
+}
+.aurora span:nth-child(3) {
+    width: 52vw; height: 52vw;
+    bottom: -22vw; left: 14vw;
+    background: var(--hue-b);
+    animation: drift3 38s ease-in-out infinite alternate;
+}
+.aurora span:nth-child(4) {
+    width: 30vw; height: 30vw;
+    bottom: 10vw; right: 4vw;
+    background: var(--hue-d);
+    animation: drift1 22s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift1 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(4vw, 5vw) scale(1.12); }
+}
+@keyframes drift2 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(-5vw, 4vw) scale(1.08); }
+}
+@keyframes drift3 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(3vw, -4vw) scale(1.1); }
+}
+
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: var(--grain-opacity);
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: var(--grain-blend);
+    transition: opacity 0.35s ease;
+}
+
+/* ---- Theme toggle ---- */
+.theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 20;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 6px 20px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+.theme-toggle:hover { background: var(--glass-fill-strong); transform: translateY(-2px); }
+.theme-toggle:active { transform: scale(0.94); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.theme-toggle svg { width: 20px; height: 20px; }
+.theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+@media (max-width: 600px) {
+    .theme-toggle { top: 1rem; right: 1rem; width: 42px; height: 42px; }
+}
+
+/* Layout */
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    letter-spacing: -0.03em;
+    color: var(--text-heading);
+    text-shadow: 0 1px 24px var(--accent-glow);
+}
+
+p.subtitle {
+    color: var(--text-secondary);
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    max-width: 640px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background: linear-gradient(155deg, var(--glass-fill-strong), var(--glass-fill-soft));
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+    color: var(--text-heading);
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 18px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: linear-gradient(155deg, var(--glass-highlight-strong), var(--glass-fill));
+    border-color: var(--glass-border-hover);
+    transform: translateY(-2px);
+}
+
+.btn.primary {
+    position: relative;
+    background: linear-gradient(155deg, var(--accent-dim), var(--accent));
+    color: var(--accent-text-on);
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+    font-weight: 700;
+    border: 1px solid var(--glass-border-hover);
+    padding: 12px 20px;
+    box-shadow: 0 6px 20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+}
+
+.btn.primary::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -60%;
+    width: 40%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+.btn.primary:hover::after {
+    left: 130%;
+}
+
+.btn.primary:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* Search Container */
+.search-container {
+    margin-bottom: 35px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 16px 22px;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(155deg, var(--glass-fill), var(--glass-fill-soft));
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    color: var(--text-heading);
+    font-family: inherit;
+    font-size: 1rem;
+    box-shadow: 0 8px 28px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
+    transition: all 0.25s ease;
+}
+
+#searchInput::placeholder {
+    color: var(--text-muted);
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 8px 28px var(--shadow-color), 0 0 0 3px var(--accent-glow), inset 0 1px 0 var(--glass-highlight);
+}
+
+/* Product Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Cards — the liquid glass panel */
+.card {
+    position: relative;
+    background: linear-gradient(155deg, var(--glass-fill), var(--glass-fill-soft));
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow:
+        0 8px 30px var(--shadow-color),
+        inset 0 1px 0 var(--glass-highlight),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+/* Specular sweep — the signature liquid-glass touch, a soft highlight that glides across on hover */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: -60%;
+    width: 60%;
+    height: 220%;
+    background: linear-gradient(
+        75deg,
+        rgba(255, 255, 255, 0) 0%,
+        var(--glass-sheen) 45%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(20deg) translateX(0%);
+    transition: transform 0.9s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Gradient-mask ring — a thin diagonal sea-to-sand border only the mask reveals */
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--card-ring-a), rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, var(--card-ring-b));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.card.visible { opacity: 1; transform: translateY(0); }
+
+.card.visible:hover::before {
+    transform: rotate(20deg) translateX(260%);
+}
+
+.card.visible:hover {
+    transform: translateY(-6px);
+    border-color: var(--glass-border-hover);
+    box-shadow:
+        0 18px 40px var(--shadow-color-strong),
+        inset 0 1px 0 var(--glass-highlight-strong),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Image Container & Fit */
+.card-img {
+    background-color: var(--glass-fill-soft);
+    width: 100%;
+    height: 200px;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+.card.visible:hover .card-img img {
+    transform: scale(1.05);
+}
+
+.card h3 {
+    font-family: 'Poppins', sans-serif;
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    letter-spacing: -0.01em;
+}
+
+.card p {
+    color: var(--text-card-body);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0 0 18px 0;
+    flex-grow: 1;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 12px;
+    text-shadow: 0 1px 12px var(--accent-glow);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .card, .card::before, .card::after, .card-img img, .btn, .btn.primary::after, .theme-toggle, .aurora span, html, body {
+        animation: none !important;
+        transition: none !important;
+    }
+    .card {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* Mobile Layout */
+@media (max-width: 600px) {
+    body {
+        padding: 20px 15px;
+    }
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
 </head>
 <body>
+
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light background">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<div class="grain" aria-hidden="true"></div>
 
 <div class="container">
     <a href="../" class="btn">← Back to Main Page</a>
@@ -154,6 +630,57 @@ function filterProducts() {
         }
     }
 }
+
+(function () {
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+
+    // Wrapped so a blocked/unavailable localStorage (file://, sandboxed
+    // previews) can't throw and silently break the toggle.
+    let memoryTheme = null;
+    function getStoredTheme() {
+        try {
+            return localStorage.getItem('theme');
+        } catch (e) {
+            return memoryTheme;
+        }
+    }
+    function setStoredTheme(value) {
+        try {
+            localStorage.setItem('theme', value);
+        } catch (e) {
+            memoryTheme = value;
+        }
+    }
+
+    const stored = getStoredTheme();
+    const initial = stored === 'light' ? 'light' : 'dark';
+    root.setAttribute('data-theme', initial);
+    toggle.setAttribute('aria-label', initial === 'dark' ? 'Switch to light background' : 'Switch to dark background');
+
+    toggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        setStoredTheme(next);
+        toggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light background' : 'Switch to dark background');
+    });
+})();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".card");
+    const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -40px 0px" };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add("visible"), index * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    cards.forEach(card => observer.observe(card));
+});
 </script>
 
 </body>
