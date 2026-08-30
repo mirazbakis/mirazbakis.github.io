@@ -602,7 +602,27 @@
             const root = document.documentElement;
             const toggle = document.getElementById('theme-toggle');
 
-            const stored = localStorage.getItem('theme');
+            // Some browsers (e.g. Safari on file:// pages) or sandboxed
+            // preview environments throw when touching localStorage.
+            // Wrap every access so a storage failure can never silently
+            // kill the whole script (which is what broke the toggle).
+            let memoryTheme = null;
+            function getStoredTheme() {
+                try {
+                    return localStorage.getItem('theme');
+                } catch (e) {
+                    return memoryTheme;
+                }
+            }
+            function setStoredTheme(value) {
+                try {
+                    localStorage.setItem('theme', value);
+                } catch (e) {
+                    memoryTheme = value;
+                }
+            }
+
+            const stored = getStoredTheme();
             const initial = stored === 'light' ? 'light' : 'dark';
             root.setAttribute('data-theme', initial);
             toggle.setAttribute('aria-label', initial === 'dark' ? 'Switch to light background' : 'Switch to dark background');
@@ -610,7 +630,7 @@
             toggle.addEventListener('click', () => {
                 const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
                 root.setAttribute('data-theme', next);
-                localStorage.setItem('theme', next);
+                setStoredTheme(next);
                 toggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light background' : 'Switch to dark background');
             });
         })();
