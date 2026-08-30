@@ -7,681 +7,644 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
-/* ---- Theme tokens ---- */
-:root {
-    --bg-base: #07090c;
-    --hue-a: #5ec8d8;
-    --hue-b: #c4a86e;
-    --hue-c: #508c78;
-    --hue-d: #466ebe;
-    --aurora-opacity: 0.5;
-    --grain-blend: overlay;
-    --grain-opacity: 0.035;
+        :root {
+            --bg-base: #05070f;
 
-    --text-primary: #f2f2f2;
-    --text-heading: #ffffff;
-    --text-secondary: #a8b0b6;
-    --text-muted: #8a9096;
-    --text-card-body: #b7bec4;
+            --hue-a: #3d6bff;
+            --hue-b: #8a3dff;
+            --hue-c: #2fd4c8;
+            --hue-d: #ff5f9e;
 
-    --glass-fill: rgba(255, 255, 255, 0.09);
-    --glass-fill-strong: rgba(255, 255, 255, 0.20);
-    --glass-fill-soft: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.14);
-    --glass-border-hover: rgba(255, 255, 255, 0.30);
-    --glass-highlight: rgba(255, 255, 255, 0.18);
-    --glass-highlight-strong: rgba(255, 255, 255, 0.25);
-    --glass-sheen: rgba(255, 255, 255, 0.14);
+            --accent: #4f8bff;
+            --accent-hover: #6ba0ff;
+            --accent-glow: rgba(79, 139, 255, 0.4);
 
-    --card-ring-a: rgba(94, 200, 216, 0.5);
-    --card-ring-b: rgba(196, 168, 110, 0.4);
+            --glass-fill: rgba(255, 255, 255, 0.05);
+            --glass-fill-hover: rgba(255, 255, 255, 0.095);
+            --glass-border: rgba(255, 255, 255, 0.16);
+            --glass-border-hover: rgba(255, 255, 255, 0.32);
+            --glass-highlight: rgba(255, 255, 255, 0.24);
+            --glass-highlight-strong: rgba(255, 255, 255, 0.32);
 
-    --shadow-color: rgba(0, 0, 0, 0.45);
-    --shadow-color-strong: rgba(0, 0, 0, 0.55);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.64);
+            --text-muted: rgba(255, 255, 255, 0.38);
 
-    --accent: #5ec8d8;
-    --accent-dim: rgba(94, 200, 216, 0.85);
-    --accent-glow: rgba(94, 200, 216, 0.25);
-    --accent-text-on: #06181c;
+            --aurora-opacity: 0.55;
+            --grain-blend: overlay;
+            --grain-opacity: 0.035;
 
-    color-scheme: dark;
-}
+            color-scheme: dark;
 
-html[data-theme="light"] {
-    --bg-base: #eef1f8;
-    --hue-a: #a9dbe6;
-    --hue-b: #e6d3a0;
-    --hue-c: #a8d0c0;
-    --hue-d: #aab8e6;
-    --aurora-opacity: 0.65;
-    --grain-blend: multiply;
-    --grain-opacity: 0.02;
+            transition: color 0.35s ease;
+        }
 
-    --text-primary: #232a33;
-    --text-heading: #10151b;
-    --text-secondary: #4c5560;
-    --text-muted: #7a828c;
-    --text-card-body: #4c5560;
+        html[data-theme="light"] {
+            --bg-base: #eef1f8;
 
-    --glass-fill: rgba(255, 255, 255, 0.55);
-    --glass-fill-strong: rgba(255, 255, 255, 0.78);
-    --glass-fill-soft: rgba(255, 255, 255, 0.35);
-    --glass-border: rgba(20, 30, 60, 0.12);
-    --glass-border-hover: rgba(20, 30, 60, 0.24);
-    --glass-highlight: rgba(255, 255, 255, 0.65);
-    --glass-highlight-strong: rgba(255, 255, 255, 0.85);
-    --glass-sheen: rgba(255, 255, 255, 0.5);
+            --hue-a: #a9c2ff;
+            --hue-b: #d7b8ff;
+            --hue-c: #a6ede6;
+            --hue-d: #ffc2dc;
 
-    --card-ring-a: rgba(47, 143, 166, 0.45);
-    --card-ring-b: rgba(196, 150, 80, 0.35);
+            --accent: #2f6bff;
+            --accent-hover: #1f57e6;
+            --accent-glow: rgba(47, 107, 255, 0.28);
 
-    --shadow-color: rgba(30, 40, 70, 0.14);
-    --shadow-color-strong: rgba(30, 40, 70, 0.2);
+            --glass-fill: rgba(255, 255, 255, 0.5);
+            --glass-fill-hover: rgba(255, 255, 255, 0.72);
+            --glass-border: rgba(20, 30, 60, 0.1);
+            --glass-border-hover: rgba(20, 30, 60, 0.2);
+            --glass-highlight: rgba(255, 255, 255, 0.75);
+            --glass-highlight-strong: rgba(255, 255, 255, 0.9);
 
-    --accent: #2f8fa6;
-    --accent-dim: rgba(47, 143, 166, 0.9);
-    --accent-glow: rgba(47, 143, 166, 0.2);
-    --accent-text-on: #ffffff;
+            --text-primary: #10142b;
+            --text-secondary: rgba(16, 20, 43, 0.66);
+            --text-muted: rgba(16, 20, 43, 0.42);
 
-    color-scheme: light;
-}
+            --aurora-opacity: 0.7;
+            --grain-blend: multiply;
+            --grain-opacity: 0.02;
 
-/* Core Reset */
-* {
-    box-sizing: border-box;
-}
+            color-scheme: light;
+        }
 
-html {
-    height: 100%;
-    background: var(--bg-base);
-    transition: background 0.35s ease;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-    background-color: var(--bg-base) !important;
-    color: var(--text-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 40px 20px;
-    line-height: 1.6;
-    min-height: 100%;
-    position: relative;
-    overflow-x: hidden;
-    transition: background-color 0.35s ease, color 0.35s ease;
-}
+        html { background: var(--bg-base); transition: background 0.35s ease; }
 
-/* Drifting color fields — the light source the glass bends */
-.aurora {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    overflow: hidden;
-    pointer-events: none;
-}
-.aurora span {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: var(--aurora-opacity);
-    will-change: transform;
-    transition: opacity 0.35s ease;
-}
-.aurora span:nth-child(1) {
-    width: 48vw; height: 48vw;
-    top: -16vw; left: -12vw;
-    background: var(--hue-a);
-    animation: drift1 26s ease-in-out infinite alternate;
-}
-.aurora span:nth-child(2) {
-    width: 40vw; height: 40vw;
-    top: 4vw; right: -14vw;
-    background: var(--hue-c);
-    animation: drift2 32s ease-in-out infinite alternate;
-}
-.aurora span:nth-child(3) {
-    width: 52vw; height: 52vw;
-    bottom: -22vw; left: 14vw;
-    background: var(--hue-b);
-    animation: drift3 38s ease-in-out infinite alternate;
-}
-.aurora span:nth-child(4) {
-    width: 30vw; height: 30vw;
-    bottom: 10vw; right: 4vw;
-    background: var(--hue-d);
-    animation: drift1 22s ease-in-out infinite alternate-reverse;
-}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 3.5rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.35s ease, color 0.35s ease;
+        }
 
-@keyframes drift1 {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(4vw, 5vw) scale(1.12); }
-}
-@keyframes drift2 {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(-5vw, 4vw) scale(1.08); }
-}
-@keyframes drift3 {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(3vw, -4vw) scale(1.1); }
-}
+        /* ---- Theme toggle ---- */
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 20;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-fill);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25), inset 0 1px 0 var(--glass-highlight);
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+        }
+        .theme-toggle:hover { background: var(--glass-fill-hover); transform: translateY(-2px); }
+        .theme-toggle:active { transform: scale(0.94); }
+        .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-.grain {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    opacity: var(--grain-opacity);
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: var(--grain-blend);
-    transition: opacity 0.35s ease;
-}
+        .theme-toggle svg { width: 20px; height: 20px; }
+        .theme-toggle .icon-moon { display: none; }
+        html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+        html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
-/* ---- Theme toggle ---- */
-.theme-toggle {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    z-index: 20;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--glass-fill);
-    border: 1px solid var(--glass-border);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    backdrop-filter: blur(24px) saturate(180%);
-    box-shadow: 0 6px 20px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
-    cursor: pointer;
-    color: var(--text-primary);
-    transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
-}
-.theme-toggle:hover { background: var(--glass-fill-strong); transform: translateY(-2px); }
-.theme-toggle:active { transform: scale(0.94); }
-.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.theme-toggle svg { width: 20px; height: 20px; }
-.theme-toggle .icon-moon { display: none; }
-html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
-html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+        /* Drifting color fields — the light source the glass bends. */
+        .aurora {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .aurora span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: var(--aurora-opacity);
+            will-change: transform;
+            transition: opacity 0.35s ease;
+        }
+        .aurora span:nth-child(1) {
+            width: 48vw; height: 48vw;
+            top: -16vw; left: -12vw;
+            background: var(--hue-a);
+            animation: drift1 26s ease-in-out infinite alternate;
+        }
+        .aurora span:nth-child(2) {
+            width: 40vw; height: 40vw;
+            top: 4vw; right: -14vw;
+            background: var(--hue-c);
+            animation: drift2 32s ease-in-out infinite alternate;
+        }
+        .aurora span:nth-child(3) {
+            width: 52vw; height: 52vw;
+            bottom: -22vw; left: 14vw;
+            background: var(--hue-b);
+            animation: drift3 38s ease-in-out infinite alternate;
+        }
+        .aurora span:nth-child(4) {
+            width: 30vw; height: 30vw;
+            bottom: 10vw; right: 4vw;
+            background: var(--hue-d);
+            animation: drift1 22s ease-in-out infinite alternate-reverse;
+        }
 
-@media (max-width: 600px) {
-    .theme-toggle { top: 1rem; right: 1rem; width: 42px; height: 42px; }
-}
+        @keyframes drift1 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(4vw, 5vw) scale(1.12); }
+        }
+        @keyframes drift2 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(-5vw, 4vw) scale(1.08); }
+        }
+        @keyframes drift3 {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(3vw, -4vw) scale(1.1); }
+        }
 
-/* Layout */
-.container {
-    max-width: 1080px;
-    margin: 0 auto;
-}
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: var(--grain-opacity);
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            mix-blend-mode: var(--grain-blend);
+            transition: opacity 0.35s ease;
+        }
 
-/* Typography */
-h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.6rem;
-    font-weight: 900;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    letter-spacing: -0.03em;
-    color: var(--text-heading);
-    text-shadow: 0 1px 24px var(--accent-glow);
-}
+        .container { max-width: 1080px; width: 100%; }
 
-p.subtitle {
-    color: var(--text-secondary);
-    margin-top: 0;
-    margin-bottom: 30px;
-    font-size: 1.1rem;
-    max-width: 640px;
-}
+        /* ---- Header ---- */
+        header {
+            text-align: center;
+            padding: 1rem 1rem 2.5rem 1rem;
+            animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-/* Buttons */
-.btn {
-    display: inline-block;
-    background: linear-gradient(155deg, var(--glass-fill-strong), var(--glass-fill-soft));
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%);
-    color: var(--text-heading);
-    padding: 10px 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 4px 18px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
-    transition: all 0.25s ease;
-    cursor: pointer;
-}
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+        }
 
-.btn:hover {
-    background: linear-gradient(155deg, var(--glass-highlight-strong), var(--glass-fill));
-    border-color: var(--glass-border-hover);
-    transform: translateY(-2px);
-}
+        .subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin: 0 auto;
+        }
 
-.btn.primary {
-    position: relative;
-    background: linear-gradient(155deg, var(--accent-dim), var(--accent));
-    color: var(--accent-text-on);
-    width: 100%;
-    text-align: center;
-    margin-top: auto;
-    font-weight: 700;
-    border: 1px solid var(--glass-border-hover);
-    padding: 12px 20px;
-    box-shadow: 0 6px 20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    overflow: hidden;
-}
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.btn.primary::after {
-    content: "";
-    position: absolute;
-    top: 0; left: -60%;
-    width: 40%; height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.6s ease;
-}
+        /* ---- Nav / back link — glass pill, same language as footer links ---- */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            background: var(--glass-fill);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+        .back-link:hover {
+            color: var(--text-primary);
+            background: var(--glass-fill-hover);
+            border-color: var(--glass-border-hover);
+        }
+        .back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-.btn.primary:hover::after {
-    left: 130%;
-}
+        /* ---- Search — same glass-pill language as the skill/footer pills ---- */
+        .search-container { margin: 1.75rem 0; }
 
-.btn.primary:hover {
-    filter: brightness(1.08);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 26px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
+        #searchInput {
+            width: 100%;
+            padding: 0.9rem 1.4rem;
+            border-radius: 9999px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-fill);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 0 var(--glass-highlight);
+            transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        #searchInput::placeholder { color: var(--text-muted); }
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--glass-border-hover);
+            box-shadow: inset 0 1px 0 var(--glass-highlight), 0 0 0 3px var(--accent-glow);
+        }
 
-/* Search Container */
-.search-container {
-    margin-bottom: 35px;
-}
+        /* ---- Product grid ---- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.25rem;
+            width: 100%;
+        }
 
-#searchInput {
-    width: 100%;
-    padding: 16px 22px;
-    border-radius: 16px;
-    border: 1px solid var(--glass-border);
-    background: linear-gradient(155deg, var(--glass-fill), var(--glass-fill-soft));
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    color: var(--text-heading);
-    font-family: inherit;
-    font-size: 1rem;
-    box-shadow: 0 8px 28px var(--shadow-color), inset 0 1px 0 var(--glass-highlight);
-    transition: all 0.25s ease;
-}
+        /* ---- Liquid Glass card ---- */
+        .card {
+            position: relative;
+            background: var(--glass-fill);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 1.75rem;
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            isolation: isolate;
+            overflow: hidden;
+            box-shadow:
+                0 10px 36px rgba(0, 0, 0, 0.22),
+                inset 0 1px 0 var(--glass-highlight),
+                inset 0 -1px 0 rgba(120, 160, 255, 0.06);
 
-#searchInput::placeholder {
-    color: var(--text-muted);
-}
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        background-color 0.25s ease,
+                        border-color 0.25s ease,
+                        box-shadow 0.25s ease;
+        }
 
-#searchInput:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 8px 28px var(--shadow-color), 0 0 0 3px var(--accent-glow), inset 0 1px 0 var(--glass-highlight);
-}
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(120% 100% at 10% -10%, var(--glass-highlight-strong), transparent 55%);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
 
-/* Product Grid */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-}
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(140,180,255,0.5), rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,140,220,0.35));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
 
-/* Cards — the liquid glass panel */
-.card {
-    position: relative;
-    background: linear-gradient(155deg, var(--glass-fill), var(--glass-fill-soft));
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow:
-        0 8px 30px var(--shadow-color),
-        inset 0 1px 0 var(--glass-highlight),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+        .card.visible { opacity: 1; transform: translateY(0); }
 
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                background 0.25s ease,
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
-}
+        .card.visible:hover {
+            background: var(--glass-fill-hover);
+            border-color: var(--glass-border-hover);
+            transform: translateY(-4px);
+            box-shadow:
+                0 16px 44px rgba(0, 0, 0, 0.28),
+                0 0 0 1px rgba(255, 255, 255, 0.07),
+                inset 0 1px 0 var(--glass-highlight-strong);
+        }
 
-/* Specular sweep — the signature liquid-glass touch, a soft highlight that glides across on hover */
-.card::before {
-    content: "";
-    position: absolute;
-    top: -60%;
-    left: -60%;
-    width: 60%;
-    height: 220%;
-    background: linear-gradient(
-        75deg,
-        rgba(255, 255, 255, 0) 0%,
-        var(--glass-sheen) 45%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    transform: rotate(20deg) translateX(0%);
-    transition: transform 0.9s ease;
-    pointer-events: none;
-    z-index: 1;
-}
+        .card:focus-within {
+            border-color: var(--glass-border-hover);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
 
-/* Gradient-mask ring — a thin diagonal sea-to-sand border only the mask reveals */
-.card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, var(--card-ring-a), rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, var(--card-ring-b));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-}
+        .card-img {
+            width: 100%;
+            height: 190px;
+            border-radius: 18px;
+            margin-bottom: 1.1rem;
+            overflow: hidden;
+            background: var(--glass-fill);
+            border: 1px solid var(--glass-border);
+            box-shadow: inset 0 1px 0 var(--glass-highlight);
+        }
 
-.card.visible { opacity: 1; transform: translateY(0); }
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.4s ease;
+        }
 
-.card.visible:hover::before {
-    transform: rotate(20deg) translateX(260%);
-}
+        .card.visible:hover .card-img img { transform: scale(1.05); }
 
-.card.visible:hover {
-    transform: translateY(-6px);
-    border-color: var(--glass-border-hover);
-    box-shadow:
-        0 18px 40px var(--shadow-color-strong),
-        inset 0 1px 0 var(--glass-highlight-strong),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
+        .card-content { display: flex; flex-direction: column; align-items: flex-start; flex-grow: 1; }
 
-/* Image Container & Fit */
-.card-img {
-    background-color: var(--glass-fill-soft);
-    width: 100%;
-    height: 200px;
-    border-radius: 14px;
-    margin-bottom: 18px;
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-    box-shadow: inset 0 1px 0 var(--glass-highlight);
-}
+        .card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
 
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.4s ease;
-}
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 0.85rem;
+            flex-grow: 1;
+        }
 
-.card.visible:hover .card-img img {
-    transform: scale(1.05);
-}
+        .price {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.85rem;
+        }
 
-.card h3 {
-    font-family: 'Poppins', sans-serif;
-    margin: 0 0 8px 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-heading);
-    letter-spacing: -0.01em;
-}
+        /* ---- Liquid Glass button (primary CTA) ---- */
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, rgba(79,139,255,0.95), rgba(120,90,255,0.85));
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 0 4px 18px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.4);
+        }
 
-.card p {
-    color: var(--text-card-body);
-    font-size: 0.92rem;
-    line-height: 1.5;
-    margin: 0 0 18px 0;
-    flex-grow: 1;
-}
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0; left: -60%;
+            width: 40%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.6s ease;
+        }
 
-.price {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text-heading);
-    margin-bottom: 12px;
-    text-shadow: 0 1px 12px var(--accent-glow);
-}
+        .btn:hover { box-shadow: 0 6px 22px rgba(79, 139, 255, 0.55), inset 0 1px 0 rgba(255,255,255,0.45); filter: brightness(1.08); }
+        .btn:hover::after { left: 130%; }
+        .btn:active { transform: scale(0.97); }
+        .btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    .card, .card::before, .card::after, .card-img img, .btn, .btn.primary::after, .theme-toggle, .aurora span, html, body {
-        animation: none !important;
-        transition: none !important;
-    }
-    .card {
-        opacity: 1 !important;
-        transform: none !important;
-    }
-}
+        @media (max-width: 640px) {
+            body { padding: 2rem 1rem; }
+            h1 { font-size: 2.2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .theme-toggle { top: 1rem; right: 1rem; width: 42px; height: 42px; }
+        }
 
-/* Mobile Layout */
-@media (max-width: 600px) {
-    body {
-        padding: 20px 15px;
-    }
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
+        @media (prefers-reduced-motion: reduce) {
+            header, .card, .btn::after, .aurora span {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light background">
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-</button>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light background">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
 
-<div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-<div class="grain" aria-hidden="true"></div>
+    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <div class="grain" aria-hidden="true"></div>
 
-<div class="container">
-    <a href="../" class="btn">← Back to Main Page</a>
+    <div class="container">
+        <a href="../" class="back-link">&larr; Back to Main Page</a>
 
-    <br><br>
-    <h1>Rock Collection</h1>
-    <p class="subtitle">Rocks collected from the Aegean coast of Pelion. These were collected during my stay in Pelion, Greece.</p>
+        <header>
+            <h1>Rock Collection</h1>
+            <p class="subtitle">Rocks collected from the Aegean coast of Pelion. These were collected during my stay in Pelion, Greece.</p>
+        </header>
 
-    <div class="search-container">
-        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search stones, rocks, or types...">
+        <div class="search-container">
+            <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search stones, rocks, or types...">
+        </div>
+
+        <div class="grid" id="productGrid">
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4603.jpeg" alt="Albatros Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Albatros</h3>
+                    <p>Sourced from the tranquil shores of Albatros Beach in Afissos, where gentle waves lap against pebble-strewn sands under the shade of olive trees.</p>
+                </div>
+                <div class="price">$15.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4609.jpeg" alt="Kallifteri Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Kallifteri</h3>
+                    <p>Found along the golden sands of Kallifteri, kissed by the crystal-clear waters of the Pagasetic Gulf during warm Aegean sunsets.</p>
+                </div>
+                <div class="price">$5.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4601.jpeg" alt="Abovos Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Abovos</h3>
+                    <p>A curated bag of smooth stones gathered from the shallow, turquoise waters of Abovos Beach, perfect for holding onto coastal memories.</p>
+                </div>
+                <div class="price">$7.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4612.jpeg" alt="Kala Nera Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Kala Nera</h3>
+                    <p>Discovered along the lively coastline of Kala Nera, reflecting the lush green foliage of Mount Pelion cascading right down to the sea.</p>
+                </div>
+                <div class="price">$8.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4604.jpeg" alt="Boufa Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Boufa</h3>
+                    <p>Collected from the wide, sun-drenched shores of Boufa Beach, featuring sparkling textures shaped by endless coastal tides.</p>
+                </div>
+                <div class="price">$12.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4608.jpeg" alt="Lefokastro Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Lefokastro</h3>
+                    <p>Picked from the quiet, picturesque fishing hamlet of Lefokastro, where timeless stone pathways meet peaceful, glassy waters.</p>
+                </div>
+                <div class="price">$5.50</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4610.jpeg" alt="Kato Gatzea Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Kato Gatzea</h3>
+                    <p>Washed ashore near the charming coastal village of Kato Gatzea, carrying the rustic warmth of the Pagasetic coastline.</p>
+                </div>
+                <div class="price">$6.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4602.jpeg" alt="Mylopotamos Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Mylopotamos</h3>
+                    <p>Found where the dramatic cliffs of Mylopotamos meet the roaring, deep blue waves of the open Aegean Sea.</p>
+                </div>
+                <div class="price">$9.50</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4605.jpeg" alt="Fakistra Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Fakistra</h3>
+                    <p>Retrieved from the hidden, emerald paradise of Fakistra Beach, cradled by wild cliffs and ancient secret grottoes.</p>
+                </div>
+                <div class="price">$9.50</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4613.jpeg" alt="Papa Nero Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Papa Nero</h3>
+                    <p>Gathered from the vibrant, sweeping shores of Papa Nero Beach, where lush green mountain slopes meet rolling white-capped surf.</p>
+                </div>
+                <div class="price">$7.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+            <div class="card">
+                <div class="card-img"><img src="images/IMG_4606.jpeg" alt="Damouchari Beach Rock" loading="lazy"></div>
+                <div class="card-content">
+                    <h3>Damouchari</h3>
+                    <p>Sourced from the historic, pebble-paved cove of Damouchari, famous for its crystal-clear turquoise waters and timeless cinematic beauty.</p>
+                </div>
+                <div class="price">$11.00</div>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+
+        </div>
     </div>
 
-    <div class="grid" id="productGrid">
+    <script>
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let grid = document.getElementById('productGrid');
+            let cards = grid.getElementsByClassName('card');
 
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4603.jpeg" alt="Albatros Beach Rock" loading="lazy">
-            </div>
-            <h3>Albatros</h3>
-            <p>Sourced from the tranquil shores of Albatros Beach in Afissos, where gentle waves lap against pebble-strewn sands under the shade of olive trees.</p>
-            <div class="price">$15.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4609.jpeg" alt="Kallifteri Beach Rock" loading="lazy">
-            </div>
-            <h3>Kallifteri</h3>
-            <p>Found along the golden sands of Kallifteri, kissed by the crystal-clear waters of the Pagasetic Gulf during warm Aegean sunsets.</p>
-            <div class="price">$5.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4601.jpeg" alt="Abovos Beach Rock" loading="lazy">
-            </div>
-            <h3>Abovos</h3>
-            <p>A curated bag of smooth stones gathered from the shallow, turquoise waters of Abovos Beach, perfect for holding onto coastal memories.</p>
-            <div class="price">$7.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4612.jpeg" alt="Kala Nera Beach Rock" loading="lazy">
-            </div>
-            <h3>Kala Nera</h3>
-            <p>Discovered along the lively coastline of Kala Nera, reflecting the lush green foliage of Mount Pelion cascading right down to the sea.</p>
-            <div class="price">$8.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4604.jpeg" alt="Boufa Beach Rock" loading="lazy">
-            </div>
-            <h3>Boufa</h3>
-            <p>Collected from the wide, sun-drenched shores of Boufa Beach, featuring sparkling textures shaped by endless coastal tides.</p>
-            <div class="price">$12.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4608.jpeg" alt="Lefokastro Beach Rock" loading="lazy">
-            </div>
-            <h3>Lefokastro</h3>
-            <p>Picked from the quiet, picturesque fishing hamlet of Lefokastro, where timeless stone pathways meet peaceful, glassy waters.</p>
-            <div class="price">$5.50</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4610.jpeg" alt="Kato Gatzea Beach Rock" loading="lazy">
-            </div>
-            <h3>Kato Gatzea</h3>
-            <p>Washed ashore near the charming coastal village of Kato Gatzea, carrying the rustic warmth of the Pagasetic coastline.</p>
-            <div class="price">$6.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4602.jpeg" alt="Mylopotamos Beach Rock" loading="lazy">
-            </div>
-            <h3>Mylopotamos</h3>
-            <p>Found where the dramatic cliffs of Mylopotamos meet the roaring, deep blue waves of the open Aegean Sea.</p>
-            <div class="price">$9.50</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4605.jpeg" alt="Fakistra Beach Rock" loading="lazy">
-            </div>
-            <h3>Fakistra</h3>
-            <p>Retrieved from the hidden, emerald paradise of Fakistra Beach, cradled by wild cliffs and ancient secret grottoes.</p>
-            <div class="price">$9.50</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4613.jpeg" alt="Papa Nero Beach Rock" loading="lazy">
-            </div>
-            <h3>Papa Nero</h3>
-            <p>Gathered from the vibrant, sweeping shores of Papa Nero Beach, where lush green mountain slopes meet rolling white-capped surf.</p>
-            <div class="price">$7.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-        <div class="card">
-            <div class="card-img">
-                <img src="images/IMG_4606.jpeg" alt="Damouchari Beach Rock" loading="lazy">
-            </div>
-            <h3>Damouchari</h3>
-            <p>Sourced from the historic, pebble-paved cove of Damouchari, famous for its crystal-clear turquoise waters and timeless cinematic beauty.</p>
-            <div class="price">$11.00</div>
-            <a href="#" class="btn primary">Buy Now</a>
-        </div>
-
-    </div>
-</div>
-
-<script>
-function filterProducts() {
-    let input = document.getElementById('searchInput').value.toLowerCase();
-    let grid = document.getElementById('productGrid');
-    let cards = grid.getElementsByClassName('card');
-
-    for (let i = 0; i < cards.length; i++) {
-        let cardText = cards[i].innerText.toLowerCase();
-        if (cardText.includes(input)) {
-            cards[i].style.display = "";
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
-}
-
-(function () {
-    const root = document.documentElement;
-    const toggle = document.getElementById('theme-toggle');
-
-    // Wrapped so a blocked/unavailable localStorage (file://, sandboxed
-    // previews) can't throw and silently break the toggle.
-    let memoryTheme = null;
-    function getStoredTheme() {
-        try {
-            return localStorage.getItem('theme');
-        } catch (e) {
-            return memoryTheme;
-        }
-    }
-    function setStoredTheme(value) {
-        try {
-            localStorage.setItem('theme', value);
-        } catch (e) {
-            memoryTheme = value;
-        }
-    }
-
-    const stored = getStoredTheme();
-    const initial = stored === 'light' ? 'light' : 'dark';
-    root.setAttribute('data-theme', initial);
-    toggle.setAttribute('aria-label', initial === 'dark' ? 'Switch to light background' : 'Switch to dark background');
-
-    toggle.addEventListener('click', () => {
-        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', next);
-        setStoredTheme(next);
-        toggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light background' : 'Switch to dark background');
-    });
-})();
-
-document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".card");
-    const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -40px 0px" };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => entry.target.classList.add("visible"), index * 80);
-                observer.unobserve(entry.target);
+            for (let i = 0; i < cards.length; i++) {
+                let cardText = cards[i].innerText.toLowerCase();
+                if (cardText.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
             }
-        });
-    }, observerOptions);
+        }
 
-    cards.forEach(card => observer.observe(card));
-});
-</script>
+        (function () {
+            const root = document.documentElement;
+            const toggle = document.getElementById('theme-toggle');
+
+            let memoryTheme = null;
+            function getStoredTheme() {
+                try {
+                    return localStorage.getItem('theme');
+                } catch (e) {
+                    return memoryTheme;
+                }
+            }
+            function setStoredTheme(value) {
+                try {
+                    localStorage.setItem('theme', value);
+                } catch (e) {
+                    memoryTheme = value;
+                }
+            }
+
+            const stored = getStoredTheme();
+            const initial = stored === 'light' ? 'light' : 'dark';
+            root.setAttribute('data-theme', initial);
+            toggle.setAttribute('aria-label', initial === 'dark' ? 'Switch to light background' : 'Switch to dark background');
+
+            toggle.addEventListener('click', () => {
+                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                root.setAttribute('data-theme', next);
+                setStoredTheme(next);
+                toggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light background' : 'Switch to dark background');
+            });
+        })();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".card");
+            const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -40px 0px" };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => entry.target.classList.add("visible"), index * 80);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            cards.forEach(card => observer.observe(card));
+        });
+    </script>
 
 </body>
 </html>
