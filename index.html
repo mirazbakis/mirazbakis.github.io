@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miraz Bakis — Developer</title>
+    <title>Miraz Bakis — Portfolio</title>
     <meta name="description" content="Miraz Bakis builds applications, developer tools, and storefronts — from iOS utilities to a hand-picked stone catalog.">
     <meta property="og:title" content="Miraz Bakis — Developer">
     <meta property="og:description" content="Applications, tools, and storefronts.">
@@ -297,13 +297,10 @@
             background: var(--glass-fill);
             border: 1px solid var(--glass-border);
             border-radius: 28px;
-            padding: 1.75rem;
-            aspect-ratio: 1 / 1;
             backdrop-filter: blur(40px) saturate(200%);
             -webkit-backdrop-filter: blur(40px) saturate(200%);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             width: 100%;
             isolation: isolate;
             overflow: hidden;
@@ -320,6 +317,24 @@
                         border-color 0.25s ease,
                         box-shadow 0.25s ease;
         }
+
+        .card-banner {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .card-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card.visible:hover .card-banner img { transform: scale(1.04); }
+
+        .card-body { padding: 1.5rem 1.75rem 1.75rem; display: flex; flex-direction: column; flex: 1; }
+        .card:not(:has(.card-banner)) .card-body { padding-top: 1.75rem; }
 
         .card::before {
             content: "";
@@ -362,7 +377,7 @@
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
 
-        .card-content { display: flex; flex-direction: column; align-items: flex-start; }
+        .card-content { display: flex; flex-direction: column; align-items: flex-start; flex: 1; }
 
         .card h3 {
             font-family: 'Poppins', sans-serif;
@@ -407,6 +422,7 @@
             align-items: center;
             justify-content: center;
             width: 100%;
+            margin-top: 1.25rem;
             padding: 0.75rem 1rem;
             border-radius: 9999px;
             background: linear-gradient(135deg, rgba(79,139,255,0.95), rgba(120,90,255,0.85));
@@ -447,7 +463,7 @@
 
         footer { text-align: center; padding-top: 1.5rem; }
 
-        .footer-links { display: flex; justify-content: center; margin-bottom: 1rem; }
+        .footer-links { display: flex; justify-content: center; gap: 0.6rem; margin-bottom: 1rem; }
 
         .footer-links a {
             display: inline-flex;
@@ -482,7 +498,7 @@
             body { padding: 2rem 1rem; }
             h1 { font-size: 2.2rem; }
             .grid { grid-template-columns: 1fr; }
-            .card { aspect-ratio: auto; padding: 1.5rem; gap: 1.25rem; }
+            .card-body { padding: 1.25rem 1.5rem 1.5rem; }
             .theme-toggle { top: 1rem; right: 1rem; width: 42px; height: 42px; }
         }
 
@@ -542,28 +558,40 @@
             </div>
             <div class="grid">
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-active">Live Storefront</span>
-                        <h3>Rock Collection Store</h3>
-                        <p>A minimalist catalog of hand-picked metamorphic beach stones.</p>
+                    <div class="card-banner">
+                        <img src="./rcs_logo.jpeg" alt="Rock Collection Store preview">
                     </div>
-                    <a href="./store/" class="btn">Access Project &rarr;</a>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <span class="badge badge-active">Live Storefront</span>
+                            <h3>Rock Collection Store</h3>
+                            <p>A minimalist catalog of hand-picked metamorphic beach stones.</p>
+                        </div>
+                        <a href="./store/" class="btn">Access Project &rarr;</a>
+                    </div>
                 </div>
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-active">Live Tool</span>
-                        <h3>XSign Web Edition</h3>
-                        <p>Sign and install iOS applications directly in the browser — no desktop client required.</p>
+                    <div class="card-banner">
+                        <img src="./xsignweb.png" alt="XSign Web Edition">
                     </div>
-                    <a href="./signer.html" class="btn">Access Project &rarr;</a>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <span class="badge badge-active">Live Tool</span>
+                            <h3>XSign Web Edition</h3>
+                            <p>Sign and install iOS applications directly in the browser — no desktop client required.</p>
+                        </div>
+                        <a href="./signer.html" class="btn">Access Project &rarr;</a>
+                    </div>
                 </div>
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-active">Live Tool</span>
-                        <h3>AI Rock Value Estimator</h3>
-                        <p>Upload a photo of a rock to identify its geological type and estimate its market value.</p>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <span class="badge badge-active">Live Tool</span>
+                            <h3>AI Rock Value Estimator</h3>
+                            <p>Upload a photo of a rock to identify its geological type and estimate its market value.</p>
+                        </div>
+                        <a href="./rock-identifier.html" class="btn">Access Project &rarr;</a>
                     </div>
-                    <a href="./rock-identifier.html" class="btn">Access Project &rarr;</a>
                 </div>
             </div>
         </section>
@@ -574,12 +602,17 @@
             </div>
             <div class="grid">
                 <div class="card">
-                    <div class="card-content">
-                        <span class="badge badge-upcoming">In Development</span>
-                        <h3>XSign</h3>
-                        <p>A codesigning app that lets you sign and install apps without revokes, permanently.</p>
+                    <div class="card-banner">
+                        <img src="./xsign.jpeg" alt="XSign preview">
                     </div>
-                    <span class="btn btn-disabled" aria-disabled="true">Coming Soon</span>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <span class="badge badge-upcoming">In Development</span>
+                            <h3>XSign</h3>
+                            <p>A codesigning app that lets you sign and install apps without revokes, permanently.</p>
+                        </div>
+                        <span class="btn btn-disabled" aria-disabled="true">Coming Soon</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -592,10 +625,9 @@
                     <span>GitHub</span>
                 </a>
                 <a href="https://www.roblox.com/users/3126200351/profile" target="_blank" rel="noopener" aria-label="Roblox">
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4.42 0h15.16L24 19.58 4.42 24 0 4.42 4.42 0zm5.94 8.36l-1.03 5.65 5.65 1.03 1.03-5.65-5.65-1.03z"/></svg>
-    <span>Roblox</span>
-</a>
-
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4.42 0h15.16L24 19.58 4.42 24 0 4.42 4.42 0zm5.94 8.36l-1.03 5.65 5.65 1.03 1.03-5.65-5.65-1.03z"/></svg>
+                    <span>Roblox</span>
+                </a>
             </div>
             <p class="copyright">Made with HTML, CSS &amp; JS</p>
             <p class="copyright">&copy; 2026 Miraz Bakis</p>
