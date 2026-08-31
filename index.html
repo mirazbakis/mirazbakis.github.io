@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miraz Bakis — Portfolio</title>
+    <title>Miraz Bakis — Developer</title>
     <meta name="description" content="Miraz Bakis builds applications, developer tools, and storefronts — from iOS utilities to a hand-picked stone catalog.">
     <meta property="og:title" content="Miraz Bakis — Developer">
     <meta property="og:description" content="Applications, tools, and storefronts.">
@@ -25,12 +25,12 @@
             --accent-hover: #6ba0ff;
             --accent-glow: rgba(79, 139, 255, 0.4);
 
-            --glass-fill: rgba(255, 255, 255, 0.05);
-            --glass-fill-hover: rgba(255, 255, 255, 0.095);
-            --glass-border: rgba(255, 255, 255, 0.16);
-            --glass-border-hover: rgba(255, 255, 255, 0.32);
-            --glass-highlight: rgba(255, 255, 255, 0.24);
-            --glass-highlight-strong: rgba(255, 255, 255, 0.32);
+            --glass-fill: rgba(255, 255, 255, 0.06);
+            --glass-fill-hover: rgba(255, 255, 255, 0.11);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-border-hover: rgba(255, 255, 255, 0.38);
+            --glass-highlight: rgba(255, 255, 255, 0.3);
+            --glass-highlight-strong: rgba(255, 255, 255, 0.4);
 
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.64);
@@ -57,12 +57,12 @@
             --accent-hover: #1f57e6;
             --accent-glow: rgba(47, 107, 255, 0.28);
 
-            --glass-fill: rgba(255, 255, 255, 0.5);
-            --glass-fill-hover: rgba(255, 255, 255, 0.72);
-            --glass-border: rgba(20, 30, 60, 0.1);
-            --glass-border-hover: rgba(20, 30, 60, 0.2);
-            --glass-highlight: rgba(255, 255, 255, 0.75);
-            --glass-highlight-strong: rgba(255, 255, 255, 0.9);
+            --glass-fill: rgba(255, 255, 255, 0.55);
+            --glass-fill-hover: rgba(255, 255, 255, 0.76);
+            --glass-border: rgba(20, 30, 60, 0.12);
+            --glass-border-hover: rgba(20, 30, 60, 0.24);
+            --glass-highlight: rgba(255, 255, 255, 0.8);
+            --glass-highlight-strong: rgba(255, 255, 255, 0.92);
 
             --text-primary: #10142b;
             --text-secondary: rgba(16, 20, 43, 0.66);
@@ -109,9 +109,9 @@
             justify-content: center;
             background: var(--glass-fill);
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25), inset 0 1px 0 var(--glass-highlight);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.28), inset 0 1.5px 0 var(--glass-highlight);
             cursor: pointer;
             color: var(--text-primary);
             transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
@@ -241,9 +241,9 @@
             border: 1px solid var(--glass-border);
             border-radius: 26px;
             padding: 1.75rem 2rem;
-            backdrop-filter: blur(36px) saturate(180%);
-            -webkit-backdrop-filter: blur(36px) saturate(180%);
-            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 var(--glass-highlight);
+            backdrop-filter: blur(48px) saturate(220%);
+            -webkit-backdrop-filter: blur(48px) saturate(220%);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.24), inset 0 1.5px 0 var(--glass-highlight);
             overflow: hidden;
         }
         .about-card::before {
@@ -251,9 +251,9 @@
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            background: radial-gradient(120% 100% at 8% -10%, var(--glass-highlight-strong), transparent 55%);
+            background: radial-gradient(130% 110% at 8% -12%, var(--glass-highlight-strong), transparent 58%);
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.75;
         }
         .about-card p {
             position: relative;
@@ -279,8 +279,8 @@
             border-radius: 9999px;
             background: var(--glass-fill);
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
             box-shadow: inset 0 1px 0 var(--glass-highlight);
             transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
         }
@@ -297,17 +297,17 @@
             background: var(--glass-fill);
             border: 1px solid var(--glass-border);
             border-radius: 28px;
-            backdrop-filter: blur(40px) saturate(200%);
-            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            backdrop-filter: blur(50px) saturate(220%);
+            -webkit-backdrop-filter: blur(50px) saturate(220%);
             display: flex;
             flex-direction: column;
             width: 100%;
             isolation: isolate;
             overflow: hidden;
             box-shadow:
-                0 10px 36px rgba(0, 0, 0, 0.22),
-                inset 0 1px 0 var(--glass-highlight),
-                inset 0 -1px 0 rgba(120, 160, 255, 0.06);
+                0 14px 44px rgba(0, 0, 0, 0.32),
+                inset 0 1.5px 0 var(--glass-highlight),
+                inset 0 -1px 0 rgba(120, 160, 255, 0.1);
 
             opacity: 0;
             transform: translateY(20px);
@@ -331,6 +331,12 @@
             display: block;
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .card-banner.contain {
+            background: #0a0a0a;
+        }
+        .card-banner.contain img {
+            object-fit: contain;
+        }
         .card.visible:hover .card-banner img { transform: scale(1.04); }
 
         .card-body { padding: 1.5rem 1.75rem 1.75rem; display: flex; flex-direction: column; flex: 1; }
@@ -341,10 +347,10 @@
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            background: radial-gradient(120% 100% at 10% -10%, var(--glass-highlight-strong), transparent 55%);
+            background: radial-gradient(130% 110% at 8% -12%, var(--glass-highlight-strong), transparent 58%);
             pointer-events: none;
             z-index: -1;
-            opacity: 0.6;
+            opacity: 0.75;
         }
 
         .card::after {
@@ -352,8 +358,8 @@
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(140,180,255,0.5), rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,140,220,0.35));
+            padding: 1.5px;
+            background: linear-gradient(135deg, rgba(160,195,255,0.65), rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.03) 65%, rgba(255,150,220,0.45));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -365,11 +371,11 @@
         .card.visible:hover {
             background: var(--glass-fill-hover);
             border-color: var(--glass-border-hover);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
             box-shadow:
-                0 16px 44px rgba(0, 0, 0, 0.28),
-                0 0 0 1px rgba(255, 255, 255, 0.07),
-                inset 0 1px 0 var(--glass-highlight-strong);
+                0 20px 52px rgba(0, 0, 0, 0.36),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1.5px 0 var(--glass-highlight-strong);
         }
 
         .card:focus-within {
@@ -571,7 +577,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-banner">
+                    <div class="card-banner contain">
                         <img src="./xsignweb.png" alt="XSign Web Edition">
                     </div>
                     <div class="card-body">
