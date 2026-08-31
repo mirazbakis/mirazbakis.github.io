@@ -12,4 +12,4 @@ Welcome to my official GitHub space! I am an upcoming developer focused on build
 
 * **XSign (coming soon)** — A simple codesigning app that allows you to sign app without revokes.
 
-The web signer (XSign Lite) uses the open-source zsign engine by zhlynn. zsign is licensed under the MIT License. Parts of this project also uses TensorFlow.js and MobileNet, both licensed under Apache 2.0.
+The web signer (XSign Web) uses the open-source zsign engine by zhlynn. zsign is licensed under the MIT License. Parts of this project also uses TensorFlow.js and MobileNet, both licensed under Apache 2.0.
