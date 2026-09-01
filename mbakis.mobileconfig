@@ -17,7 +17,7 @@
             </dict>
 
             <key>PayloadDisplayName</key>
-            <string>mbakis (KEEP APPS)</string>
+            <string>XSign Standard</string>
 
             <key>PayloadIdentifier</key>
             <string>com.mbakis.dns.keepapps</string>
@@ -43,7 +43,7 @@
             </dict>
 
             <key>PayloadDisplayName</key>
-            <string>mbakis (INSTALL APPS)</string>
+            <string>XSign Installation</string>
 
             <key>PayloadIdentifier</key>
             <string>com.mbakis.dns.installapps</string>
@@ -67,10 +67,10 @@
             <true/>
 
             <key>Label</key>
-            <string>mbakis</string>
+            <string>XSign Web</string>
 
             <key>PayloadDisplayName</key>
-            <string>mbakis Web Clip</string>
+            <string>XSign Web Edition</string>
 
             <key>PayloadIdentifier</key>
             <string>com.mbakis.webclip</string>
@@ -85,13 +85,13 @@
             <integer>1</integer>
 
             <key>URL</key>
-            <string>https://mirazbakis.github.io/</string>
+            <string>https://mirazbakis.github.io/signer.html</string>
         </dict>
 
     </array>
 
     <key>PayloadDescription</key>
-    <string>mbakis switchable DNS configuration profile</string>
+    <string>This is XSign's official configuration profile using encrypted DNS profiles. You may uninstall this whenever you want.</string>
 
     <key>PayloadDisplayName</key>
     <string>mbakis</string>
@@ -100,7 +100,7 @@
     <string>com.mbakis.profile</string>
 
     <key>PayloadOrganization</key>
-    <string>mirazbakis.github.io</string>
+    <string>XSign Team</string>
 
     <key>PayloadRemovalDisallowed</key>
     <false/>
