@@ -94,7 +94,7 @@
     <string>This is XSign's official configuration profile using encrypted DNS profiles. You may uninstall this whenever you want.</string>
 
     <key>PayloadDisplayName</key>
-    <string>mbakis</string>
+    <string>mirazbakis</string>
 
     <key>PayloadIdentifier</key>
     <string>com.mbakis.profile</string>
