@@ -62,13 +62,9 @@
         <dict>
             <key>FullScreen</key>
             <true/>
-<dict>
-    <key>FullScreen</key>
-    <true/>
 
-    <key>Icon</key>
-    <data>
-    iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAABFKUlEQVR4nO09eZwUxdV1dM997gVEvEWM+nl8Gg9QP0FBghrFKzEeiQcaRfGMGA/iFRURNYiI8BmFKBo/o0aTiBHFOxqJIsagogiKuMvuzM7szt3dVd8f1V1T09f07A54hPcjZra76lXVq1fvvXrvVTXs6OgAjQCE0PSEUmp9yJ43hHkLfNMADbK+E2dsge8ANMwcW+TBfw5IDZW2CoktYuM7DAhC6H2Cmyg2msVVtngaGlSzuvHdWyeDlRx1C3N+Mv3JnrA/TWi9syCryPF4Ke9e0jsql/7UxcDH28SSmwIaYo6BrAzTxJuo77Tu2Y+6E2mL1omDOSdZMZtQ8QJOhd2H4M5hTt12KmN94n0leC9sC5JTbwCgYlcghPzJwLiE4/QufUQuqSu0nCaJ/1fof31aW9lF7IaXzljROq2EuqtFAJGAkD8R/rTBX1PfIrmFAnzG9b8lV86iXJU6rSTPbg+bVmxLOvXexZtiO36rLKHUzJemkhZmcispdtWWLNaHVtlmJT7vgIjKbtSAzY4VubWfvAgAAMKa1c76CAAFAHGcvOeStR9CZUiIqUlgapUQYu09e1grchgeCEB1HduSRmyOEAJqJ0aknZPYZE/4BPMesoIGCcy95T9Yo7a9EjlVZCBWxcRkwA6M59U1amViUwdszTL+ircjzrqpP3ygvB4AgBAbicjmF0K9Vo3NYcvmpgLiOnYigbgEbQu4VxQGQyFEfGqMSYVCgfoqnxeA0IqBP9HnydpTXsXUZYbN+F0tYIeEzwr3KvGlUofmxliqbfE3wjKrqevCT
+            <key>FullScreen</key>
+            <true/>
 
             <key>IsRemovable</key>
             <true/>
