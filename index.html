@@ -552,11 +552,16 @@
                 <h2 class="section-title" id="dns-heading">Network</h2>
             </div>
             <div class="about-card">
-                <p>This is the official XSign encrypted DNS profile. For XSign to function properly, you'll need to install this configuration profile which contains NextDNS and a web clip inside.</p>
+                <p>This is XSign's official encrypted DNS configuration profile. It is required for XSign to function, and you may uninstall it at any time.</p>
                 <a href="https://mirazbakis.github.io/mbakis.mobileconfig" class="btn">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.5rem;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                     Install DNS Profile
                 </a>
+                <ol style="position: relative; margin-top: 1.25rem; padding-left: 1.1rem; color: var(--text-secondary); font-size: 0.875rem; line-height: 1.7;">
+                    <li>Tap <strong style="color: var(--text-primary);">Install DNS Profile</strong> above and tap <strong style="color: var(--text-primary);">Allow</strong> when Safari asks to download the configuration profile.</li>
+                    <li>Open <strong style="color: var(--text-primary);">Settings</strong> and tap <strong style="color: var(--text-primary);">Profile Downloaded</strong> (or go to Settings → General → VPN &amp; Device Management), then tap <strong style="color: var(--text-primary);">Install</strong>.</li>
+                    <li>Confirm it's applied: in Settings → General → VPN &amp; Device Management, open <strong style="color: var(--text-primary);">DNS</strong> and check that <strong style="color: var(--text-primary);">mirazbakis</strong> is selected.</li>
+                </ol>
             </div>
         </section>
 
@@ -708,7 +713,17 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             const cards = document.querySelectorAll(".card");
-            const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -40px 0px" };
+
+            // Safety net: if IntersectionObserver isn't supported, or a card
+            // never crosses the threshold for some reason, make sure every
+            // card still ends up visible rather than staying stuck at
+            // opacity: 0 permanently.
+            if (!("IntersectionObserver" in window)) {
+                cards.forEach(card => card.classList.add("visible"));
+                return;
+            }
+
+            const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -80px 0px" };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
