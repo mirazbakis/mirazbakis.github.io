@@ -32,6 +32,27 @@
             <integer>1</integer>
         </dict>
 
+<!-- PROFILE -->
+<dict>
+    <key>DNSSettings</key>
+    <dict>
+        <key>DNSProtocol</key>
+        <string>HTTPS</string>
+        <key>ServerURL</key>
+        <string>https://d25bea.dns.nextdns.io</string>
+    </dict>
+    <key>PayloadDisplayName</key>
+    <string>Ad Blocker</string>
+    <key>PayloadIdentifier</key>
+    <string>com.apple.dnsSettings.managed.d25bea</string>
+    <key>PayloadType</key>
+    <string>com.apple.dnsSettings.managed</string>
+    <key>PayloadUUID</key>
+    <string>0F1A2B3C-4D5E-6F70-8192-A3B4C5D6E7F8</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+
         <!-- INSTALL APPS -->
         <dict>
             <key>DNSSettings</key>
