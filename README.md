@@ -10,6 +10,6 @@ Welcome to my official GitHub space! I am an upcoming developer focused on build
 
 * **[Project Directory](https://mirazbakis.github.io)** — Explore current interactive builds, software tools, and web applications directly in the repository hub.
 
-* **[XSign](https://github.com/mirazbakis/xsign)** — A fork of Feather with improvements that allow you to sign & install apps with ease.
+* **[AnchorSign](https://github.com/mirazbakis/AnchorSign)** — A fork of Feather with improvements that allow you to sign & install apps with ease.
 
 The XSign web signer (XSign Web) uses the open-source zsign engine by zhlynn. zsign is licensed under the MIT License. Parts of this project also uses TensorFlow.js and MobileNet, both licensed under Apache 2.0.
