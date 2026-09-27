@@ -113,6 +113,13 @@
         .card-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .card-banner.contain { background: #0a0a0a; }
         .card-banner.contain img { object-fit: contain; }
+        /* Catalyst: its icon on black with a faint purple glow, like the app. */
+        .card-banner.catalyst {
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at 50% 50%, rgba(109, 64, 204, 0.35), #000 65%);
+        }
+        .card-banner.catalyst img { width: 42%; height: auto; aspect-ratio: 1; border-radius: 22%; }
 
         .card-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
         .badge {
@@ -197,6 +204,15 @@
         <section>
             <h2 class="section-title">Current Projects</h2>
             <div class="grid">
+                <div class="card">
+                    <div class="card-banner catalyst"><img src="https://raw.githubusercontent.com/mirazbakis/Catalyst/master/docs/icon-rounded.png" alt="Catalyst"></div>
+                    <div class="card-body">
+                        <span class="badge badge-active">iOS App</span>
+                        <h3>Catalyst</h3>
+                        <p>An on-device app store for iPhone and iPad. Install, refresh and customize sideloaded apps, no computer needed.</p>
+                        <a href="./Catalyst/" class="btn">Access Project &rarr;</a>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-banner"><img src="./AltLoad.png" alt="AltLoad"></div>
                     <div class="card-body">
