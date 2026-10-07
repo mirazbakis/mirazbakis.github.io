@@ -1,63 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K1QEH9G0QP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K1QEH9G0QP');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miraz Bakis</title>
-    <meta name="description" content="I'm Miraz, and I am a developer working on apps, tools, and utilies.">
+
+    <!-- Apply saved / system theme before first paint (prevents a light/dark flash) -->
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (t !== 'light' && t !== 'dark') {
+                t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1QEH9G0QP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-K1QEH9G0QP');
+    </script>
+
+    <title>Miraz Bakis — Developer</title>
+    <meta name="description" content="I build iOS and macOS apps, signing tools, and Roblox experiences.">
+    <meta name="author" content="Miraz Bakis">
+    <link rel="canonical" href="https://mirazbakis.github.io/">
+
     <meta property="og:title" content="Miraz Bakis — Developer">
-    <meta property="og:description" content="Applications, tools, and software.">
+    <meta property="og:description" content="iOS and macOS apps, signing tools, and Roblox games.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mirazbakis.github.io/">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mirazbakis/Catalyst/master/docs/icon-rounded.png">
+    <meta name="twitter:card" content="summary">
+
+    <meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0c0f17" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
+
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg: #0c0f17;
             --surface: #151a26;
+            --surface-2: #1b2130;
             --border: #262c3a;
             --text: #f2f4f8;
             --muted: #9aa3b5;
             --accent: #4f8bff;
             --accent-hover: #6ba0ff;
+            --accent-soft: rgba(79, 139, 255, 0.12);
+            --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
         }
         html[data-theme="light"] {
             --bg: #f6f7fb;
             --surface: #ffffff;
+            --surface-2: #f0f2f8;
             --border: #e3e6ee;
             --text: #10142b;
             --muted: #5b6478;
             --accent: #2f6bff;
             --accent-hover: #1f57e6;
+            --accent-soft: rgba(47, 107, 255, 0.08);
+            --shadow: 0 10px 30px -14px rgba(16, 20, 43, 0.18);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.55;
             -webkit-font-smoothing: antialiased;
-            padding: 3rem 1.25rem 4rem;
+            padding: 4.5rem 1.25rem 4rem;
+            transition: background-color .2s ease, color .2s ease;
         }
 
-        .container { max-width: 760px; margin: 0 auto; }
+        a { color: inherit; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+        .skip-link {
+            position: absolute; left: 1rem; top: -3rem;
+            background: var(--accent); color: #fff;
+            padding: .5rem .9rem; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: .85rem;
+            z-index: 10;
+        }
+        .skip-link:focus { top: 1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; }
 
         /* ---- header ---- */
-        header { margin-bottom: 2.75rem; }
-        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-        .subtitle { color: var(--muted); margin-top: 0.35rem; }
+        header { margin-bottom: 3rem; }
+        .avatar {
+            width: 56px; height: 56px;
+            border-radius: 14px;
+            display: grid; place-items: center;
+            font-size: 1.6rem;
+            background: var(--accent-soft);
+            border: 1px solid var(--border);
+            margin-bottom: 1.1rem;
+        }
+        h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; }
+        .subtitle { color: var(--muted); margin-top: 0.45rem; font-size: 1.05rem; }
+
+        .header-links { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+        .chip-link {
+            display: inline-flex; align-items: center; gap: .45rem;
+            padding: .45rem .85rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            text-decoration: none;
+            font-size: .85rem; font-weight: 500;
+            transition: border-color .15s ease, transform .15s ease;
+        }
+        .chip-link:hover { border-color: var(--accent); transform: translateY(-1px); }
+        .chip-link svg { width: 16px; height: 16px; }
 
         .theme-toggle {
             position: fixed;
@@ -69,6 +139,8 @@
             border: 1px solid var(--border);
             color: var(--text);
             cursor: pointer;
+            z-index: 5;
+            transition: border-color .15s ease;
         }
         .theme-toggle:hover { border-color: var(--accent); }
         .theme-toggle svg { width: 18px; height: 18px; }
@@ -77,7 +149,7 @@
         html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
         /* ---- sections ---- */
-        section { margin-bottom: 2.5rem; }
+        section { margin-bottom: 2.75rem; }
         .section-title {
             font-size: 0.72rem;
             font-weight: 600;
@@ -87,18 +159,16 @@
             margin-bottom: 1rem;
         }
 
-        .about p { color: var(--muted); max-width: 620px; }
+        .about p { color: var(--muted); max-width: 640px; }
         .about p + p { margin-top: 0.6rem; }
 
-        .skills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .skill {
-            font-size: 0.8rem;
-            color: var(--muted);
-            padding: 0.35rem 0.8rem;
-            border-radius: 6px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-        }
+        .skills { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; max-width: 640px; }
+        .skill-head { display: flex; justify-content: space-between; font-size: .85rem; font-weight: 500; margin-bottom: .4rem; }
+        .skill-pct { color: var(--muted); font-variant-numeric: tabular-nums; }
+        .bar { height: 8px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); overflow: hidden; }
+        .bar span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-hover)); transition: width .9s cubic-bezier(.2,.7,.2,1); }
+        .skills.in .bar span { width: var(--v); }
+        @media (max-width: 520px) { .skills { grid-template-columns: 1fr; } }
 
         /* ---- projects ---- */
         .grid {
@@ -108,27 +178,41 @@
         }
 
         .card {
+            position: relative;
             display: flex;
             flex-direction: column;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
+            transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
         }
+        .card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
+        .card.is-soon:hover { transform: none; border-color: var(--border); box-shadow: none; }
+
         .card-banner {
             aspect-ratio: 16 / 10;
-            background: var(--bg);
+            background: var(--surface-2);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
         }
-        .card-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .card-banner.contain { background: #0a0a0a; }
-        .card-banner.contain img { object-fit: contain; }
-        /* Catalyst: its icon on black with a faint purple glow, like the app. */
-        .card-banner.catalyst {
+        .card-banner img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+        .card:hover .card-banner img { transform: scale(1.03); }
+        
+        /* Icon-on-glow banners (Catalyst, Rock Estimator) */
+        .card-banner.glow {
             display: grid;
             place-items: center;
-            background: radial-gradient(circle at 50% 50%, rgba(109, 64, 204, 0.35), #000 65%);
+            background: radial-gradient(circle at 50% 50%, var(--glow), #000 65%);
         }
-        .card-banner.catalyst img { width: 42%; height: auto; aspect-ratio: 1; border-radius: 22%; }
+        .card-banner.glow img { width: 42%; height: auto; aspect-ratio: 1; border-radius: 22%; }
+        .card-banner.catalyst { --glow: rgba(109, 64, 204, 0.35); }
+        .card-banner.rock { --glow: rgba(214, 140, 64, 0.35); }
+        .card-banner.odysseus { --glow: rgba(184, 204, 240, 0.28); }
+        .card-banner.agamemnon { --glow: rgba(216, 178, 106, 0.30); }
+        .card-banner.dionysos { --glow: rgba(47, 123, 246, 0.38); }
+        .card-banner.hephaestus { --glow: rgba(255, 110, 40, 0.38); }
+        .card-banner .emoji { font-size: 3.4rem; line-height: 1; filter: drop-shadow(0 6px 18px rgba(0,0,0,.5)); }
 
         .card-body { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
         .badge {
@@ -140,7 +224,7 @@
             border-radius: 999px;
             margin-bottom: 0.7rem;
         }
-        .badge-active { color: var(--accent); border: 1px solid var(--accent); }
+        .badge-active { color: var(--accent); border: 1px solid var(--accent); background: var(--accent-soft); }
         .badge-soon { color: var(--muted); border: 1px solid var(--border); }
 
         .card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
@@ -150,6 +234,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: .35rem;
             margin-top: 1rem;
             padding: 0.6rem 1rem;
             border-radius: 8px;
@@ -158,8 +243,14 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.85rem;
+            transition: background-color .15s ease;
         }
         .btn:hover { background: var(--accent-hover); }
+        .btn .arrow { transition: transform .15s ease; }
+        .card:hover .btn .arrow { transform: translateX(3px); }
+        /* Make the whole card clickable via the button's link */
+        .btn.stretched::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+
         .btn-disabled {
             background: transparent;
             color: var(--muted);
@@ -169,124 +260,191 @@
         .btn-disabled:hover { background: transparent; }
 
         /* ---- footer ---- */
-        footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
-        footer a { color: var(--muted); }
+        footer {
+            margin-top: 3.5rem; padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted); font-size: 0.85rem;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem;
+        }
+        footer a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; }
         footer a:hover { color: var(--text); }
-        .copyright { font-size: 0.75rem; margin-top: 0.4rem; }
+        footer svg { width: 16px; height: 16px; }
+        .copyright { font-size: 0.75rem; }
 
         @media (max-width: 640px) {
+            body { padding-top: 4rem; }
             .grid { grid-template-columns: 1fr; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+            .bar span { width: var(--v) !important; }
         }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch theme">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
 
     <div class="container">
         <header>
+            <div class="avatar" aria-hidden="true">⛏️</div>
             <h1>Miraz Bakis</h1>
-            <p class="subtitle">Developing iOS applications, tools, and storefronts.</p>
+            <p class="subtitle">Developing iOS and macOS apps and tools.</p>
+            <nav class="header-links" aria-label="Links">
+                <a class="chip-link" href="#projects">Projects</a>
+                <a class="chip-link" href="https://github.com/mirazbakis" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+                    GitHub
+                </a>
+            </nav>
         </header>
 
-        <section>
-            <h2 class="section-title">About</h2>
-            <div class="about">
-                <p>I build small, focused tools — storefronts, browser utilities, and iOS apps — usually starting from something I needed myself.</p>
-                <p>I develop games on Roblox, working in Lua to create an outstanding experience.</p>
-            </div>
-        </section>
+        <main id="main">
+            <section aria-labelledby="about-title">
+                <h2 class="section-title" id="about-title">About</h2>
+                <div class="about">
+                    <p>I build small, focused apps for iPhone and Mac, stretching from Anti Virus programs to sideloading tools.</p>
+                    <p>I also develop games on Roblox, when I get an idea.</p>
+                </div>
+            </section>
 
-        <section>
-            <h2 class="section-title">Skills</h2>
-            <div class="skills">
-                <span class="skill">HTML</span>
-                <span class="skill">CSS</span>
-                <span class="skill">Swift</span>
-                <span class="skill">Roblox Studio</span>
-            </div>
-        </section>
+            <section aria-labelledby="skills-title">
+                <h2 class="section-title" id="skills-title">Skills</h2>
+                <ul class="skills">
+                    <li class="skill-row">
+                        <div class="skill-head"><span>Swift</span><span class="skill-pct">85%</span></div>
+                        <div class="bar" role="progressbar" aria-label="Swift" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85"><span style="--v:85%"></span></div>
+                    </li>
+                    <li class="skill-row">
+                        <div class="skill-head"><span>Luau</span><span class="skill-pct">80%</span></div>
+                        <div class="bar" role="progressbar" aria-label="Luau" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80"><span style="--v:80%"></span></div>
+                    </li>
+                    <li class="skill-row">
+                        <div class="skill-head"><span>HTML</span><span class="skill-pct">75%</span></div>
+                        <div class="bar" role="progressbar" aria-label="HTML" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75"><span style="--v:75%"></span></div>
+                    </li>
+                    <li class="skill-row">
+                        <div class="skill-head"><span>CSS</span><span class="skill-pct">70%</span></div>
+                        <div class="bar" role="progressbar" aria-label="CSS" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"><span style="--v:70%"></span></div>
+                    </li>
+                </ul>
+            </section>
 
-        <section>
-            <h2 class="section-title">Current Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-banner catalyst"><img src="https://raw.githubusercontent.com/mirazbakis/Catalyst/master/docs/icon-rounded.png" alt="Catalyst"></div>
-                    <div class="card-body">
-                        <span class="badge badge-active">iOS App</span>
-                        <h3>Catalyst</h3>
-                        <p>An on-device app store for iPhone and iPad. Install, refresh and customize sideloaded apps, no computer needed.</p>
-                        <a href="./Catalyst/" class="btn">Access Project &rarr;</a>
-                    </div>
+            <section id="projects" aria-labelledby="current-title">
+                <h2 class="section-title" id="current-title">Current Projects</h2>
+                <div class="grid">
+                    <article class="card">
+                        <div class="card-banner glow odysseus"><img src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+                        <div class="card-body">
+                            <span class="badge badge-active">iOS App</span>
+                            <h3>Odysseus</h3>
+                            <p>An on-device signer and app store for iPhone. Browse sources and get apps in one tap — download, sign and install, with live certificate status checks.</p>
+                            <a href="https://github.com/mirazbakis/Odysseus" class="btn stretched" target="_blank" rel="noopener" aria-label="Open Odysseus">Access Project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-banner glow agamemnon"><img src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+                        <div class="card-body">
+                            <span class="badge badge-active">macOS App</span>
+                            <h3>Agamemnon</h3>
+                            <p>A free, open-source antivirus for Mac with download protection, quarantine, scheduled scans and encrypted DNS.</p>
+                            <a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" class="btn stretched" target="_blank" rel="noopener" aria-label="Open Agamemnon">Access Project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-banner glow dionysos"><img src="https://raw.githubusercontent.com/mirazbakis/Dionysos/main/docs/assets/logo.png" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+                        <div class="card-body">
+                            <span class="badge badge-active">iOS App</span>
+                            <h3>Dionysos</h3>
+                            <p>Sign and install apps on your iPhone with your own Apple IDs — manage accounts, certificates and refreshes on-device.</p>
+                            <a href="https://github.com/mirazbakis/Dionysos" class="btn stretched" target="_blank" rel="noopener" aria-label="Open Dionysos">Access Project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-banner glow catalyst"><img src="https://raw.githubusercontent.com/mirazbakis/Catalyst/master/docs/icon-rounded.png" alt="" width="256" height="256" loading="lazy" decoding="async"></div>
+                        <div class="card-body">
+                            <span class="badge badge-active">iOS App</span>
+                            <h3>Catalyst</h3>
+                            <p>An on-device app store for iPhone and iPad. Install, refresh and customize sideloaded apps, no computer needed.</p>
+                            <a href="./Catalyst/" class="btn stretched" aria-label="Open Catalyst">Access Project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-banner"><img src="./AltLoad.png" alt="" width="640" height="400" loading="lazy" decoding="async"></div>
+                        <div class="card-body">
+                            <span class="badge badge-active">iOS App</span>
+                            <h3>AltLoad</h3>
+                            <p>Install AltStore on your iPhone using your own Apple ID — no computer needed.</p>
+                            <a href="./AltLoad.html" class="btn stretched" aria-label="Open AltLoad">Access Project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-banner glow rock" aria-hidden="true"><span class="emoji">🪨</span></div>
+                        <div class="card-body">
+                            <span class="badge badge-active">Live Tool</span>
+                            <h3>AI Rock Value Estimator</h3>
+                            <p>Upload a photo of a rock to identify its geological type and estimate its value.</p>
+                            <a href="./rock-identifier.html" class="btn stretched" aria-label="Open AI Rock Value Estimator">Access Project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </article>
                 </div>
-                <div class="card">
-                    <div class="card-banner"><img src="./AltLoad.png" alt="AltLoad"></div>
-                    <div class="card-body">
-                        <span class="badge badge-active">iOS App</span>
-                        <h3>AltLoad</h3>
-                        <p>Install AltStore on your iPhone using your own Apple ID — no computer needed.</p>
-                        <a href="./AltLoad.html" class="btn">Access Project &rarr;</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-banner contain"><img src="./xsignweb.png" alt="XSign Web Edition"></div>
-                    <div class="card-body">
-                        <span class="badge badge-active">Live Tool</span>
-                        <h3>XSign Web Edition</h3>
-                        <p>Sign and install iOS applications directly in the browser — no desktop client or app required.</p>
-                        <a href="./signer.html" class="btn">Access Project &rarr;</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <span class="badge badge-active">Live Tool</span>
-                        <h3>AI Rock Value Estimator</h3>
-                        <p>Upload a photo of a rock to identify its geological type and estimate its value.</p>
-                        <a href="./rock-identifier.html" class="btn">Access Project &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section>
-            <h2 class="section-title">Upcoming Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-banner"><img src="./assets/icon.png" alt="AnchorSign"></div>
-                    <div class="card-body">
-                        <span class="badge badge-soon">In Development</span>
-                        <h3>AnchorSign</h3>
-                        <p>A codesigning app that lets you sign and install apps without revokes.</p>
-                        <span class="btn btn-disabled" aria-disabled="true">Coming Soon</span>
-                    </div>
+            <section aria-labelledby="upcoming-title">
+                <h2 class="section-title" id="upcoming-title">Upcoming Projects</h2>
+                <div class="grid">
+                    <article class="card is-soon">
+                        <div class="card-banner glow hephaestus" aria-hidden="true"><span class="emoji">🔨</span></div>
+                        <div class="card-body">
+                            <span class="badge badge-soon">In Development</span>
+                            <h3>Hephaestus</h3>
+                            <p>A web-based signer — sign and install iOS apps right from your browser.</p>
+                            <span class="btn btn-disabled" aria-disabled="true">Coming Soon</span>
+                        </div>
+                    </article>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
         <footer>
-            <a href="https://github.com/mirazbakis" target="_blank" rel="noopener">GitHub</a>
-            <p class="copyright">&copy; 2026 Miraz Bakis</p>
+            <a href="https://github.com/mirazbakis" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+                github.com/mirazbakis
+            </a>
+            <p class="copyright">&copy; <span id="year">2026</span> Miraz Bakis</p>
         </footer>
     </div>
 
     <script>
         (function () {
-            const root = document.documentElement;
-            const toggle = document.getElementById('theme-toggle');
-            let mem = null;
-            const get = () => { try { return localStorage.getItem('theme'); } catch (e) { return mem; } };
-            const set = v => { try { localStorage.setItem('theme', v); } catch (e) { mem = v; } };
-            root.setAttribute('data-theme', get() === 'dark' ? 'dark' : 'light');
-            toggle.addEventListener('click', () => {
-                const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            var root = document.documentElement;
+            var toggle = document.getElementById('theme-toggle');
+            var label = function () {
+                var dark = root.getAttribute('data-theme') === 'dark';
+                toggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+            };
+            label();
+            toggle.addEventListener('click', function () {
+                var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
                 root.setAttribute('data-theme', next);
-                set(next);
+                try { localStorage.setItem('theme', next); } catch (e) {}
+                label();
             });
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            var skills = document.querySelector('.skills');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (es) {
+                    if (es[0].isIntersecting) { skills.classList.add('in'); io.disconnect(); }
+                }, { threshold: 0.3 });
+                io.observe(skills);
+            } else { skills.classList.add('in'); }
         })();
     </script>
-
 </body>
 </html>
