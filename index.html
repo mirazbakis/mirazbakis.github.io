@@ -26,24 +26,24 @@
     </script>
 
     <title>Miraz Bakis</title>
-    <meta name="description" content="hi! i'm miraz. i make apps for iphone and mac, mostly sideloading and signing tools, and sometimes roblox games.">
+    <meta name="description" content="I build apps for iPhone and Mac: sideloading and signing tools, a free antivirus for Mac, and the occasional Roblox game.">
     <meta name="author" content="Miraz Bakis">
     <link rel="canonical" href="https://mirazbakis.github.io/">
 
     <meta property="og:title" content="Miraz Bakis">
-    <meta property="og:description" content="i make apps for iphone and mac, mostly sideloading and signing tools, and sometimes roblox games.">
+    <meta property="og:description" content="I build apps for iPhone and Mac: sideloading and signing tools, a free antivirus for Mac, and the occasional Roblox game.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mirazbakis.github.io/">
     <meta name="twitter:card" content="summary">
 
-    <meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0e0f11" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b0c0f" media="(prefers-color-scheme: dark)">
     <meta name="color-scheme" content="dark light">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/site.css">
 
@@ -58,23 +58,31 @@
         /* Banner: my app icons, blown up and blurred into a colour wash */
         .banner {
             position: relative;
-            height: 150px;
+            height: 140px;
             overflow: hidden;
-            background: #1c2140;
+            background:
+                radial-gradient(120% 140% at 0% 0%, #3b4bd8 0%, transparent 55%),
+                radial-gradient(120% 140% at 100% 100%, #7b3fd1 0%, transparent 55%),
+                #151833;
+        }
+        .banner::before {
+            /* fine dot texture */
+            content: "";
+            position: absolute; inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, .14) 1px, transparent 1px);
+            background-size: 14px 14px;
+            mask-image: linear-gradient(90deg, transparent, #000 40%, #000 60%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%, #000 60%, transparent);
         }
         .banner-art {
             position: absolute;
-            inset: -40px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            filter: blur(26px) saturate(140%);
-            opacity: .9;
+            right: 1.25rem; top: 1.25rem;
+            display: flex; gap: .5rem;
         }
-        .banner-art img { width: 100%; height: 100%; object-fit: cover; }
-        .banner::after {
-            content: "";
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, .35));
+        .banner-art img {
+            width: 34px; height: 34px;
+            border-radius: 9px;
+            box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .6);
         }
 
         .profile-body { padding: 0 1.5rem 1.5rem; text-align: center; }
@@ -85,15 +93,14 @@
             display: grid; place-items: center;
             border-radius: 50%;
             background: var(--surface-2);
-            border: 4px solid var(--surface);
+            border: 5px solid var(--surface);
             font-size: 2.6rem;
-            box-shadow: 0 0 0 2px var(--accent);
         }
         .profile h1 {
             margin-top: .8rem;
-            font-size: 1.75rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            letter-spacing: -0.015em;
+            letter-spacing: -0.025em;
             line-height: 1.2;
         }
         .handle { font-family: var(--mono); font-size: .82rem; color: var(--muted); margin-top: .15rem; }
@@ -103,14 +110,15 @@
         .chips .tag { font-size: .72rem; padding: .15rem .55rem; border-radius: 999px; }
 
         /* ---- intro ---- */
-        .intro { margin-top: 2.25rem; font-size: 1.12rem; line-height: 1.7; }
+        .intro { margin-top: 2.25rem; font-size: 1.05rem; line-height: 1.75; color: var(--muted); }
+        .intro strong { color: var(--ink); font-weight: 600; }
         .intro p + p { margin-top: .9rem; }
-        .intro a { border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
-        .intro a:hover { text-decoration: none; border-bottom-color: var(--accent); }
+        .intro a { color: var(--ink); font-weight: 500; border-bottom: 1px solid var(--line-strong); }
+        .intro a:hover { text-decoration: none; border-bottom-color: var(--ink); }
 
-        .section-note { color: var(--muted); margin: -.6rem 0 1rem; font-size: .95rem; }
+        .section-note { color: var(--muted); margin: -.6rem 0 1rem; font-size: .9rem; }
 
-        /* ---- stuff i made ---- */
+        /* ---- projects ---- */
         .stuff { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
         .item {
             position: relative;
@@ -122,7 +130,7 @@
             background: var(--surface);
             transition: border-color .15s ease, transform .15s ease;
         }
-        .item:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .item:hover { border-color: var(--line-strong); background: var(--surface-2); }
         .item .icon {
             flex: none;
             width: 48px; height: 48px;
@@ -131,19 +139,19 @@
         }
         .item .icon.emoji { display: grid; place-items: center; font-size: 1.5rem; background: var(--surface-2); }
         .item h3 {
-            font-size: 1.02rem;
-            font-weight: 700;
+            font-size: .98rem;
+            font-weight: 600;
             line-height: 1.3;
             display: flex; align-items: center; flex-wrap: wrap; gap: .2rem .5rem;
         }
         .item h3 a { color: var(--ink); }
         .item h3 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
         .item:hover h3 a { color: var(--accent); text-decoration: none; }
-        .item p { color: var(--muted); font-size: .9rem; line-height: 1.5; margin-top: .25rem; }
+        .item p { color: var(--muted); font-size: .86rem; line-height: 1.55; margin-top: .25rem; }
 
         .item.wip { border-style: dashed; }
-        .item.wip:hover { border-color: var(--line); transform: none; }
-        .tag.cooking { color: var(--accent); border-color: currentColor; }
+        .item.wip:hover { border-color: var(--line); background: var(--surface); }
+        .tag.dev { color: var(--accent); background: var(--accent-soft); border-color: transparent; }
 
         /* ---- small list (facedev style) ---- */
         .bullets { list-style: none; }
@@ -162,11 +170,11 @@
 
     <div class="container">
         <header class="site-header">
-            <a class="wordmark" href="./"><span class="mark" aria-hidden="true">⛏️</span><span>mirazbakis<span class="dim">.github.io</span></span></a>
+            <a class="wordmark" href="./"><span class="mark" aria-hidden="true">⛏️</span><span>Miraz Bakis</span></a>
             <nav class="site-nav" aria-label="Primary">
-                <a href="./" aria-current="page">home</a>
-                <a href="#stuff">stuff</a>
-                <a href="https://github.com/mirazbakis" target="_blank" rel="noopener">github</a>
+                <a href="./" aria-current="page">Home</a>
+                <a href="#stuff">Projects</a>
+                <a href="https://github.com/mirazbakis" target="_blank" rel="noopener">GitHub</a>
                 <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
                     <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -193,74 +201,74 @@
                             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
                             GitHub
                         </a>
-                        <a class="btn" href="https://apps.apple.com/app/id6755608044" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c.02 2.53 2.22 3.37 2.24 3.38-.02.06-.35 1.2-1.16 2.38-.7 1.02-1.42 2.04-2.57 2.06-1.12.02-1.48-.67-2.77-.67-1.28 0-1.68.65-2.75.69-1.1.04-1.95-1.11-2.65-2.13-1.44-2.08-2.54-5.88-1.06-8.44.73-1.27 2.04-2.08 3.47-2.1 1.08-.02 2.1.73 2.77.73.66 0 1.9-.9 3.2-.77.55.02 2.08.22 3.06 1.66-.08.05-1.83 1.07-1.8 3.2M14.3 4.36c.58-.71.98-1.69.87-2.67-.84.03-1.86.56-2.46 1.27-.54.62-1.01 1.62-.89 2.58.94.07 1.9-.48 2.48-1.18"/></svg>
-                            AltLoad on the App Store
+                        <a class="btn" href="./AltLoad.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14"/></svg>
+                            Get AltLoad
                         </a>
                     </div>
                     <div class="chips" aria-label="What I use">
-                        <span class="tag">swift</span>
-                        <span class="tag">luau</span>
-                        <span class="tag">html &amp; css</span>
+                        <span class="tag">Swift</span>
+                        <span class="tag">Luau</span>
+                        <span class="tag">HTML &amp; CSS</span>
                     </div>
                 </div>
             </section>
 
             <section class="intro" aria-label="About me">
-                <p>hi! i'm miraz. i make apps for iphone and mac, mostly sideloading and signing tools like <a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener">odysseus</a> and <a href="./AltLoad.html">altload</a>, plus a free antivirus for mac called <a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener">agamemnon</a>.</p>
-                <p>when an idea sticks, i also make games on roblox. everything i make ends up on my <a href="https://github.com/mirazbakis" target="_blank" rel="noopener">github</a>.</p>
+                <p>Hi, I'm <strong>Miraz</strong>. I build apps for iPhone and Mac, mostly sideloading and signing tools like <a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener">Odysseus</a> and <a href="./AltLoad.html">AltLoad</a>, plus <a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener">Agamemnon</a>, a free antivirus for Mac.</p>
+                <p>When an idea sticks, I also make games on Roblox. Source code for most of my work is on <a href="https://github.com/mirazbakis" target="_blank" rel="noopener">GitHub</a>.</p>
             </section>
 
             <section id="stuff" aria-labelledby="stuff-title">
-                <h2 id="stuff-title">stuff i made</h2>
-                <p class="section-note">apps and tools i've built or am still working on.</p>
+                <h2 id="stuff-title">Projects</h2>
+                <p class="section-note">Apps and tools I've built or am working on.</p>
                 <ul class="stuff">
                     <li class="item">
                         <img class="icon" src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="" width="48" height="48" loading="lazy" decoding="async">
                         <div>
-                            <h3><a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener">Odysseus</a> <span class="tag">ios</span></h3>
+                            <h3><a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener">Odysseus</a> <span class="tag">iOS</span></h3>
                             <p>On-device signer and app store for iPhone. Browse sources, then download, sign and install in one tap.</p>
                         </div>
                     </li>
                     <li class="item">
                         <img class="icon" src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="" width="48" height="48" loading="lazy" decoding="async">
                         <div>
-                            <h3><a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener">Agamemnon</a> <span class="tag">macos</span></h3>
+                            <h3><a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener">Agamemnon</a> <span class="tag">macOS</span></h3>
                             <p>Free, open-source antivirus for Mac with download protection, quarantine, scheduled scans and encrypted DNS.</p>
                         </div>
                     </li>
                     <li class="item">
                         <img class="icon" src="https://raw.githubusercontent.com/mirazbakis/Dionysos/main/docs/assets/logo.png" alt="" width="48" height="48" loading="lazy" decoding="async">
                         <div>
-                            <h3><a href="https://github.com/mirazbakis/Dionysos" target="_blank" rel="noopener">Dionysos</a> <span class="tag">ios</span></h3>
+                            <h3><a href="https://github.com/mirazbakis/Dionysos" target="_blank" rel="noopener">Dionysos</a> <span class="tag">iOS</span></h3>
                             <p>Sign and install apps with your own Apple IDs. Manage accounts, certificates and refreshes on-device.</p>
                         </div>
                     </li>
                     <li class="item">
                         <img class="icon" src="https://raw.githubusercontent.com/mirazbakis/Catalyst/master/docs/icon-rounded.png" alt="" width="48" height="48" loading="lazy" decoding="async">
                         <div>
-                            <h3><a href="./Catalyst/">Catalyst</a> <span class="tag">ios</span></h3>
+                            <h3><a href="./Catalyst/">Catalyst</a> <span class="tag">iOS</span></h3>
                             <p>On-device app store for iPhone and iPad. Install, refresh and customize sideloaded apps, no computer needed.</p>
                         </div>
                     </li>
                     <li class="item">
                         <svg class="icon" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="al" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#A274FF"/><stop offset="1" stop-color="#241245"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#al)"/><path d="M32 14v22M23 28l9 9 9-9M19 40v4a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4v-4" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         <div>
-                            <h3><a href="./AltLoad.html">AltLoad</a> <span class="tag">ios</span></h3>
+                            <h3><a href="./AltLoad.html">AltLoad</a> <span class="tag">iOS</span></h3>
                             <p>Install AltStore on your iPhone using your own Apple ID, no computer needed.</p>
                         </div>
                     </li>
                     <li class="item">
                         <span class="icon emoji" aria-hidden="true">🪨</span>
                         <div>
-                            <h3><a href="./rock-identifier.html">Rock Value Estimator</a> <span class="tag">web</span></h3>
+                            <h3><a href="./rock-identifier.html">Rock Value Estimator</a> <span class="tag">Web</span></h3>
                             <p>Upload a photo of a rock to guess its type and what it might be worth.</p>
                         </div>
                     </li>
                     <li class="item wip">
                         <span class="icon emoji" aria-hidden="true">🔨</span>
                         <div>
-                            <h3>Hephaestus <span class="tag cooking">cooking</span></h3>
+                            <h3>Hephaestus <span class="tag dev">In development</span></h3>
                             <p>A web-based signer: sign and install iOS apps right from your browser.</p>
                         </div>
                     </li>
@@ -268,16 +276,16 @@
             </section>
 
             <section aria-labelledby="more-title">
-                <h2 id="more-title">more</h2>
+                <h2 id="more-title">Links</h2>
                 <ul class="bullets">
-                    <li><a href="https://github.com/mirazbakis" target="_blank" rel="noopener">github</a>: source for most of the above</li>
-                    <li><a href="./AltLoad.html">altload</a>: setup guide, faq and download</li>
+                    <li><a href="https://github.com/mirazbakis" target="_blank" rel="noopener">GitHub</a>: source code for most of the above</li>
+                    <li><a href="./AltLoad.html">AltLoad</a>: setup guide, FAQ and download</li>
                 </ul>
             </section>
         </main>
 
         <footer class="site-footer">
-            <p>&copy; <span id="year">2026</span> miraz bakis</p>
+            <p>&copy; <span id="year">2026</span> Miraz Bakis</p>
         </footer>
     </div>
 
