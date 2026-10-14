@@ -3,241 +3,191 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Rock Identifier & Value Estimator</title>
+    <script>
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('theme'); } catch (e) {}
+            if (t !== 'light' && t !== 'dark') {
+                t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            }
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
+    <title>Rock Value Estimator · Miraz Bakis</title>
+    <meta name="description" content="Upload a photo of a rock to identify its geological type and estimate its value, right in your browser.">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪨</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/site.css">
     <!-- TensorFlow.js and MobileNet CDNs -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"></script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px 16px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 540px;
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 20px;
-            padding: 32px 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Return Button */
-        .top-nav {
-            margin-bottom: 24px;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 8px 14px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            transition: all 0.2s ease;
-        }
-
-        .back-btn:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-1px);
-        }
-
-        h1 {
-            font-size: 1.8rem;
+        .tool { padding: 1.5rem 0 0; }
+        .tool h1 {
+            font-family: var(--display);
             font-weight: 700;
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
+            font-size: clamp(1.9rem, 5vw, 2.4rem);
+            letter-spacing: -0.015em;
+            line-height: 1.15;
+            margin-top: .5rem;
         }
-
-        .subtitle {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 0.95rem;
-            margin-bottom: 28px;
-        }
+        .tool h1 em { font-style: normal; color: var(--muted); }
+        .subtitle { color: var(--muted); margin-top: .75rem; font-size: 1.05rem; }
 
         /* Upload Area */
         .upload-area {
-            border: 2px dashed #475569;
-            border-radius: 16px;
-            padding: 36px 20px;
+            margin-top: 2rem;
+            border: 1.5px dashed var(--line-strong);
+            border-radius: var(--radius);
+            padding: 2.75rem 1.25rem;
             text-align: center;
-            background: #0f172a;
+            background: var(--surface);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: border-color .2s ease, background-color .2s ease;
         }
-
-        .upload-area:hover {
-            border-color: #3b82f6;
-            background: #131d31;
-        }
-
-        .upload-area p {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .upload-area input {
-            display: none;
-        }
-
+        .upload-area:hover, .upload-area.dragging { border-color: var(--accent); background: var(--accent-soft); }
+        .upload-area p { font-weight: 500; }
+        .upload-area .hint { color: var(--muted); font-weight: 400; font-size: .9rem; margin-top: .25rem; }
+        .upload-icon { width: 40px; height: 40px; margin: 0 auto .9rem; color: var(--accent); }
+        .upload-area input { display: none; }
         .upload-area img {
             max-width: 100%;
-            max-height: 240px;
-            margin-top: 16px;
+            max-height: 280px;
+            margin: 1.25rem auto 0;
             border-radius: 12px;
-            border: 1px solid #334155;
             object-fit: cover;
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Results Card */
+        /* Results */
         .results {
-            margin-top: 24px;
-            padding: 20px;
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 14px;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 18px;
         }
-
         .results h2 {
-            font-size: 1.05rem;
-            color: #f8fafc;
-            margin-bottom: 16px;
-            font-weight: 700;
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 1.35rem;
+            margin-bottom: .75rem;
         }
-
         .result-item {
             display: flex;
             justify-content: space-between;
-            font-size: 0.9rem;
-            color: #e2e8f0;
-            margin-top: 10px;
+            gap: 1rem;
+            font-size: .92rem;
+            margin-top: .9rem;
         }
-
+        .result-item span:last-child { font-family: var(--mono); color: var(--muted); }
         .confidence-bar {
             height: 6px;
-            background: #334155;
-            border-radius: 10px;
-            margin-top: 6px;
+            background: var(--surface-2);
+            border-radius: 999px;
+            margin-top: .4rem;
             overflow: hidden;
-            width: 100%;
         }
-
         .confidence-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            border-radius: 10px;
-            transition: width 0.4s ease;
+            background: var(--accent);
+            border-radius: inherit;
+            transition: width .4s ease;
         }
 
-        /* Value Estimate Badge */
         .value-estimate {
-            margin-top: 20px;
-            padding: 16px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            border-radius: 12px;
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            border-radius: 14px;
+            background: var(--accent-soft);
             text-align: center;
-            color: #10b981;
-            font-weight: 500;
-            font-size: 0.95rem;
+            font-family: var(--mono);
+            font-size: .75rem;
+            color: var(--accent);
         }
-
         .value-estimate strong {
             display: block;
-            font-size: 1.5rem;
-            color: #34d399;
-            margin-top: 4px;
-            font-weight: 700;
+            margin-top: .35rem;
+            font-family: var(--display);
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            text-transform: none;
+            color: var(--ink);
         }
 
         .loading {
-            text-align: center;
-            color: #60a5fa;
-            margin-top: 20px;
-            font-weight: 500;
             display: none;
-            font-size: 0.95rem;
-        }
-
-        .error {
-            color: #f87171;
+            margin-top: 1.25rem;
             text-align: center;
-            margin-top: 14px;
-            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 500;
         }
-
+        .error { margin-top: 1rem; text-align: center; color: #c0392b; font-size: .92rem; }
+        html[data-theme="dark"] .error { color: #f17a6a; }
         .disclaimer {
-            font-size: 0.78rem;
-            color: #64748b;
-            margin-top: 12px;
+            margin-top: 1rem;
             text-align: center;
-            line-height: 1.4;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 24px 16px;
-            }
+            font-size: .8rem;
+            color: var(--muted);
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- Return Button -->
-        <div class="top-nav">
-            <a href="index.html" class="back-btn">← Return to Main Page</a>
-        </div>
+        <header class="site-header">
+            <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true">⛏️</span><span>mirazbakis<span class="dim">.github.io</span></span></a>
+            <nav class="site-nav" aria-label="Primary">
+                <a href="index.html">home</a>
+                <a href="index.html#stuff">stuff</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </nav>
+        </header>
+    </div>
+    <div class="container">
 
-        <h1>🪨 Rock Identifier</h1>
-        <p class="subtitle">Upload a photo to estimate its rock type & value</p>
+        <main class="tool">
+            <p class="eyebrow">web tool · runs in your browser</p>
+            <h1>Rock Value <em>Estimator</em></h1>
+            <p class="subtitle">Upload a photo to estimate its rock type and value.</p>
 
-        <div class="upload-area" id="uploadArea">
-            <p>📸 Click or drag an image here</p>
-            <input type="file" id="imageInput" accept="image/*" />
-            <img id="preview" style="display:none;" alt="Preview" />
-        </div>
-
-        <div class="loading" id="loading">🔍 Analyzing your rock...</div>
-        <div class="error" id="error"></div>
-
-        <div class="results" id="results" style="display:none;">
-            <h2>🔬 Identification Results</h2>
-            <div id="predictions"></div>
-            <div class="value-estimate" id="valueEstimate">
-                Estimated Value
-                <strong id="valueAmount">—</strong>
+            <div class="upload-area" id="uploadArea" role="button" tabindex="0" aria-label="Upload a rock photo">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1.5M12 15V4M7.5 8.5 12 4l4.5 4.5"/></svg>
+                <p>Click or drag an image here</p>
+                <p class="hint">A clear, close-up photo works best</p>
+                <input type="file" id="imageInput" accept="image/*" />
+                <img id="preview" style="display:none;" alt="Your uploaded rock" />
             </div>
-            <p class="disclaimer">
-                ⚠️ Value is an estimate based on rock type, market heuristics, and visual features.
-            </p>
-        </div>
+
+            <div class="loading" id="loading" role="status">Analyzing your rock…</div>
+            <div class="error" id="error" role="alert"></div>
+
+            <div class="results" id="results" style="display:none;">
+                <h2>Identification results</h2>
+                <div id="predictions"></div>
+                <div class="value-estimate" id="valueEstimate">
+                    Estimated value
+                    <strong id="valueAmount">—</strong>
+                </div>
+                <p class="disclaimer">
+                    Value is a rough estimate based on rock type, market heuristics, and visual features.
+                </p>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; <span id="year">2026</span> Miraz Bakis</p>
+            
+        </footer>
     </div>
 
+    <script src="assets/site.js"></script>
     <script>
         // ----- ROCK TYPES & VALUE MAPPING -----
         const ROCK_DATA = {
@@ -326,19 +276,19 @@
 
         // ----- File Upload Events -----
         uploadArea.addEventListener('click', () => fileInput.click());
-        uploadArea.addEventListener('dragover', (e) => { 
-            e.preventDefault(); 
-            uploadArea.style.borderColor = '#3b82f6';
-            uploadArea.style.background = '#131d31';
+        uploadArea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
         });
-        uploadArea.addEventListener('dragleave', () => { 
-            uploadArea.style.borderColor = '#475569';
-            uploadArea.style.background = '#0f172a';
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragging');
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragging');
         });
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = '#475569';
-            uploadArea.style.background = '#0f172a';
+            uploadArea.classList.remove('dragging');
             if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
         });
         fileInput.addEventListener('change', (e) => {
@@ -391,7 +341,7 @@
                     const isRock = rock !== null;
                     html += `
                         <div class="result-item">
-                            <span>${displayName} ${isRock ? '🪨' : '🔍'}</span>
+                            <span>${displayName}</span>
                             <span>${conf}%</span>
                         </div>
                         <div class="confidence-bar">
