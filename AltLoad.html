@@ -13,14 +13,14 @@
 <link rel="icon" type="image/png" href="AltLoad.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/altload.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/altload.css?v=3">
 <style>
   /* hero: the icon under the spotlight, centred */
   .hero{text-align:center;padding:56px 0 24px}
   .hero .icon{width:132px;height:132px;margin:0 auto;border-radius:30px;box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.06)}
-  .hero h1{font-size:clamp(44px,8vw,84px);margin:28px 0 12px}
-  .hero p.sub{font-size:clamp(17px,2.2vw,21px);color:var(--ink-2);max-width:620px;margin:0 auto}
+  .hero h1{font-size:clamp(48px,8.5vw,88px);margin:28px 0 14px}
+  .hero p.sub{font-size:clamp(18px,2.2vw,21px);line-height:1.5;color:var(--ink-2);max-width:600px;margin:0 auto}
   .hero .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px}
   .hero .meta{margin-top:16px}
 
@@ -28,36 +28,36 @@
   .stores{margin:56px auto 0;display:grid;grid-template-columns:repeat(3,1fr);border-radius:22px;overflow:hidden}
   .stores > div{padding:22px 22px 20px;border-right:1px solid var(--line)}
   .stores > div:last-child{border-right:0}
-  .stores h3{font-size:18px;margin:10px 0 4px}
-  .stores p{font-size:14px;color:var(--ink-2)}
-  .stores .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-  .tag{font-family:var(--mono);font-size:11px;padding:4px 9px;border-radius:8px;background:var(--raised);color:var(--ink-2);border:1px solid var(--line)}
+  .stores h3{font-size:19px;margin:12px 0 6px}
+  .stores p{font-size:15px;line-height:1.55;color:var(--ink-2)}
+  .stores .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:14px}
+  .tag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:8px;background:var(--raised);color:var(--ink-2);border:1px solid var(--line)}
   .tag.night{color:#b9c8ff}
   .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
   @media (max-width:760px){.stores{grid-template-columns:1fr}.stores > div{border-right:0;border-bottom:1px solid var(--line)}.stores > div:last-child{border-bottom:0}}
 
   section{padding:72px 0 0}
-  .head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
-  .head h2{font-size:clamp(26px,3.6vw,34px)}
+  .head{margin-bottom:26px}
+  .head h2{font-size:clamp(28px,3.8vw,38px);margin-top:10px}
 
   /* how it works: a numbered rail */
   .rail{list-style:none;counter-reset:s}
   .rail li{counter-increment:s;display:grid;grid-template-columns:56px 1fr;gap:4px 18px;padding:20px 0;border-top:1px solid var(--line)}
   .rail li:last-child{border-bottom:1px solid var(--line)}
-  .rail li::before{content:"0" counter(s);font-family:var(--mono);font-size:14px;color:var(--leaf);padding-top:3px;grid-row:span 2}
-  .rail b{font-size:18px}
-  .rail span{color:var(--ink-2);font-size:15.5px}
+  .rail li::before{content:"0" counter(s);font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;font-size:15px;color:var(--leaf);padding-top:2px;grid-row:span 2}
+  .rail b{font-family:var(--display);font-size:20px;font-weight:650;letter-spacing:-.015em}
+  .rail span{color:var(--ink-2);font-size:16.5px}
 
   /* download */
   .get{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
   .get .surface{padding:26px}
-  .get h3{font-size:22px;margin-bottom:6px}
-  .get p{color:var(--ink-2);font-size:15px}
-  .agree{display:flex;gap:12px;align-items:flex-start;margin:20px 0 18px;font-size:14.5px;color:var(--ink-2);cursor:pointer}
+  .get h3{font-size:23px;margin-bottom:8px}
+  .get p{color:var(--ink-2);font-size:16px}
+  .agree{display:flex;gap:12px;align-items:flex-start;margin:20px 0 18px;font-size:15px;color:var(--ink-2);cursor:pointer}
   .agree input{width:22px;height:22px;flex:none;accent-color:var(--accent);margin-top:1px}
   .get .btn{width:100%}
   .need{list-style:none;margin-top:6px}
-  .need li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .need li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
   .need li:last-child{border-bottom:0}
   .need li span:last-child{color:var(--ink-2);text-align:right}
   @media (max-width:760px){.get{grid-template-columns:1fr}}
@@ -65,11 +65,11 @@
   /* questions */
   details{border-top:1px solid var(--line)}
   details:last-of-type{border-bottom:1px solid var(--line)}
-  summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between;gap:16px}
+  summary{list-style:none;cursor:pointer;padding:20px 0;font-family:var(--display);font-weight:650;font-size:19px;letter-spacing:-.01em;display:flex;justify-content:space-between;gap:16px}
   summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";font-family:var(--mono);color:var(--ink-3)}
+  summary::after{content:"+";font-size:22px;line-height:1;font-weight:400;color:var(--ink-3)}
   details[open] summary::after{content:"–"}
-  details p{color:var(--ink-2);padding:0 0 18px;max-width:760px}
+  details p{color:var(--ink-2);padding:0 0 22px;max-width:720px}
 </style>
 </head>
 <body>
@@ -123,7 +123,7 @@
   </div>
 
   <section id="how" class="wrap reveal">
-    <div class="head"><span class="label">How it works</span></div>
+    <div class="head"><span class="label">How it works</span><h2>Four steps, all on the iPhone</h2></div>
     <ol class="rail">
       <li><b>Pair once</b><span>iOS 27 can pair with a host it finds on the network. AltLoad is that host, so the iPhone pairs with AltLoad the way it pairs with a Mac.</span></li>
       <li><b>Sign in</b><span>Your Apple ID goes to Apple only. AltLoad picks an anisette server that's working and moves on to another if Apple turns one down.</span></li>
@@ -133,7 +133,7 @@
   </section>
 
   <section id="download" class="wrap reveal">
-    <div class="head"><span class="label">Download</span></div>
+    <div class="head"><span class="label">Download</span><h2>Get AltLoad</h2></div>
     <div class="get">
       <div class="surface">
         <h3>AltLoad for iPhone and iPad</h3>
@@ -143,7 +143,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg>
           Download AltLoad.ipa
         </a>
-        <p class="label" style="margin-top:14px">or browse <a href="https://github.com/mirazbakis/AltLoad/releases">all releases</a></p>
+        <p style="margin-top:14px;font-size:14.5px;color:var(--ink-3)">Older versions are on the <a href="https://github.com/mirazbakis/AltLoad/releases">releases page</a>.</p>
       </div>
       <div class="surface">
         <h3>You'll need</h3>
@@ -159,7 +159,7 @@
   </section>
 
   <section id="faq" class="wrap reveal">
-    <div class="head"><span class="label">Questions</span></div>
+    <div class="head"><span class="label">Questions</span><h2>Good to know</h2></div>
     <details><summary>Sign-in fails. What now?</summary><p>Since 12 October 2026 Apple turns down sign-in data from many public anisette servers. Leave Settings › Anisette on Automatic so AltLoad tries the servers that still work, and if it keeps failing, tap Reset Anisette Data and try again a few minutes later. You can check your Apple ID without installing anything from Settings › Apple ID.</p></details>
     <details><summary>SideStore's repository is down.</summary><p>AltLoad tries SideStore's source, its mirror, its GitHub releases and a known-good build, in that order, and uses its own saved copy if it has one. If none of them answer, pick a SideStore IPA you already have with Install IPA from Files.</p></details>
     <details><summary>What are the nightlies?</summary><p>The newest SideStore and LiveContainer builds, straight from each project's GitHub. They install over the regular build and can be broken; switch back to Stable any time.</p></details>
