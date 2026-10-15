@@ -41,7 +41,7 @@
   .sec li::marker{color:var(--sky)}
   .sec a,.head a{color:var(--sky);font-weight:600}
   .sec strong{color:var(--ink)}
-  @media (max-width:900px){.doc{grid-template-columns:1fr}.toc{position:static}}
+  @media (max-width:900px){.doc{grid-template-columns:1fr;padding-top:32px}.toc{display:none}}
 </style>
 </head>
 <body>
@@ -51,9 +51,9 @@
     <a class="brand" href="AltLoad.html"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"> <defs> <linearGradient id="m0-bg" x1="0" y1="0" x2="0.35" y2="1"> <stop offset="0" stop-color="#3F8BFF"/> <stop offset="0.55" stop-color="#174A9E"/> <stop offset="1" stop-color="#050D21"/> </linearGradient> <radialGradient id="m0-glow" cx="0.5" cy="0.47" r="0.42"> <stop offset="0" stop-color="#D6ECFF" stop-opacity="0.55"/> <stop offset="1" stop-color="#D6ECFF" stop-opacity="0"/> </radialGradient> <linearGradient id="m0-glyph" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF"/> <stop offset="1" stop-color="#D8E8FF"/> </linearGradient> <linearGradient id="m0-sheen" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/> <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/> </linearGradient> <clipPath id="m0-squircle"> <rect width="1024" height="1024" rx="230"/> </clipPath> </defs> <g clip-path="url(#m0-squircle)"> <rect width="1024" height="1024" fill="url(#m0-bg)"/> <circle cx="512" cy="480" r="430" fill="url(#m0-glow)"/> <path fill="#FFFFFF" fill-opacity="0.22" fill-rule="evenodd" d="M512 150a350 350 0 1 1 0 700a350 350 0 1 1 0-700z M512 178a322 322 0 1 0 0 644a322 322 0 1 0 0-644z"/> <g transform="translate(362 222)"> <path fill="url(#m0-glyph)" d="M150 0C166.6 0 180 13.4 180 30V217L238 159C249.7 147.3 268.7 147.3 280.4 159C292.1 170.7 292.1 189.7 280.4 201.4L171.2 310.6C159.5 322.3 140.5 322.3 128.8 310.6L19.6 201.4C7.9 189.7 7.9 170.7 19.6 159C31.3 147.3 50.3 147.3 62 159L120 217V30C120 13.4 133.4 0 150 0Z"/> </g> <g transform="translate(282 584)"> <path fill="url(#m0-glyph)" d="M30 0C46.6 0 60 13.4 60 30V100C60 111 69 120 80 120H380C391 120 400 111 400 100V30C400 13.4 413.4 0 430 0C446.6 0 460 13.4 460 30V100C460 144.2 424.2 180 380 180H80C35.8 180 0 144.2 0 100V30C0 13.4 13.4 0 30 0Z"/> </g> <g transform="translate(700 176)"> <path fill="#FFFFFF" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <g transform="translate(236 690) scale(0.45)"> <path fill="#FFFFFF" fill-opacity="0.8" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <rect width="1024" height="1024" fill="url(#m0-sheen)"/> </g>
 </svg>AltLoad</a>
     <div class="nav-links">
-      <a href="AltLoad.html#features">Features</a>
-      <a href="AltLoad.html#faq">FAQ</a>
-      <a href="https://github.com/mirazbakis/AltLoad" target="_blank" rel="noopener">GitHub</a>
+      <a class="txt" href="AltLoad.html#features">Features</a>
+      <a class="txt" href="AltLoad.html#faq">FAQ</a>
+      <a class="txt" href="https://github.com/mirazbakis/AltLoad" target="_blank" rel="noopener">GitHub</a>
     </div>
     <a class="nav-cta" href="AltLoad.html#download">Get AltLoad</a>
   </div>
@@ -260,15 +260,38 @@
 
 <footer>
   <div class="container">
-    <a class="brand" href="AltLoad.html"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"> <defs> <linearGradient id="m1-bg" x1="0" y1="0" x2="0.35" y2="1"> <stop offset="0" stop-color="#3F8BFF"/> <stop offset="0.55" stop-color="#174A9E"/> <stop offset="1" stop-color="#050D21"/> </linearGradient> <radialGradient id="m1-glow" cx="0.5" cy="0.47" r="0.42"> <stop offset="0" stop-color="#D6ECFF" stop-opacity="0.55"/> <stop offset="1" stop-color="#D6ECFF" stop-opacity="0"/> </radialGradient> <linearGradient id="m1-glyph" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF"/> <stop offset="1" stop-color="#D8E8FF"/> </linearGradient> <linearGradient id="m1-sheen" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/> <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/> </linearGradient> <clipPath id="m1-squircle"> <rect width="1024" height="1024" rx="230"/> </clipPath> </defs> <g clip-path="url(#m1-squircle)"> <rect width="1024" height="1024" fill="url(#m1-bg)"/> <circle cx="512" cy="480" r="430" fill="url(#m1-glow)"/> <path fill="#FFFFFF" fill-opacity="0.22" fill-rule="evenodd" d="M512 150a350 350 0 1 1 0 700a350 350 0 1 1 0-700z M512 178a322 322 0 1 0 0 644a322 322 0 1 0 0-644z"/> <g transform="translate(362 222)"> <path fill="url(#m1-glyph)" d="M150 0C166.6 0 180 13.4 180 30V217L238 159C249.7 147.3 268.7 147.3 280.4 159C292.1 170.7 292.1 189.7 280.4 201.4L171.2 310.6C159.5 322.3 140.5 322.3 128.8 310.6L19.6 201.4C7.9 189.7 7.9 170.7 19.6 159C31.3 147.3 50.3 147.3 62 159L120 217V30C120 13.4 133.4 0 150 0Z"/> </g> <g transform="translate(282 584)"> <path fill="url(#m1-glyph)" d="M30 0C46.6 0 60 13.4 60 30V100C60 111 69 120 80 120H380C391 120 400 111 400 100V30C400 13.4 413.4 0 430 0C446.6 0 460 13.4 460 30V100C460 144.2 424.2 180 380 180H80C35.8 180 0 144.2 0 100V30C0 13.4 13.4 0 30 0Z"/> </g> <g transform="translate(700 176)"> <path fill="#FFFFFF" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <g transform="translate(236 690) scale(0.45)"> <path fill="#FFFFFF" fill-opacity="0.8" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <rect width="1024" height="1024" fill="url(#m1-sheen)"/> </g>
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="AltLoad.html"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"> <defs> <linearGradient id="m1-bg" x1="0" y1="0" x2="0.35" y2="1"> <stop offset="0" stop-color="#3F8BFF"/> <stop offset="0.55" stop-color="#174A9E"/> <stop offset="1" stop-color="#050D21"/> </linearGradient> <radialGradient id="m1-glow" cx="0.5" cy="0.47" r="0.42"> <stop offset="0" stop-color="#D6ECFF" stop-opacity="0.55"/> <stop offset="1" stop-color="#D6ECFF" stop-opacity="0"/> </radialGradient> <linearGradient id="m1-glyph" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF"/> <stop offset="1" stop-color="#D8E8FF"/> </linearGradient> <linearGradient id="m1-sheen" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/> <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/> </linearGradient> <clipPath id="m1-squircle"> <rect width="1024" height="1024" rx="230"/> </clipPath> </defs> <g clip-path="url(#m1-squircle)"> <rect width="1024" height="1024" fill="url(#m1-bg)"/> <circle cx="512" cy="480" r="430" fill="url(#m1-glow)"/> <path fill="#FFFFFF" fill-opacity="0.22" fill-rule="evenodd" d="M512 150a350 350 0 1 1 0 700a350 350 0 1 1 0-700z M512 178a322 322 0 1 0 0 644a322 322 0 1 0 0-644z"/> <g transform="translate(362 222)"> <path fill="url(#m1-glyph)" d="M150 0C166.6 0 180 13.4 180 30V217L238 159C249.7 147.3 268.7 147.3 280.4 159C292.1 170.7 292.1 189.7 280.4 201.4L171.2 310.6C159.5 322.3 140.5 322.3 128.8 310.6L19.6 201.4C7.9 189.7 7.9 170.7 19.6 159C31.3 147.3 50.3 147.3 62 159L120 217V30C120 13.4 133.4 0 150 0Z"/> </g> <g transform="translate(282 584)"> <path fill="url(#m1-glyph)" d="M30 0C46.6 0 60 13.4 60 30V100C60 111 69 120 80 120H380C391 120 400 111 400 100V30C400 13.4 413.4 0 430 0C446.6 0 460 13.4 460 30V100C460 144.2 424.2 180 380 180H80C35.8 180 0 144.2 0 100V30C0 13.4 13.4 0 30 0Z"/> </g> <g transform="translate(700 176)"> <path fill="#FFFFFF" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <g transform="translate(236 690) scale(0.45)"> <path fill="#FFFFFF" fill-opacity="0.8" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <rect width="1024" height="1024" fill="url(#m1-sheen)"/> </g>
 </svg>AltLoad</a>
-    <div class="foot-links">
-      <a href="https://github.com/mirazbakis/AltLoad" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://github.com/mirazbakis/AltLoad/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
-      <a href="https://github.com/mirazbakis/AltLoad/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
-      <a href="./">mirazbakis.github.io</a>
+        <p>Install AltStore Classic completely on device. An independent project, not affiliated with AltStore or Apple.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="AltLoad.html#features">Features</a></li>
+          <li><a href="AltLoad.html#download">Download</a></li>
+          <li><a href="https://github.com/mirazbakis/AltLoad/releases" target="_blank" rel="noopener">Releases</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="https://github.com/mirazbakis/AltLoad" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/mirazbakis/AltLoad/blob/main/docs/HOW-IT-WORKS.md" target="_blank" rel="noopener">How it works</a></li>
+          <li><a href="https://github.com/mirazbakis/AltLoad/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="https://github.com/mirazbakis/AltLoad/blob/main/LICENSE" target="_blank" rel="noopener">License</a></li>
+          <li><a href="./">mirazbakis.github.io</a></li>
+        </ul>
+      </div>
     </div>
-    <p class="foot-note">© 2026 mirazbakis. All rights reserved. AltLoad is not affiliated with Apple Inc. or AltStore.</p>
+    <p class="foot-note">© 2026 mirazbakis. All rights reserved. Apple, iPhone and iOS are trademarks of Apple Inc.</p>
   </div>
 </footer>
 </body>

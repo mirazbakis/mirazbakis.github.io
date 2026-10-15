@@ -41,17 +41,20 @@ h1,h2,h3{font-family:'Sora','Inter',sans-serif;letter-spacing:-.02em;line-height
   -webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
 
-/* nav */
-.nav{position:sticky;top:0;z-index:30;padding:12px 0;background:rgba(3,7,26,.6);
-  -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--line)}
-.nav .container{display:flex;align-items:center;gap:20px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Sora',sans-serif;font-weight:700;font-size:18px}
-.brand .mark{width:32px;height:32px}
-.nav-links{display:flex;gap:2px;margin-left:auto}
-.nav-links a{padding:8px 12px;border-radius:999px;text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-2);transition:background .2s,color .2s}
+/* nav: a floating glass pill */
+.nav{position:sticky;top:12px;z-index:30;margin-top:12px}
+.nav .container{display:flex;align-items:center;gap:16px;width:min(820px,100% - 24px);padding:7px 7px 7px 16px;border-radius:999px;
+  background:rgba(6,13,32,.62);border:1px solid var(--line);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  box-shadow:0 14px 40px rgba(0,3,15,.45),inset 0 1px 0 rgba(255,255,255,.06)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Sora',sans-serif;font-weight:700;font-size:17px}
+.brand .mark{width:30px;height:30px}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-links a{display:inline-flex;align-items:center;padding:8px 12px;border-radius:999px;text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-2);transition:background .2s,color .2s}
 .nav-links a:hover{background:rgba(255,255,255,.07);color:var(--ink)}
+.nav-links svg{width:18px;height:18px}
 .nav-cta{padding:9px 16px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:600;background:var(--grad);color:#fff;box-shadow:0 8px 22px rgba(46,138,255,.35);white-space:nowrap}
-@media (max-width:760px){.nav-links{display:none}.nav-cta{margin-left:auto}}
+@media (max-width:760px){.nav-links a.txt{display:none}}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 22px;border-radius:16px;font-weight:600;font-size:15.5px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:transform .18s ease,box-shadow .18s ease,background .18s}
@@ -70,15 +73,18 @@ section.block{padding:80px 0}
 .block-head p{color:var(--ink-2);font-size:17px}
 .center{text-align:center;margin-inline:auto}
 
-/* footer */
-footer{position:relative;z-index:1;padding:44px 0 56px;border-top:1px solid var(--line);margin-top:24px}
-footer .container{display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between}
+/* footer: brand blurb and link columns */
+footer{position:relative;z-index:1;padding:48px 0 56px;border-top:1px solid var(--line);margin-top:24px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:28px}
+.foot-grid p{color:var(--ink-3);font-size:14px;margin-top:12px;max-width:340px}
+.foot-grid h4{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;font-weight:600}
+.foot-grid ul{list-style:none;display:grid;gap:8px}
+.foot-grid ul a{color:var(--ink-2);text-decoration:none;font-size:14.5px}
+.foot-grid ul a:hover{color:var(--ink)}
 footer .brand{font-size:16px}
 footer .brand .mark{width:26px;height:26px}
-.foot-links{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
-.foot-links a{color:var(--ink-2);text-decoration:none}
-.foot-links a:hover{color:var(--ink)}
-.foot-note{width:100%;font-size:12.5px;color:var(--ink-3)}
+.foot-note{margin-top:32px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3)}
+@media (max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-grid > :first-child{grid-column:1 / -1}}
 
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .reveal.in{opacity:1;transform:none}
