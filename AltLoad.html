@@ -4,245 +4,155 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AltLoad — AltStore, installed from your iPhone</title>
-<meta name="description" content="AltLoad pairs your iPhone with itself and installs AltStore using your own Apple ID. No computer, no AltServer.">
+<meta name="description" content="AltLoad pairs your iPhone with itself and installs AltStore using your own Apple ID. No computer, no AltServer on a Mac.">
 <meta property="og:title" content="AltLoad">
 <meta property="og:description" content="AltStore, installed from your iPhone. No computer needed.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#1b1033">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='.35' y2='1'%3E%3Cstop offset='0' stop-color='%23A274FF'/%3E%3Cstop offset='1' stop-color='%23241245'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M32 14v22M23 28l9 9 9-9M19 40v4a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4v-4' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#03071a">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='.35' y2='1'%3E%3Cstop offset='0' stop-color='%233F8BFF'/%3E%3Cstop offset='1' stop-color='%23050D21'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M32 14v22M23 28l9 9 9-9M19 40v4a4 4 0 0 0 4 4h18a4 4 0 0 0 4-4v-4' fill='none' stroke='white' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/altload.css">
 <style>
-  :root{
-    --ink:#f5f1ff;
-    --ink-2:rgba(245,241,255,.74);
-    --ink-3:rgba(245,241,255,.5);
-    --line:rgba(255,255,255,.12);
-    --line-2:rgba(255,255,255,.24);
-    --glass:rgba(255,255,255,.055);
-    --glass-2:rgba(255,255,255,.09);
-    --violet:#8b5cf6;
-    --orchid:#c084fc;
-    --lilac:#ddd1ff;
-    --mint:#6ee7b7;
-    --deep:#160d2b;
-    --plum:#2a1a4f;
-    --dusk:#3a2470;
-    --grad:linear-gradient(120deg,#c084fc 0%,#8b5cf6 55%,#6d4aff 100%);
-    --r-lg:28px; --r-md:20px; --r-sm:14px;
-    color-scheme:dark;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{background:var(--deep);scroll-behavior:smooth;overflow-x:clip}
-  body{
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-    color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased;
-    background:
-      radial-gradient(900px 520px at 78% -8%, rgba(192,132,252,.28), transparent 60%),
-      radial-gradient(760px 520px at 8% 8%, rgba(109,74,255,.30), transparent 62%),
-      linear-gradient(180deg,var(--dusk) 0%,var(--plum) 38%,var(--deep) 100%);
-    background-attachment:fixed;
-    min-height:100vh; overflow-x:clip;
-  }
-  /* soft noise so the gradients don't band */
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-  a{color:inherit}
-  .container{position:relative;z-index:1;width:min(1120px,100% - 40px);margin-inline:auto}
-  h1,h2,h3{font-family:'Poppins',sans-serif;letter-spacing:-.02em;line-height:1.12}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac)}
-  .eyebrow::before{content:"";width:18px;height:2px;border-radius:2px;background:var(--grad)}
-  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-  /* ---------- nav ---------- */
-  .nav{position:sticky;top:0;z-index:30;padding:14px 0;
-    background:linear-gradient(180deg,rgba(27,16,51,.82),rgba(27,16,51,.55));
-    -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
-    border-bottom:1px solid var(--line)}
-  .nav .container{display:flex;align-items:center;gap:22px}
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Poppins',sans-serif;font-weight:700;font-size:18px}
-  .brand .mark{width:34px;height:34px}
-  .nav-links{display:flex;gap:4px;margin-left:auto}
-  .nav-links a{padding:8px 13px;border-radius:999px;text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-2);transition:background .2s,color .2s}
-  .nav-links a:hover{background:var(--glass-2);color:var(--ink)}
-  .nav-cta{padding:9px 16px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:600;background:var(--grad);color:#fff;box-shadow:0 8px 22px rgba(139,92,246,.4);white-space:nowrap}
-  @media (max-width:760px){.nav-links{display:none}.nav-cta{margin-left:auto}}
-
-  /* ---------- hero ---------- */
-  .hero{padding:72px 0 40px}
+  /* hero */
+  .hero{padding:68px 0 36px}
   .hero .container{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
-  .hero h1{font-size:clamp(38px,6.2vw,68px);font-weight:800;margin:14px 0 18px}
+  .hero h1{font-size:clamp(36px,6vw,66px);font-weight:800;margin:14px 0 18px}
   .lede{font-size:clamp(16.5px,2vw,19px);color:var(--ink-2);max-width:540px}
-  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 22px;border-radius:16px;font-weight:600;font-size:15.5px;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:transform .18s ease,box-shadow .18s ease,background .18s,border-color .18s}
-  .btn svg{width:18px;height:18px;flex:none}
-  .btn-primary{background:var(--grad);color:#fff;box-shadow:0 14px 34px rgba(139,92,246,.45),inset 0 1px 0 rgba(255,255,255,.35)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(139,92,246,.55),inset 0 1px 0 rgba(255,255,255,.35)}
-  .btn-glass{background:var(--glass);border-color:var(--line-2);color:var(--ink);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-  .btn-glass:hover{background:var(--glass-2);transform:translateY(-2px)}
-  .trust{display:flex;flex-wrap:wrap;gap:18px;margin-top:28px;color:var(--ink-3);font-size:13.5px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .trust{display:flex;flex-wrap:wrap;gap:18px;margin-top:26px;color:var(--ink-3);font-size:13.5px}
   .trust span{display:inline-flex;align-items:center;gap:7px}
-  .trust svg{width:16px;height:16px;color:var(--mint)}
+  .trust svg{width:16px;height:16px;color:var(--success)}
 
-  /* phone mockup of the app's Install screen */
+  /* phone mockup of the Install tab */
   .phone-wrap{position:relative;display:grid;place-items:center}
-  .phone-wrap::before{content:"";position:absolute;width:78%;aspect-ratio:1;border-radius:50%;
-    background:radial-gradient(circle,rgba(192,132,252,.55),rgba(139,92,246,.15) 55%,transparent 70%);filter:blur(30px)}
-  .phone{position:relative;text-align:left;width:min(300px,78vw);aspect-ratio:9/19.3;border-radius:46px;padding:12px;
-    background:linear-gradient(160deg,#4a3a78,#1c1236 60%,#120a24);
-    box-shadow:0 40px 80px rgba(8,3,24,.65),inset 0 0 0 1.5px rgba(255,255,255,.18),inset 0 2px 0 rgba(255,255,255,.22);
+  .phone-wrap::before{content:"";position:absolute;width:76%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(46,138,255,.45),rgba(77,209,242,.12) 55%,transparent 70%);filter:blur(30px)}
+  .phone{position:relative;width:min(300px,78vw);aspect-ratio:9/19.3;border-radius:46px;padding:12px;
+    background:linear-gradient(160deg,#2a3f66,#0c1730 60%,#050a18);
+    box-shadow:0 40px 80px rgba(0,3,15,.7),inset 0 0 0 1.5px rgba(255,255,255,.16),inset 0 2px 0 rgba(255,255,255,.2);
     transform:rotate(-4deg);animation:float 7s ease-in-out infinite}
   @keyframes float{50%{transform:rotate(-4deg) translateY(-12px)}}
   .screen{position:relative;height:100%;border-radius:36px;overflow:hidden;
-    background:linear-gradient(180deg,#3a2470 0%,#2a1a4f 45%,#160d2b 100%);padding:44px 16px 16px;
-    display:flex;flex-direction:column;gap:12px}
-  .screen::before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:34%;height:24px;border-radius:14px;background:#07030f}
-  .scr-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:22px;padding:0 4px}
-  .scr-card{border-radius:22px;padding:14px;background:rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 8px 18px rgba(0,0,0,.22)}
+    background:linear-gradient(175deg,#08122a 0%,#0d2647 45%,#03071a 100%);padding:42px 14px 14px;
+    display:flex;flex-direction:column;gap:10px}
+  .screen::before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:34%;height:24px;border-radius:14px;background:#01030a}
+  .screen::after{content:"";position:absolute;top:-40px;right:-50px;width:160px;height:160px;border-radius:50%;background:rgba(255,159,67,.22);filter:blur(36px)}
+  .scr-title{font-family:'Sora',sans-serif;font-weight:700;font-size:21px;padding:0 4px;position:relative}
+  .seg{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:999px;background:rgba(255,255,255,.08);font-size:10px;font-weight:600;text-align:center}
+  .seg span{padding:5px;border-radius:999px;color:var(--ink-3)}
+  .seg span:first-child{background:rgba(255,255,255,.16);color:var(--ink)}
+  .scr-card{position:relative;border-radius:20px;padding:13px;background:rgba(9,19,40,.6);border:1px solid rgba(255,255,255,.08)}
   .scr-hero{text-align:center}
-  .app-ph{width:56px;height:56px;margin:2px auto 8px;border-radius:15px;display:grid;place-items:center;
-    background:linear-gradient(150deg,#5eb0ff,#3b6cf5);box-shadow:0 8px 18px rgba(0,0,0,.35)}
-  .app-ph svg{width:28px;height:28px}
-  .scr-hero b{display:block;font-family:'Poppins',sans-serif;font-size:16px}
-  .scr-hero small{display:block;color:var(--ink-3);font-size:10.5px;margin-top:2px}
-  .scr-chip{display:inline-block;margin-top:8px;font-size:9.5px;font-weight:600;padding:4px 9px;border-radius:999px;background:rgba(110,231,183,.22);color:#e9fff6}
-  .scr-btn{border-radius:999px;padding:10px;text-align:center;font-size:12px;font-weight:700;background:var(--grad);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
-  .scr-row{display:flex;align-items:center;gap:9px;font-size:10.5px}
-  .scr-row + .scr-row{margin-top:9px}
-  .scr-dot{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;color:var(--mint);background:rgba(110,231,183,.18)}
-  .scr-row em{display:block;font-style:normal;color:var(--ink-3);font-size:9px}
-  .scr-tabs{margin-top:auto;display:flex;justify-content:space-around;padding:9px 6px;border-radius:999px;background:rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
-  .scr-tabs i{width:18px;height:18px;border-radius:6px;background:rgba(255,255,255,.3)}
-  .scr-tabs i:first-child{background:var(--orchid)}
-
+  .app-ph{width:52px;height:52px;margin:2px auto 7px;border-radius:14px;display:grid;place-items:center;
+    background:linear-gradient(150deg,#5eb0ff,#3b6cf5);box-shadow:0 8px 18px rgba(0,0,0,.4)}
+  .app-ph svg{width:26px;height:26px}
+  .scr-hero b{display:block;font-family:'Sora',sans-serif;font-size:15px}
+  .scr-hero small{display:block;color:var(--ink-3);font-size:10px;margin-top:2px}
+  .chips{display:flex;justify-content:center;gap:5px;margin-top:8px;flex-wrap:wrap}
+  .chip{font-size:9px;font-weight:600;padding:4px 8px;border-radius:999px;background:rgba(77,217,143,.2);color:#e6fff1}
+  .chip.sky{background:rgba(77,209,242,.2);color:#e3f9ff}
+  .scr-btn{position:relative;border-radius:999px;padding:10px;text-align:center;font-size:11.5px;font-weight:700;background:var(--grad)}
+  .scr-row{display:flex;align-items:center;gap:9px;font-size:10px}
+  .scr-row + .scr-row{margin-top:8px}
+  .scr-dot{flex:none;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;font-size:9.5px;font-weight:800;color:var(--success);background:rgba(77,217,143,.18)}
+  .scr-row em{display:block;font-style:normal;color:var(--ink-3);font-size:8.5px}
+  .scr-tabs{position:relative;margin-top:auto;display:flex;justify-content:space-around;padding:9px 6px;border-radius:999px;background:rgba(255,255,255,.07)}
+  .scr-tabs i{width:18px;height:18px;border-radius:6px;background:rgba(255,255,255,.26)}
+  .scr-tabs i:first-child{background:var(--accent)}
   @media (max-width:900px){
-    .hero{padding-top:44px}
+    .hero{padding-top:40px}
     .hero .container{grid-template-columns:1fr;text-align:center}
     .lede{margin-inline:auto}
     .hero-actions,.trust{justify-content:center}
-    .phone-wrap{margin-top:18px}
+    .phone-wrap{margin-top:16px}
   }
 
-  /* ---------- sections ---------- */
-  section.block{padding:84px 0}
-  .block-head{max-width:640px;margin-bottom:40px}
-  .block-head h2{font-size:clamp(28px,4.2vw,42px);font-weight:700;margin:12px 0 10px}
-  .block-head p{color:var(--ink-2);font-size:17px}
-  .center{text-align:center;margin-inline:auto}
-
-  /* ---------- how it works: horizontal flow ---------- */
+  /* how it works */
   .flow{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   .flow::before{content:"";position:absolute;top:31px;left:12%;right:12%;height:2px;
-    background:linear-gradient(90deg,transparent,rgba(192,132,252,.7),rgba(139,92,246,.7),transparent)}
+    background:linear-gradient(90deg,transparent,rgba(77,209,242,.6),rgba(46,138,255,.6),transparent)}
   .node{position:relative;text-align:center;padding:0 6px}
   .node-icon{position:relative;width:64px;height:64px;margin:0 auto 18px;border-radius:20px;display:grid;place-items:center;
-    background:linear-gradient(160deg,rgba(192,132,252,.35),rgba(109,74,255,.35));
-    border:1px solid var(--line-2);box-shadow:0 12px 26px rgba(109,74,255,.35),inset 0 1px 0 rgba(255,255,255,.3)}
+    background:linear-gradient(160deg,rgba(77,209,242,.28),rgba(46,138,255,.3));
+    border:1px solid var(--line-2);box-shadow:0 12px 26px rgba(46,138,255,.28),inset 0 1px 0 rgba(255,255,255,.25)}
   .node-icon svg{width:28px;height:28px}
   .node-icon span{position:absolute;top:-8px;right:-8px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
-    font-size:12px;font-weight:700;background:#fff;color:var(--deep)}
+    font-size:12px;font-weight:700;background:#fff;color:var(--night)}
   .node h3{font-size:18px;font-weight:600;margin-bottom:6px}
   .node p{color:var(--ink-2);font-size:14.5px}
-  @media (max-width:860px){
-    .flow{grid-template-columns:1fr 1fr;row-gap:36px}
-    .flow::before{display:none}
-  }
+  @media (max-width:860px){.flow{grid-template-columns:1fr 1fr;row-gap:36px}.flow::before{display:none}}
   @media (max-width:480px){.flow{grid-template-columns:1fr}}
 
-  /* ---------- features: bento ---------- */
+  /* features */
   .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-  .tile{position:relative;overflow:hidden;padding:26px;border-radius:var(--r-lg);background:var(--glass);border:1px solid var(--line);
-    -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.14);transition:transform .25s ease,border-color .25s,background .25s}
+  .tile{position:relative;overflow:hidden;padding:26px;transition:transform .25s ease,border-color .25s,background .25s}
   .tile:hover{transform:translateY(-4px);border-color:var(--line-2);background:var(--glass-2)}
   .tile h3{font-size:19px;font-weight:600;margin:14px 0 6px}
   .tile p{color:var(--ink-2);font-size:14.5px}
-  .tile .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--grad);box-shadow:0 10px 22px rgba(139,92,246,.4)}
+  .tile .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--grad);box-shadow:0 10px 22px rgba(46,138,255,.32)}
+  .tile .ic.ember{background:linear-gradient(140deg,#ffb86b,#ff7a45);box-shadow:0 10px 22px rgba(255,122,69,.3)}
   .tile .ic svg{width:22px;height:22px;color:#fff}
   .t-wide{grid-column:span 4}
   .t-tall{grid-column:span 2;grid-row:span 2}
   .t-third{grid-column:span 2}
   .t-half{grid-column:span 3}
-  .t-wide .big{font-family:'Poppins',sans-serif;font-size:clamp(34px,5vw,52px);font-weight:800;line-height:1;margin-top:14px}
-  .t-tall .timeline{margin-top:18px;display:grid;gap:12px}
-  .t-tall .tl{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--ink-2)}
-  .t-tall .tl b{color:var(--ink);font-weight:600}
-  .t-tall .bar{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
-  .t-tall .bar i{display:block;height:100%;border-radius:inherit;background:var(--grad)}
+  .t-wide .big{font-family:'Sora',sans-serif;font-size:clamp(32px,5vw,50px);font-weight:800;line-height:1;margin-top:14px}
+  .timeline{margin-top:18px;display:grid;gap:12px}
+  .tl{display:flex;gap:10px;align-items:center;font-size:13.5px;color:var(--ink-2)}
+  .tl b{color:var(--ink);font-weight:600;min-width:42px}
+  .bar{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:inherit;background:var(--grad)}
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .pills span{font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.07);color:var(--ink-2)}
+  .pills span.paid{background:rgba(255,159,67,.14);color:#ffd9b3}
   @media (max-width:860px){
     .bento{grid-template-columns:1fr 1fr}
     .t-wide,.t-tall,.t-third,.t-half{grid-column:span 2;grid-row:auto}
   }
 
-  /* ---------- download ---------- */
+  /* download */
   .dl{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
-  .panel{padding:30px;border-radius:var(--r-lg);background:var(--glass);border:1px solid var(--line);
-    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:inset 0 1px 0 rgba(255,255,255,.14)}
+  .panel{padding:30px}
   .panel h3{font-size:22px;font-weight:700;margin-bottom:6px}
   .panel > p{color:var(--ink-2);font-size:15px}
-  .panel.feature{background:linear-gradient(160deg,rgba(192,132,252,.22),rgba(109,74,255,.16) 60%,rgba(255,255,255,.04));border-color:rgba(192,132,252,.4)}
+  .panel.feature{background:linear-gradient(160deg,rgba(46,138,255,.2),rgba(77,209,242,.08) 60%,rgba(9,19,40,.55));border-color:rgba(46,138,255,.35)}
   .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
-  .meta-row span{font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--ink-2)}
-
-  /* terms switch */
-  .agree{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r-sm);background:rgba(0,0,0,.18);border:1px solid var(--line);cursor:pointer;user-select:none;-webkit-user-select:none;margin-bottom:14px}
+  .meta-row span{font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.07);color:var(--ink-2)}
+  .agree{position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r-sm);background:rgba(0,0,0,.22);border:1px solid var(--line);cursor:pointer;user-select:none;-webkit-user-select:none;margin-bottom:14px}
   .agree input{position:absolute;opacity:0;width:1px;height:1px}
   .switch{flex:none;position:relative;width:46px;height:28px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid var(--line-2);transition:background .2s}
   .switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:transform .22s cubic-bezier(.3,1.4,.5,1)}
-  .agree input:checked + .switch{background:var(--violet);border-color:transparent}
+  .agree input:checked + .switch{background:var(--accent);border-color:transparent}
   .agree input:checked + .switch::after{transform:translateX(18px)}
-  .agree input:focus-visible + .switch{outline:2px solid var(--orchid);outline-offset:3px}
+  .agree input:focus-visible + .switch{outline:2px solid var(--sky);outline-offset:3px}
   .agree-text{font-size:14.5px;color:var(--ink-2)}
-  .agree-text a{color:var(--lilac);font-weight:600}
-  .btn-block{width:100%;justify-content:center}
-  .btn[aria-disabled="true"]{opacity:.42;filter:saturate(.5);pointer-events:none;box-shadow:none}
+  .agree-text a,.fine a,.checklist a,.faq .ans a{color:var(--sky);font-weight:600}
   .fine{margin-top:12px;font-size:12.5px;color:var(--ink-3)}
-
   .checklist{list-style:none;display:grid;gap:14px;margin-top:18px}
   .checklist li{display:flex;gap:12px;font-size:14.5px;color:var(--ink-2)}
   .checklist li b{color:var(--ink);font-weight:600}
-  .checklist .n{flex:none;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;font-size:13px;font-weight:700;background:rgba(255,255,255,.1);color:var(--lilac)}
-  .checklist a{color:var(--lilac);font-weight:600}
+  .checklist .n{flex:none;width:26px;height:26px;border-radius:9px;display:grid;place-items:center;font-size:13px;font-weight:700;background:rgba(255,255,255,.08);color:var(--sky)}
   @media (max-width:860px){.dl{grid-template-columns:1fr}}
 
-  /* ---------- faq ---------- */
+  /* faq */
   .faq{max-width:780px;margin-inline:auto;display:grid;gap:12px}
-  .faq details{border-radius:var(--r-md);background:var(--glass);border:1px solid var(--line);overflow:hidden;transition:background .2s,border-color .2s}
+  .faq details{border-radius:var(--r-md);overflow:hidden;transition:background .2s,border-color .2s}
   .faq details[open]{background:var(--glass-2);border-color:var(--line-2)}
   .faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;font-weight:600;font-size:16px}
   .faq summary::-webkit-details-marker{display:none}
-  .faq summary .pm{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);transition:transform .25s,background .25s}
+  .faq summary .pm{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:transform .25s,background .25s}
   .faq summary .pm svg{width:14px;height:14px}
-  .faq details[open] summary .pm{transform:rotate(45deg);background:var(--violet)}
+  .faq details[open] summary .pm{transform:rotate(45deg);background:var(--accent)}
   .faq .ans{padding:0 22px 20px;color:var(--ink-2);font-size:15px}
-  .faq .ans a{color:var(--lilac)}
-
-  /* ---------- footer ---------- */
-  footer{padding:50px 0 60px;border-top:1px solid var(--line);margin-top:30px}
-  footer .container{display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between}
-  footer .brand{font-size:16px}
-  footer .brand .mark{width:28px;height:28px}
-  .foot-links{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
-  .foot-links a{color:var(--ink-2);text-decoration:none}
-  .foot-links a:hover{color:var(--ink)}
-  .foot-note{width:100%;font-size:12.5px;color:var(--ink-3)}
-
-  /* reveal on scroll */
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .phone{animation:none}
-    .reveal{opacity:1;transform:none;transition:none}
-  }
 </style>
 </head>
 <body>
 
 <nav class="nav" aria-label="Main">
   <div class="container">
-    <a class="brand" href="#top"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"> <defs> <linearGradient id="m0-bg" x1="0" y1="0" x2="0.35" y2="1"> <stop offset="0" stop-color="#A274FF"/> <stop offset="0.55" stop-color="#5B34B8"/> <stop offset="1" stop-color="#241245"/> </linearGradient> <radialGradient id="m0-glow" cx="0.5" cy="0.47" r="0.42"> <stop offset="0" stop-color="#E9DDFF" stop-opacity="0.55"/> <stop offset="1" stop-color="#E9DDFF" stop-opacity="0"/> </radialGradient> <linearGradient id="m0-glyph" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF"/> <stop offset="1" stop-color="#E4D7FF"/> </linearGradient> <linearGradient id="m0-sheen" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/> <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/> </linearGradient> <clipPath id="m0-squircle"> <rect width="1024" height="1024" rx="230"/> </clipPath> </defs> <g clip-path="url(#m0-squircle)"> <rect width="1024" height="1024" fill="url(#m0-bg)"/> <circle cx="512" cy="480" r="430" fill="url(#m0-glow)"/> <path fill="#FFFFFF" fill-opacity="0.22" fill-rule="evenodd" d="M512 150a350 350 0 1 1 0 700a350 350 0 1 1 0-700z M512 178a322 322 0 1 0 0 644a322 322 0 1 0 0-644z"/> <g transform="translate(362 222)"> <path fill="url(#m0-glyph)" d="M150 0C166.6 0 180 13.4 180 30V217L238 159C249.7 147.3 268.7 147.3 280.4 159C292.1 170.7 292.1 189.7 280.4 201.4L171.2 310.6C159.5 322.3 140.5 322.3 128.8 310.6L19.6 201.4C7.9 189.7 7.9 170.7 19.6 159C31.3 147.3 50.3 147.3 62 159L120 217V30C120 13.4 133.4 0 150 0Z"/> </g> <g transform="translate(282 584)"> <path fill="url(#m0-glyph)" d="M30 0C46.6 0 60 13.4 60 30V100C60 111 69 120 80 120H380C391 120 400 111 400 100V30C400 13.4 413.4 0 430 0C446.6 0 460 13.4 460 30V100C460 144.2 424.2 180 380 180H80C35.8 180 0 144.2 0 100V30C0 13.4 13.4 0 30 0Z"/> </g> <g transform="translate(700 176)"> <path fill="#FFFFFF" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <g transform="translate(236 690) scale(0.45)"> <path fill="#FFFFFF" fill-opacity="0.8" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <rect width="1024" height="1024" fill="url(#m0-sheen)"/> </g>
+    <a class="brand" href="#top"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"> <defs> <linearGradient id="m0-bg" x1="0" y1="0" x2="0.35" y2="1"> <stop offset="0" stop-color="#3F8BFF"/> <stop offset="0.55" stop-color="#174A9E"/> <stop offset="1" stop-color="#050D21"/> </linearGradient> <radialGradient id="m0-glow" cx="0.5" cy="0.47" r="0.42"> <stop offset="0" stop-color="#D6ECFF" stop-opacity="0.55"/> <stop offset="1" stop-color="#D6ECFF" stop-opacity="0"/> </radialGradient> <linearGradient id="m0-glyph" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF"/> <stop offset="1" stop-color="#D8E8FF"/> </linearGradient> <linearGradient id="m0-sheen" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/> <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/> </linearGradient> <clipPath id="m0-squircle"> <rect width="1024" height="1024" rx="230"/> </clipPath> </defs> <g clip-path="url(#m0-squircle)"> <rect width="1024" height="1024" fill="url(#m0-bg)"/> <circle cx="512" cy="480" r="430" fill="url(#m0-glow)"/> <path fill="#FFFFFF" fill-opacity="0.22" fill-rule="evenodd" d="M512 150a350 350 0 1 1 0 700a350 350 0 1 1 0-700z M512 178a322 322 0 1 0 0 644a322 322 0 1 0 0-644z"/> <g transform="translate(362 222)"> <path fill="url(#m0-glyph)" d="M150 0C166.6 0 180 13.4 180 30V217L238 159C249.7 147.3 268.7 147.3 280.4 159C292.1 170.7 292.1 189.7 280.4 201.4L171.2 310.6C159.5 322.3 140.5 322.3 128.8 310.6L19.6 201.4C7.9 189.7 7.9 170.7 19.6 159C31.3 147.3 50.3 147.3 62 159L120 217V30C120 13.4 133.4 0 150 0Z"/> </g> <g transform="translate(282 584)"> <path fill="url(#m0-glyph)" d="M30 0C46.6 0 60 13.4 60 30V100C60 111 69 120 80 120H380C391 120 400 111 400 100V30C400 13.4 413.4 0 430 0C446.6 0 460 13.4 460 30V100C460 144.2 424.2 180 380 180H80C35.8 180 0 144.2 0 100V30C0 13.4 13.4 0 30 0Z"/> </g> <g transform="translate(700 176)"> <path fill="#FFFFFF" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <g transform="translate(236 690) scale(0.45)"> <path fill="#FFFFFF" fill-opacity="0.8" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <rect width="1024" height="1024" fill="url(#m0-sheen)"/> </g>
 </svg>AltLoad</a>
     <div class="nav-links">
       <a href="#how">How it works</a>
@@ -257,9 +167,9 @@
 <header class="hero" id="top">
   <div class="container">
     <div>
-      <span class="eyebrow">Open source · iOS 27+</span>
+      <span class="eyebrow">iOS 27+ · Free</span>
       <h1>AltStore, installed <span class="grad-text">from your iPhone.</span></h1>
-      <p class="lede">AltLoad does AltServer's job on the phone itself. It pairs your iPhone with itself, signs AltStore with <strong>your own Apple ID</strong>, and installs it. No computer involved.</p>
+      <p class="lede">AltLoad does AltServer's job on the phone itself. It pairs your iPhone with itself, signs AltStore with <strong>your own Apple ID</strong> and installs it. No computer involved.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#download">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
@@ -270,7 +180,7 @@
       <div class="trust">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Your own Apple ID</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No tracking</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Free &amp; open source</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Built-in AltServer</span>
       </div>
     </div>
 
@@ -278,19 +188,21 @@
       <div class="phone">
         <div class="screen">
           <div class="scr-title">Install</div>
+          <div class="seg"><span>Release</span><span>Beta</span></div>
           <div class="scr-card scr-hero">
             <span class="app-ph"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
             <b>AltStore</b>
             <small>Latest version · iOS 17.4+</small>
-            <span class="scr-chip">✓ Installed · 6 days left</span>
+            <div class="chips"><span class="chip">✓ Installed · 6 days left</span><span class="chip sky">1 entitlement</span></div>
           </div>
           <div class="scr-btn">Refresh AltStore</div>
           <div class="scr-card">
             <div class="scr-row"><span class="scr-dot">✓</span><div>Pairing file<em>This iPhone</em></div></div>
             <div class="scr-row"><span class="scr-dot">✓</span><div>LocalDevVPN<em>Connected</em></div></div>
             <div class="scr-row"><span class="scr-dot">✓</span><div>Apple ID<em>Signed in</em></div></div>
+            <div class="scr-row"><span class="scr-dot">✓</span><div>AltStore<em>Found on this iPhone</em></div></div>
           </div>
-          <div class="scr-tabs"><i></i><i></i><i></i><i></i></div>
+          <div class="scr-tabs"><i></i><i></i><i></i></div>
         </div>
       </div>
     </div>
@@ -302,7 +214,7 @@
     <div class="block-head center reveal">
       <span class="eyebrow">How it works</span>
       <h2>Four steps, all on the device</h2>
-      <p>AltLoad does what a computer running AltServer normally does, but from inside your iPhone.</p>
+      <p>AltLoad does what a computer running AltServer normally does, from inside your iPhone.</p>
     </div>
     <div class="flow">
       <div class="node reveal">
@@ -323,7 +235,7 @@
       <div class="node reveal">
         <div class="node-icon"><span>4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg></div>
         <h3>Install</h3>
-        <p>The signed app is sent to iOS through the tunnel and installed. AltStore appears on your Home Screen.</p>
+        <p>The signed app goes to iOS through the tunnel and installs. AltStore appears on your Home Screen.</p>
       </div>
     </div>
   </div>
@@ -334,16 +246,16 @@
     <div class="block-head reveal">
       <span class="eyebrow">Features</span>
       <h2>Made for a phone-only setup</h2>
-      <p>Everything AltServer handles on a computer, redesigned for a single device.</p>
+      <p>Everything AltServer handles on a computer, plus the developer tools you'd otherwise need a Mac for.</p>
     </div>
     <div class="bento">
-      <div class="tile t-wide reveal">
+      <div class="tile glass t-wide reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8"/><path d="M4 4l16 13"/></svg></div>
         <h3>No computer, ever again</h3>
-        <p>Once AltLoad is on your iPhone, installing and refreshing AltStore happens entirely on the device.</p>
+        <p>Install AltStore or AltStore Beta, and AltLoad's built-in AltServer keeps it refreshing, all on the device.</p>
         <div class="big grad-text">0 computers needed</div>
       </div>
-      <div class="tile t-tall reveal">
+      <div class="tile glass t-tall reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
         <h3>Refresh reminders</h3>
         <p>Free Apple IDs sign apps for 7 days. AltLoad reminds you the day before, and refreshing takes one tap.</p>
@@ -353,25 +265,26 @@
           <div class="tl"><b>Day 6</b><span class="bar"><i style="width:15%"></i></span></div>
         </div>
       </div>
-      <div class="tile t-third reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></div>
-        <h3>Your own Apple ID</h3>
-        <p>Apps are signed with your own free development certificate. AltLoad never uses anyone else's certificates.</p>
+      <div class="tile glass t-third reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>JIT</h3>
+        <p>Open emulators and other JIT apps with JIT enabled, straight from AltLoad.</p>
       </div>
-      <div class="tile t-third reveal">
+      <div class="tile glass t-third reveal">
+        <div class="ic ember"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <h3>Location</h3>
+        <p>Drop a pin anywhere and every app on the iPhone sees it, until you stop.</p>
+      </div>
+      <div class="tile glass t-half reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Entitlements</h3>
+        <p>Switch on capabilities for AltStore's signature. Free-account and paid-account ones are kept apart.</p>
+        <div class="pills"><span>Increased Memory Limit</span><span>Network Extensions</span><span>Personal VPN</span><span class="paid">Push Notifications</span><span class="paid">Associated Domains</span></div>
+      </div>
+      <div class="tile glass t-half reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
         <h3>Private by design</h3>
-        <p>Your password goes only to Apple. There's no analytics and no tracking.</p>
-      </div>
-      <div class="tile t-half reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg></div>
-        <h3>Always the latest AltStore</h3>
-        <p>AltLoad reads the official AltStore source, so it installs the newest release every time. You can also install from an IPA file.</p>
-      </div>
-      <div class="tile t-half reveal">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
-        <h3>Open source</h3>
-        <p>The source is on GitHub, built on idevice and isideload. Every build is made publicly by GitHub Actions.</p>
+        <p>Apps are signed with your own free certificate. Your password goes only to Apple, and there's no analytics or tracking.</p>
       </div>
     </div>
   </div>
@@ -385,7 +298,7 @@
       <p>Sideload AltLoad once with any tool you like. After that, it handles everything itself.</p>
     </div>
     <div class="dl">
-      <div class="panel feature reveal">
+      <div class="panel glass feature reveal">
         <h3>AltLoad for iPhone &amp; iPad</h3>
         <p>An unsigned IPA, built automatically from the latest source.</p>
         <div class="meta-row"><span>iOS 27+</span><span>Unsigned IPA</span><span>Free</span></div>
@@ -398,9 +311,9 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
           Download AltLoad.ipa
         </a>
-        <p class="fine">Or browse <a href="https://github.com/mirazbakis/AltLoad/releases" target="_blank" rel="noopener" style="color:var(--lilac)">all releases</a> on GitHub.</p>
+        <p class="fine">Or browse <a href="https://github.com/mirazbakis/AltLoad/releases" target="_blank" rel="noopener">all releases</a> on GitHub.</p>
       </div>
-      <div class="panel reveal">
+      <div class="panel glass reveal">
         <h3>What you'll need</h3>
         <p>You set these up once.</p>
         <ul class="checklist">
@@ -421,29 +334,33 @@
       <h2>Questions</h2>
     </div>
     <div class="faq reveal">
-      <details>
+      <details class="glass">
         <summary>Do I need a computer at all?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
         <div class="ans">Only to get AltLoad onto your phone the first time, and even that can be done with an on-device sideloading tool you already have. After that, installing and refreshing AltStore happens entirely on the iPhone.</div>
       </details>
-      <details>
+      <details class="glass">
+        <summary>Release or Beta?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="ans">Release is AltStore's stable build and the default. Beta is AltStore's early build of its next version. Both come from AltStore's official source, and you can switch on the Install tab.</div>
+      </details>
+      <details class="glass">
         <summary>Why iOS 27?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
         <div class="ans">AltLoad relies on the on-device wireless pairing option in Developer Mode, which was added in iOS 27.</div>
       </details>
-      <details>
+      <details class="glass">
         <summary>Is my Apple ID safe?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
         <div class="ans">Your password goes only to Apple. If you choose to remember it, it's stored in your iPhone's Keychain and never synced. Apple also requires device-identity headers ("anisette") to sign in. These come from a public anisette server, which never sees your password, and you can pick another server in Settings. See the <a href="https://github.com/mirazbakis/AltLoad/blob/main/SECURITY.md" target="_blank" rel="noopener">security policy</a>.</div>
       </details>
-      <details>
-        <summary>Why refresh in AltLoad instead of AltStore?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <div class="ans">AltStore's built-in refresh looks for AltServer running on a computer. Without one, AltLoad does the refreshing, and your AltStore data and apps are kept.</div>
+      <details class="glass">
+        <summary>What do JIT and Location need?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="ans">The same pairing file and LocalDevVPN as installs. The first time, AltLoad downloads Apple's Developer Disk Image and mounts it, the way Xcode does. JIT works for apps signed for development, which includes everything AltLoad and AltStore install.</div>
       </details>
-      <details>
+      <details class="glass">
         <summary>What is LocalDevVPN for?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
         <div class="ans">An app can't normally connect to its own iPhone's system services the way a computer can. LocalDevVPN routes a single address back into the phone, so AltLoad can reach them. None of your normal internet traffic goes through it.</div>
       </details>
-      <details>
+      <details class="glass">
         <summary>Is AltLoad affiliated with AltStore?<span class="pm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-        <div class="ans">No. AltLoad is an independent project and isn't affiliated with AltStore, Riley Testut, SideStore or Apple. It downloads AltStore from AltStore's official source when you install it. For AltLoad issues, use <a href="https://github.com/mirazbakis/AltLoad/issues" target="_blank" rel="noopener">GitHub issues</a>.</div>
+        <div class="ans">No. AltLoad is an independent project and isn't affiliated with AltStore, Riley Testut or Apple. It downloads AltStore from AltStore's official source when you install it. For AltLoad issues, use <a href="https://github.com/mirazbakis/AltLoad/issues" target="_blank" rel="noopener">GitHub issues</a>.</div>
       </details>
     </div>
   </div>
@@ -451,7 +368,7 @@
 
 <footer>
   <div class="container">
-    <a class="brand" href="#top"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"> <defs> <linearGradient id="m1-bg" x1="0" y1="0" x2="0.35" y2="1"> <stop offset="0" stop-color="#A274FF"/> <stop offset="0.55" stop-color="#5B34B8"/> <stop offset="1" stop-color="#241245"/> </linearGradient> <radialGradient id="m1-glow" cx="0.5" cy="0.47" r="0.42"> <stop offset="0" stop-color="#E9DDFF" stop-opacity="0.55"/> <stop offset="1" stop-color="#E9DDFF" stop-opacity="0"/> </radialGradient> <linearGradient id="m1-glyph" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF"/> <stop offset="1" stop-color="#E4D7FF"/> </linearGradient> <linearGradient id="m1-sheen" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/> <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/> </linearGradient> <clipPath id="m1-squircle"> <rect width="1024" height="1024" rx="230"/> </clipPath> </defs> <g clip-path="url(#m1-squircle)"> <rect width="1024" height="1024" fill="url(#m1-bg)"/> <circle cx="512" cy="480" r="430" fill="url(#m1-glow)"/> <path fill="#FFFFFF" fill-opacity="0.22" fill-rule="evenodd" d="M512 150a350 350 0 1 1 0 700a350 350 0 1 1 0-700z M512 178a322 322 0 1 0 0 644a322 322 0 1 0 0-644z"/> <g transform="translate(362 222)"> <path fill="url(#m1-glyph)" d="M150 0C166.6 0 180 13.4 180 30V217L238 159C249.7 147.3 268.7 147.3 280.4 159C292.1 170.7 292.1 189.7 280.4 201.4L171.2 310.6C159.5 322.3 140.5 322.3 128.8 310.6L19.6 201.4C7.9 189.7 7.9 170.7 19.6 159C31.3 147.3 50.3 147.3 62 159L120 217V30C120 13.4 133.4 0 150 0Z"/> </g> <g transform="translate(282 584)"> <path fill="url(#m1-glyph)" d="M30 0C46.6 0 60 13.4 60 30V100C60 111 69 120 80 120H380C391 120 400 111 400 100V30C400 13.4 413.4 0 430 0C446.6 0 460 13.4 460 30V100C460 144.2 424.2 180 380 180H80C35.8 180 0 144.2 0 100V30C0 13.4 13.4 0 30 0Z"/> </g> <g transform="translate(700 176)"> <path fill="#FFFFFF" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <g transform="translate(236 690) scale(0.45)"> <path fill="#FFFFFF" fill-opacity="0.8" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <rect width="1024" height="1024" fill="url(#m1-sheen)"/> </g>
+    <a class="brand" href="#top"><svg class="mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"> <defs> <linearGradient id="m1-bg" x1="0" y1="0" x2="0.35" y2="1"> <stop offset="0" stop-color="#3F8BFF"/> <stop offset="0.55" stop-color="#174A9E"/> <stop offset="1" stop-color="#050D21"/> </linearGradient> <radialGradient id="m1-glow" cx="0.5" cy="0.47" r="0.42"> <stop offset="0" stop-color="#D6ECFF" stop-opacity="0.55"/> <stop offset="1" stop-color="#D6ECFF" stop-opacity="0"/> </radialGradient> <linearGradient id="m1-glyph" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF"/> <stop offset="1" stop-color="#D8E8FF"/> </linearGradient> <linearGradient id="m1-sheen" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/> <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/> </linearGradient> <clipPath id="m1-squircle"> <rect width="1024" height="1024" rx="230"/> </clipPath> </defs> <g clip-path="url(#m1-squircle)"> <rect width="1024" height="1024" fill="url(#m1-bg)"/> <circle cx="512" cy="480" r="430" fill="url(#m1-glow)"/> <path fill="#FFFFFF" fill-opacity="0.22" fill-rule="evenodd" d="M512 150a350 350 0 1 1 0 700a350 350 0 1 1 0-700z M512 178a322 322 0 1 0 0 644a322 322 0 1 0 0-644z"/> <g transform="translate(362 222)"> <path fill="url(#m1-glyph)" d="M150 0C166.6 0 180 13.4 180 30V217L238 159C249.7 147.3 268.7 147.3 280.4 159C292.1 170.7 292.1 189.7 280.4 201.4L171.2 310.6C159.5 322.3 140.5 322.3 128.8 310.6L19.6 201.4C7.9 189.7 7.9 170.7 19.6 159C31.3 147.3 50.3 147.3 62 159L120 217V30C120 13.4 133.4 0 150 0Z"/> </g> <g transform="translate(282 584)"> <path fill="url(#m1-glyph)" d="M30 0C46.6 0 60 13.4 60 30V100C60 111 69 120 80 120H380C391 120 400 111 400 100V30C400 13.4 413.4 0 430 0C446.6 0 460 13.4 460 30V100C460 144.2 424.2 180 380 180H80C35.8 180 0 144.2 0 100V30C0 13.4 13.4 0 30 0Z"/> </g> <g transform="translate(700 176)"> <path fill="#FFFFFF" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <g transform="translate(236 690) scale(0.45)"> <path fill="#FFFFFF" fill-opacity="0.8" d="M70 0C76 44 96 64 140 70C96 76 76 96 70 140C64 96 44 76 0 70C44 64 64 44 70 0Z"/> </g> <rect width="1024" height="1024" fill="url(#m1-sheen)"/> </g>
 </svg>AltLoad</a>
     <div class="foot-links">
       <a href="https://github.com/mirazbakis/AltLoad" target="_blank" rel="noopener">GitHub</a>
@@ -460,7 +377,7 @@
       <a href="https://github.com/mirazbakis/AltLoad/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
       <a href="./">mirazbakis.github.io</a>
     </div>
-    <p class="foot-note">© 2026 Miraz Bakis. AltLoad is not affiliated with Apple Inc. or AltStore. Apple, iPhone and iOS are trademarks of Apple Inc.</p>
+    <p class="foot-note">© 2026 mirazbakis. All rights reserved. AltLoad is not affiliated with Apple Inc. or AltStore. Apple, iPhone and iOS are trademarks of Apple Inc.</p>
   </div>
 </footer>
 
