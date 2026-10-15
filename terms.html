@@ -7,36 +7,41 @@
 <meta name="description" content="The terms for using AltLoad, its builds and this website.">
 <meta name="theme-color" content="#03050b">
 <link rel="icon" type="image/png" href="AltLoad.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/altload.css?v=3">
+<link rel="stylesheet" href="assets/altload.css?v=4">
 <style>
-  .doc{display:grid;grid-template-columns:230px 1fr;gap:48px;padding:40px 0 0;align-items:start}
-  .toc{position:sticky;top:24px}
-  .toc ol{list-style:none;counter-reset:t;margin-top:12px;border-left:1px solid var(--line)}
-  .toc li{counter-increment:t}
-  .toc a{display:flex;gap:10px;padding:7px 0 7px 14px;margin-left:-1px;border-left:1px solid transparent;text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-2)}
-  .toc a::before{content:counter(t,decimal-leading-zero);font-variant-numeric:tabular-nums;font-weight:600;font-size:13px;color:var(--ink-3);padding-top:1px}
-  .toc a:hover,.toc a.on{color:var(--ink);border-left-color:var(--leaf)}
-  .title h1{font-size:clamp(38px,6vw,58px);margin:12px 0 12px}
-  .title p{color:var(--ink-2);font-size:19px}
-  .dates{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-  .dates span{font-variant-numeric:tabular-nums;font-weight:600;font-size:13px;padding:5px 10px;border-radius:8px;background:var(--raised);border:1px solid var(--line);color:var(--ink-2)}
-  .short{margin:28px 0 8px;padding:22px 24px}
-  .short ul{margin:12px 0 0 18px;color:var(--ink-2);font-size:16.5px}
+  main.wrap{width:min(1040px,100% - 32px)}
+  .label{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+  .title{padding:28px 0 0;max-width:760px}
+  .title h1{font-size:clamp(36px,6vw,50px);margin:10px 0 10px}
+  .title p{color:var(--ink-2);font-size:18px}
+  .dates{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .dates span{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink-2)}
+  .short{margin:28px 0 8px;padding:20px 24px;max-width:760px}
+  .short ul{margin:10px 0 0 18px;color:var(--ink-2);font-size:16px}
   .short li{margin:4px 0}
-  article section{padding:44px 0 0;max-width:720px;scroll-margin-top:20px}
-  article h2{display:flex;align-items:baseline;gap:14px;font-size:27px;margin-bottom:14px}
-  article h2 .n{font-variant-numeric:tabular-nums;font-size:16px;color:var(--leaf);font-weight:700}
-  article h3{font-size:18px;margin:22px 0 6px}
-  article p,article li{color:var(--ink-2);font-size:17px;line-height:1.7}
+  .doc{display:grid;grid-template-columns:220px 1fr;gap:48px;padding:36px 0 0;align-items:start}
+  .toc{position:sticky;top:24px}
+  .toc ol{list-style:none;counter-reset:t;margin-top:12px}
+  .toc li{counter-increment:t}
+  .toc a{display:flex;align-items:center;gap:10px;padding:6px 10px;margin:0 0 2px -10px;border-radius:10px;text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-2)}
+  .toc a::before{content:counter(t);display:grid;place-items:center;width:22px;height:22px;flex:none;border-radius:7px;
+    font-family:var(--round);font-size:12px;font-weight:700;color:var(--ink-2);background:var(--raised);border:1px solid var(--line)}
+  .toc a:hover,.toc a.on{color:var(--ink);background:var(--raised)}
+  .toc a.on::before{background:var(--accent-deep);color:#fff;border-color:rgba(255,255,255,.14)}
+  article{max-width:720px}
+  article section{padding:40px 0 0;scroll-margin-top:20px}
+  article section:first-child{padding-top:0}
+  article h2{display:flex;align-items:center;gap:12px;font-size:24px;margin-bottom:14px}
+  article h2 .n{display:grid;place-items:center;width:30px;height:30px;flex:none;border-radius:9px;
+    font-family:var(--round);font-size:15px;font-weight:700;color:#fff;background:var(--accent-deep);border:1px solid rgba(255,255,255,.14)}
+  article h3{font-size:17px;margin:20px 0 6px}
+  article p,article li{color:var(--ink-2);font-size:16.5px;line-height:1.7}
   article p+p{margin-top:10px}
   article ul{margin:8px 0 0 20px}
   article li{margin:5px 0}
   article a{color:var(--ink)}
   article strong{color:var(--ink)}
-  @media (max-width:860px){.doc{grid-template-columns:1fr;gap:8px}.toc{position:static}.toc ol{columns:2;column-gap:16px}}
+  @media (max-width:860px){.doc{grid-template-columns:1fr;gap:28px}.toc{position:static}.toc ol{columns:2;column-gap:16px}}
   @media (max-width:480px){.toc ol{columns:1}}
 </style>
 </head>
@@ -60,7 +65,7 @@
     <div class="dates"><span>Effective 15 October 2026</span><span>Version 3.0</span></div>
   </div>
 
-  <div class="short surface">
+  <div class="short card">
     <span class="label">In short</span>
     <ul>
       <li>AltLoad is free. It installs AltStore, SideStore and LiveContainer on your own device with your own Apple ID.</li>
@@ -90,7 +95,7 @@
 
     <article>
       <section id="nature">
-        <h2><span class="n">01</span>Nature of AltLoad</h2>
+        <h2><span class="n">1</span>Nature of AltLoad</h2>
         <p>These Terms apply to the AltLoad app, its source code at <a href="https://github.com/mirazbakis/AltLoad">github.com/mirazbakis/AltLoad</a>, the builds published there, and this website (together, the "Service"), provided by mirazbakis ("we", "us"). By downloading, building, installing or using AltLoad you agree to them. If you don't, don't use the Service.</p>
         <p>AltLoad is a free iOS app that does on the device what a computer would otherwise do. It pairs your iPhone or iPad with itself, reaches it through LocalDevVPN, signs in to Apple's developer services with your Apple ID, and signs and installs AltStore, AltStore Beta, SideStore or SideStore inside LiveContainer, including their nightly builds. It can also run an AltServer for AltStore, and offers JIT, location simulation and entitlements.</p>
         <p>We don't host, sell or distribute those apps. AltLoad downloads them from their own sources and GitHub releases, or from a file you pick. Builds of AltLoad are published unsigned; you sign and install them yourself.</p>
@@ -101,7 +106,7 @@
       </section>
 
       <section id="risk">
-        <h2><span class="n">02</span>Assumption of risk</h2>
+        <h2><span class="n">2</span>Assumption of risk</h2>
         <p>Sideloading and developer features have consequences you accept by using the Service, including:</p>
         <ul>
           <li>apps stopping working when certificates expire or are revoked;</li>
@@ -115,7 +120,7 @@
       </section>
 
       <section id="you">
-        <h2><span class="n">03</span>Your responsibilities</h2>
+        <h2><span class="n">3</span>Your responsibilities</h2>
         <h3>Your Apple ID</h3>
         <p>AltLoad acts on your behalf with your Apple ID. You're responsible for keeping it secure, for what is done with it, and for following Apple's terms that apply to you, including Apple's limits on free accounts (7-day apps, a few active apps, some capabilities only for paid members). Apple can change its services or accounts at any time; that is outside our control.</p>
         <h3>Acceptable use</h3>
@@ -133,22 +138,22 @@
       </section>
 
       <section id="warranty">
-        <h2><span class="n">04</span>No warranty</h2>
+        <h2><span class="n">4</span>No warranty</h2>
         <p>The Service is provided "as is" and "as available", without warranty of any kind, express or implied, including merchantability, fitness for a particular purpose, non-infringement, and that it will be uninterrupted, secure or error-free. We don't promise that any third-party source, anisette server or repository will be available. Where the law doesn't allow some exclusions, they apply as far as it does.</p>
       </section>
 
       <section id="liability">
-        <h2><span class="n">05</span>Limitation of liability</h2>
+        <h2><span class="n">5</span>Limitation of liability</h2>
         <p>To the fullest extent the law allows, we aren't liable for indirect, incidental, special, consequential or punitive damages, or for loss of data, device functionality, apps, certificates or access to an Apple ID, arising from your use of or inability to use the Service. Because the Service is free, our total liability is limited to zero, or the lowest amount the law allows. Nothing here limits liability that can't legally be limited.</p>
       </section>
 
       <section id="indemnity">
-        <h2><span class="n">06</span>Indemnification</h2>
+        <h2><span class="n">6</span>Indemnification</h2>
         <p>As far as the law allows, you agree to cover us for claims, losses and costs that come from your misuse of the Service or your breach of these Terms or of the law.</p>
       </section>
 
       <section id="privacy">
-        <h2><span class="n">07</span>Privacy</h2>
+        <h2><span class="n">7</span>Privacy</h2>
         <p>We don't collect your data. AltLoad has no analytics or tracking and sends nothing to us.</p>
         <ul>
           <li>Your Apple ID password is sent only to Apple. With Remember password on, it's kept in the device's Keychain, readable only while unlocked and never synced.</li>
@@ -159,12 +164,12 @@
       </section>
 
       <section id="changes">
-        <h2><span class="n">08</span>Changes and termination</h2>
+        <h2><span class="n">8</span>Changes and termination</h2>
         <p>We may update these Terms. We'll change the effective date above and mention significant changes in the release notes; using the Service after that means you accept them. We may change or stop any part of the Service at any time. You can stop by deleting AltLoad; apps it installed keep working until their signature expires. If you break these Terms, your permission to use the Service ends.</p>
       </section>
 
       <section id="severability">
-        <h2><span class="n">09</span>Severability</h2>
+        <h2><span class="n">9</span>Severability</h2>
         <p>If any part of these Terms can't be enforced, the rest stays in effect. Not enforcing a term doesn't waive it. These Terms and the AltLoad License are the whole agreement about the Service; where they conflict about rights to the code, the license applies. Mandatory consumer-protection laws where you live still apply.</p>
       </section>
 
