@@ -9,14 +9,15 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪨</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/site.css">
     <!-- TensorFlow.js and MobileNet CDNs -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"></script>
     <style>
-        .tool { max-width: 620px; margin: 0 auto; padding: 1.5rem 0 0; }
-        .eyebrow { font-size: .8rem; font-weight: 600; color: var(--muted); }
+        .tool { padding: 1.5rem 0 0; }
+        .site-footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 12.5px; }
+        .eyebrow { font-size: 12.5px; color: var(--muted); }
         .tool h1 {
             font-family: var(--display);
             font-weight: 700;
@@ -25,7 +26,8 @@
             line-height: 1.15;
             margin-top: .5rem;
         }
-        .tool h1 em { font-style: normal; color: var(--muted); }
+        .tool h1 { color: var(--pink); }
+        .tool h1 em { font-style: normal; color: var(--ink); }
         .subtitle { color: var(--muted); margin-top: .75rem; font-size: 1.05rem; }
 
         /* Upload Area */
@@ -127,18 +129,13 @@
     </style>
 </head>
 <body>
-    <div class="backdrop" aria-hidden="true">
-        <img src="AltLoad.png" alt="">
-        <img src="Catalyst.png" alt="">
-        <img src="AltLoad.png" alt="">
-    </div>
-
-    <div class="panel">
-        <div class="panel-inner" style="padding-top: clamp(1.1rem, 3vw, 1.75rem)">
-            <a class="back-link" href="index.html">&larr; Back to Miraz's page</a>
+    <div class="window">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>miraz@github: ~/rock-estimator</span></div>
+        <div class="term">
+            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ <a href="index.html">cd ~</a> <span class="muted"># back to Miraz's page</span></p>
 
         <main class="tool">
-            <p class="eyebrow">Web tool · Runs in your browser</p>
+            <p class="eyebrow"># web tool, runs in your browser</p>
             <h1>Rock Value <em>Estimator</em></h1>
             <p class="subtitle">Upload a photo to estimate its rock type and value.</p>
 

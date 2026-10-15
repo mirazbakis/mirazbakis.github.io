@@ -13,414 +13,115 @@
         gtag('config', 'G-K1QEH9G0QP');
     </script>
 
-    <title>Miraz | Portfolio</title>
+    <title>Miraz Bakis</title>
     <meta name="description" content="I build apps for iPhone and Mac: sideloading and signing tools, a free antivirus for Mac, and the occasional Roblox game.">
     <meta name="author" content="Miraz Bakis">
     <link rel="canonical" href="https://mirazbakis.github.io/">
 
-    <meta property="og:title" content="Miraz | Portfolio">
+    <meta property="og:title" content="Miraz Bakis">
     <meta property="og:description" content="I build apps for iPhone and Mac: sideloading and signing tools, a free antivirus for Mac, and the occasional Roblox game.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mirazbakis.github.io/">
     <meta name="twitter:card" content="summary">
 
-    <meta name="theme-color" content="#0c0c10">
+    <meta name="theme-color" content="#08090c">
     <meta name="color-scheme" content="dark">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/site.css">
 
     <style>
-        /* ---- banner ---- */
-        .banner {
-            position: relative;
-            height: clamp(170px, 26vw, 250px);
-            overflow: hidden;
-            background: #1a1838;
-            border-bottom: 1px solid var(--line);
-        }
-        .banner-wash {
-            position: absolute;
-            inset: -60px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            filter: blur(40px) saturate(170%) brightness(1.1);
-        }
-        .banner-wash img { width: 100%; height: 100%; object-fit: cover; }
-        /* My app icons scattered across the banner like stickers */
-        .sticker {
-            position: absolute;
-            border-radius: 23%;
-            box-shadow: 0 14px 30px -10px rgba(0, 0, 0, .55);
-        }
-        .s1 { width: clamp(54px, 7vw, 78px);  left: 6%;  top: 18%; transform: rotate(-10deg); }
-        .s2 { width: clamp(40px, 5vw, 56px);  left: 22%; top: 56%; transform: rotate(8deg); }
-        .s3 { width: clamp(46px, 6vw, 66px);  right: 22%; top: 14%; transform: rotate(9deg); }
-        .s4 { width: clamp(56px, 7.5vw, 84px); right: 6%;  top: 44%; transform: rotate(-7deg); }
-        .s5 { width: clamp(36px, 4.4vw, 50px); left: 36%; top: 12%; transform: rotate(-4deg); opacity: .9; }
-        .banner::after {
-            content: "";
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, transparent 45%, rgba(22, 22, 28, .55));
-        }
-
-        /* ---- profile ---- */
-        .profile { text-align: center; }
-        .avatar {
-            position: relative; z-index: 1;
-            width: clamp(104px, 14vw, 128px);
-            aspect-ratio: 1;
-            margin: calc(clamp(104px, 14vw, 128px) / -2) auto 0;
-            display: grid; place-items: center;
-            border-radius: 50%;
-            background: linear-gradient(160deg, #2a2d48, #17182a);
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 0 6px rgba(22, 22, 28, .9), 0 20px 40px -12px rgba(0, 0, 0, .6);
-            font-size: clamp(3rem, 6vw, 3.6rem);
-        }
-        .profile h1 {
-            margin-top: 1rem;
-            font-family: var(--display);
-            font-size: clamp(2rem, 5vw, 2.6rem);
+        .hello {
+            color: var(--pink);
+            font-size: clamp(1.8rem, 6vw, 2.6rem);
             font-weight: 700;
-            color: var(--accent);
-            line-height: 1.1;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
         }
-        .profile .realname { color: var(--muted); font-weight: 500; margin-top: .3rem; }
 
-        .socials { display: flex; justify-content: center; gap: .6rem; margin-top: 1.25rem; }
-        .social {
-            width: 46px; height: 46px;
-            display: grid; place-items: center;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .06);
-            color: var(--ink);
-            transition: background-color .15s ease, transform .15s ease;
-        }
-        .social:hover { background: rgba(255, 255, 255, .12); transform: translateY(-2px); }
-        .social svg { width: 21px; height: 21px; }
-
-        /* Status card, in the spirit of a Discord presence card */
-        .status {
-            display: flex; align-items: center; gap: .9rem;
-            max-width: 380px;
-            margin: 1.5rem auto 0;
-            padding: .85rem 1rem;
-            text-align: left;
-            background: rgba(255, 255, 255, .04);
-            border: 1px solid var(--line);
-            border-radius: 14px;
-        }
-        .status-icon {
-            position: relative; flex: none;
-            width: 44px; height: 44px;
-            display: grid; place-items: center;
-            border-radius: 50%;
-            background: linear-gradient(160deg, #ff8a4c, #9a2c0e);
-            font-size: 1.3rem;
-        }
-        .status-icon::after {
-            content: "";
-            position: absolute; right: -1px; bottom: -1px;
-            width: 13px; height: 13px;
-            border-radius: 50%;
-            background: #f0b232;
-            border: 3px solid #1d1d24;
-        }
-        .status strong { display: block; font-family: var(--display); font-weight: 600; font-size: 1.02rem; line-height: 1.2; }
-        .status span { color: var(--muted); font-size: .84rem; }
-
-        /* ---- tabs ---- */
-        .tabs {
-            position: sticky; top: 0; z-index: 5;
-            display: flex; justify-content: center; gap: 2rem;
-            margin: 2rem calc(-1 * clamp(1.1rem, 4vw, 2.5rem)) 0;
-            padding: .9rem 0 0;
-            background: linear-gradient(180deg, rgba(22, 22, 28, .96) 70%, rgba(22, 22, 28, 0));
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-        }
-        .tab {
-            position: relative;
-            padding: .3rem .2rem .8rem;
-            background: none; border: 0;
-            font-family: var(--display);
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--muted);
-            cursor: pointer;
-            transition: color .15s ease;
-        }
-        .tab:hover { color: var(--ink); text-decoration: none; }
-        .tab::after {
-            content: "";
-            position: absolute; left: 50%; bottom: 0;
-            width: 0; height: 3px;
-            border-radius: 3px;
-            background: var(--accent);
-            transform: translateX(-50%);
-            transition: width .25s ease;
-        }
-        .tab.active { color: var(--ink); }
-        .tab.active::after { width: 110%; }
-
-        section { scroll-margin-top: 4.5rem; padding-top: 2rem; }
-
-        /* ---- about ---- */
-        .about p { color: #d6d6de; max-width: 52rem; }
-        .about p + p { margin-top: .85rem; }
-        .toolkit { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
-
-        /* ---- project cards ---- */
-        .cards {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+        /* `gh api` output: avatar beside a key/value list */
+        .gh {
+            display: flex;
             gap: 1.25rem;
+            padding: 1rem;
+            border: 1px dashed var(--line);
+            border-radius: var(--radius);
         }
-        .card {
-            position: relative;
-            display: flex; flex-direction: column;
-            background: var(--card);
+        .gh img { width: 84px; height: 84px; flex: none; border-radius: 10px; background: #fff; }
+        .gh dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0 1.25rem; min-width: 0; }
+        .gh dt { color: var(--yellow); }
+        .gh dd { overflow-wrap: anywhere; }
+        .gh .stats span + span::before { content: " · "; color: var(--muted); }
+        .gh .more { grid-column: 1 / -1; margin-top: .35rem; }
+
+        /* `ls ~/projects` output */
+        .ls { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+        .ls a {
+            display: flex; gap: .85rem; align-items: flex-start;
+            height: 100%;
+            padding: .85rem;
             border: 1px solid var(--line);
             border-radius: var(--radius);
-            overflow: hidden;
-            transition: transform .2s ease, border-color .2s ease, background-color .2s ease;
+            color: var(--ink);
+            transition: border-color .15s ease, background-color .15s ease;
         }
-        .card:hover { transform: translateY(-4px); border-color: var(--line-strong); background: var(--card-hover); }
+        .ls a:hover { border-color: var(--blue); background: var(--accent-soft); text-decoration: none; }
+        .ls img { width: 44px; height: 44px; border-radius: 10px; flex: none; }
+        .ls b { color: var(--blue); font-weight: 700; }
+        .ls .tag { margin-left: .35rem; }
+        .ls small { display: block; margin-top: .15rem; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
 
-        /* Banner: the app's own icon, blurred into a backdrop, with the crisp icon on top */
-        .card-banner {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            display: grid; place-items: center;
-            overflow: hidden;
-            background: var(--tint, #222);
-        }
-        .card-banner .wash {
-            position: absolute;
-            inset: -35%;
-            width: 170%; height: 170%;
-            object-fit: cover;
-            filter: blur(36px) saturate(160%);
-            opacity: .9;
-        }
-        .card-banner .fg {
-            position: relative;
-            width: 30%;
-            aspect-ratio: 1;
-            border-radius: 23%;
-            box-shadow: 0 18px 36px -12px rgba(0, 0, 0, .6);
-            transition: transform .3s ease;
-        }
-        .card:hover .card-banner .fg { transform: scale(1.06) rotate(-3deg); }
-        .card-banner .emoji {
-            position: relative;
-            font-size: clamp(3rem, 5vw, 4rem);
-            filter: drop-shadow(0 12px 20px rgba(0, 0, 0, .45));
-            transition: transform .3s ease;
-        }
-        .card:hover .card-banner .emoji { transform: scale(1.08) rotate(-4deg); }
-
-        .card-body { padding: 1.2rem 1.35rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
-        .card h3 { font-family: var(--display); font-size: 1.45rem; font-weight: 700; line-height: 1.15; }
-        .card h3 a { color: var(--ink); }
-        .card h3 a::after { content: ""; position: absolute; inset: 0; }
-        .card h3 a:hover { text-decoration: none; }
-        .card .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .65rem; }
-        .card .subtitle { color: var(--muted); margin-top: .55rem; font-weight: 500; }
-        .card p.desc { color: #c4c4ce; margin-top: .7rem; font-size: .93rem; line-height: 1.7; }
-
-        .tag.dev { color: #ffb37a; background: rgba(255, 138, 76, .14); }
-        .tag.dev::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-        .card.wip { border-style: dashed; }
-        .card.wip:hover { transform: none; }
-
-        @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (max-width: 580px) {
-            .cards { grid-template-columns: 1fr; }
-            .s2, .s5 { display: none; }
+        @media (max-width: 600px) {
+            .ls { grid-template-columns: 1fr; }
+            .gh { flex-direction: column; }
+            .gh dl { grid-template-columns: 1fr; }
+            .gh dt { margin-top: .4rem; }
+            .gh dt:first-child { margin-top: 0; }
         }
     </style>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="backdrop" aria-hidden="true">
-        <img src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="">
-        <img src="Catalyst.png" alt="">
-        <img src="AltLoad.png" alt="">
-    </div>
+    <main id="main" class="window">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>miraz@github: ~</span></div>
+        <div class="term">
+            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ whoami</p>
+            <h1 class="out hello">Miraz ⛏️</h1>
+            <p class="out">I build apps for iPhone and Mac, mostly sideloading and signing tools, plus a free antivirus for Mac. <span class="muted">When an idea sticks, I also make games on Roblox.</span></p>
 
-    <main id="main" class="panel">
-        <div class="banner" aria-hidden="true">
-            <div class="banner-wash">
-                <img src="https://raw.githubusercontent.com/mirazbakis/Dionysos/main/docs/assets/logo.png" alt="">
-                <img src="AltLoad.png" alt="">
-                <img src="Catalyst.png" alt="">
-                <img src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="">
+            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ gh api users/mirazbakis</p>
+            <div class="out gh">
+                <img data-gh="avatar_url" src="https://avatars.githubusercontent.com/u/307711826?v=4&s=160" alt="Miraz's GitHub avatar" width="84" height="84">
+                <dl>
+                    <dt>name</dt><dd data-gh="name">Miraz</dd>
+                    <dt>login</dt><dd>@<span data-gh="login">mirazbakis</span></dd>
+                    <dt>bio</dt><dd data-gh="bio">Developer of AltLoad, a tool that installs AltStore Classic completely on-device (iOS 27).</dd>
+                    <dt>company</dt><dd data-gh="company">Athene Softworks</dd>
+                    <dt>stats</dt><dd class="stats"><span><span data-gh="public_repos">6</span> repos</span><span><span data-gh="followers">1</span> followers</span><span><span data-gh="following">2</span> following</span></dd>
+                    <dd class="more"><a href="https://github.com/mirazbakis" target="_blank" rel="noopener">→ github.com/mirazbakis</a></dd>
+                </dl>
             </div>
-            <img class="sticker s1" src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="">
-            <img class="sticker s2" src="AltLoad.png" alt="">
-            <img class="sticker s3" src="Catalyst.png" alt="">
-            <img class="sticker s4" src="https://raw.githubusercontent.com/mirazbakis/Dionysos/main/docs/assets/logo.png" alt="">
-            <img class="sticker s5" src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="">
-        </div>
 
-        <div class="panel-inner">
-            <header class="profile">
-                <div class="avatar" aria-hidden="true">⛏️</div>
-                <h1>Miraz</h1>
-                <p class="realname">Miraz Bakis</p>
-                <nav class="socials" aria-label="Links">
-                    <a class="social" href="https://github.com/mirazbakis" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
-                    </a>
-                    <a class="social" href="./AltLoad.html" aria-label="AltLoad" title="AltLoad">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19h14"/></svg>
-                    </a>
-                    <a class="social" href="#projects" aria-label="Projects" title="Projects">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-                    </a>
-                </nav>
+            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ ls ~/projects</p>
+            <ul class="out ls">
+                <li><a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="" width="44" height="44"><span><b>odysseus/</b><span class="tag">iOS</span><small>On-device signer and app store. An advanced Feather and FreeSign fork.</small></span></a></li>
+                <li><a href="./AltLoad.html"><img src="AltLoad.png" alt="" width="44" height="44"><span><b>altload/</b><span class="tag">iOS</span><small>Installs AltStore Classic completely on-device, no computer needed.</small></span></a></li>
+                <li><a href="./Catalyst/"><img src="Catalyst.png" alt="" width="44" height="44"><span><b>catalyst/</b><span class="tag">iOS</span><small>A fork of SideStore that supports Enterprise signing.</small></span></a></li>
+                <li><a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="" width="44" height="44"><span><b>agamemnon/</b><span class="tag">macOS</span><small>Free, open-source antivirus with download protection and encrypted DNS.</small></span></a></li>
+            </ul>
 
-                <div class="status">
-                    <span class="status-icon" aria-hidden="true">🔨</span>
-                    <div>
-                        <strong>Working on Hephaestus</strong>
-                        <span>A web-based iOS app signer</span>
-                    </div>
-                </div>
-            </header>
+            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ cat skills.txt</p>
+            <p class="out">Swift · Luau · HTML · CSS</p>
 
-            <nav class="tabs" aria-label="Sections">
-                <a class="tab active" href="#about">About</a>
-                <a class="tab" href="#projects">Projects</a>
-            </nav>
-
-            <section id="about" class="about" aria-labelledby="about-title">
-                <h2 class="section-title" id="about-title">Hi, I'm Miraz</h2>
-                <p>I build apps for iPhone and Mac, mostly sideloading and signing tools like <a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener">Odysseus</a> and <a href="./AltLoad.html">AltLoad</a>, plus <a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener">Agamemnon</a>, a free antivirus for Mac.</p>
-                <p>When an idea sticks, I also make games on Roblox. Source code for most of my work is on <a href="https://github.com/mirazbakis" target="_blank" rel="noopener">GitHub</a>.</p>
-                <div class="toolkit" aria-label="What I work with">
-                    <span class="tag">Swift</span>
-                    <span class="tag">Luau</span>
-                    <span class="tag">HTML &amp; CSS</span>
-                </div>
-            </section>
-
-            <section id="projects" aria-labelledby="projects-title">
-                <h2 class="section-title" id="projects-title">Here's some stuff I've made</h2>
-                <ul class="cards">
-                    <li class="card">
-                        <div class="card-banner" style="--tint:#1d2a4a" aria-hidden="true">
-                            <img class="wash" src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="">
-                            <img class="fg" src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="" loading="lazy">
-                        </div>
-                        <div class="card-body">
-                            <h3><a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener">Odysseus</a></h3>
-                            <div class="tags"><span class="tag">iOS</span></div>
-                            <p class="subtitle">On-device signer &amp; app store</p>
-                            <p class="desc">Browse sources and get apps in one tap: download, sign and install right on your iPhone, with live certificate status checks.</p>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="card-banner" style="--tint:#3a2a12" aria-hidden="true">
-                            <img class="wash" src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="">
-                            <img class="fg" src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="" loading="lazy">
-                        </div>
-                        <div class="card-body">
-                            <h3><a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener">Agamemnon</a></h3>
-                            <div class="tags"><span class="tag">macOS</span><span class="tag">Open source</span></div>
-                            <p class="subtitle">Free antivirus for Mac</p>
-                            <p class="desc">Download protection, quarantine, scheduled scans and encrypted DNS, all free and open source.</p>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="card-banner" style="--tint:#1b3a8a" aria-hidden="true">
-                            <img class="wash" src="https://raw.githubusercontent.com/mirazbakis/Dionysos/main/docs/assets/logo.png" alt="">
-                            <img class="fg" src="https://raw.githubusercontent.com/mirazbakis/Dionysos/main/docs/assets/logo.png" alt="" loading="lazy">
-                        </div>
-                        <div class="card-body">
-                            <h3><a href="https://github.com/mirazbakis/Dionysos" target="_blank" rel="noopener">Dionysos</a></h3>
-                            <div class="tags"><span class="tag">iOS</span></div>
-                            <p class="subtitle">Sign with your own Apple IDs</p>
-                            <p class="desc">Sign and install apps on your iPhone with your own Apple IDs, and manage accounts, certificates and refreshes on-device.</p>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="card-banner" style="--tint:#1a1030" aria-hidden="true">
-                            <img class="wash" src="Catalyst.png" alt="">
-                            <img class="fg" src="Catalyst.png" alt="" loading="lazy">
-                        </div>
-                        <div class="card-body">
-                            <h3><a href="./Catalyst/">Catalyst</a></h3>
-                            <div class="tags"><span class="tag">iOS</span><span class="tag">iPadOS</span></div>
-                            <p class="subtitle">On-device app store</p>
-                            <p class="desc">Install, refresh and customize sideloaded apps on iPhone and iPad, no computer needed.</p>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="card-banner" style="--tint:#3a2380" aria-hidden="true">
-                            <img class="wash" src="AltLoad.png" alt="">
-                            <img class="fg" src="AltLoad.png" alt="" loading="lazy">
-                        </div>
-                        <div class="card-body">
-                            <h3><a href="./AltLoad.html">AltLoad</a></h3>
-                            <div class="tags"><span class="tag">iOS</span><span class="tag">Open source</span></div>
-                            <p class="subtitle">AltStore, installed from your iPhone</p>
-                            <p class="desc">Install AltStore on your iPhone using your own Apple ID, completely on-device with no computer needed.</p>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <div class="card-banner" style="background:linear-gradient(150deg,#d9a26a,#6e3f1f)" aria-hidden="true">
-                            <span class="emoji">🪨</span>
-                        </div>
-                        <div class="card-body">
-                            <h3><a href="./rock-identifier.html">Rock Value Estimator</a></h3>
-                            <div class="tags"><span class="tag">Web</span></div>
-                            <p class="subtitle">A small side project</p>
-                            <p class="desc">Upload a photo of a rock to identify its geological type and get a rough estimate of its value, right in your browser.</p>
-                        </div>
-                    </li>
-                    <li class="card wip">
-                        <div class="card-banner" style="background:linear-gradient(150deg,#ff8a4c,#7a210a)" aria-hidden="true">
-                            <span class="emoji">🔨</span>
-                        </div>
-                        <div class="card-body">
-                            <h3>Hephaestus</h3>
-                            <div class="tags"><span class="tag dev">In development</span></div>
-                            <p class="subtitle">Web-based signer</p>
-                            <p class="desc">Sign and install iOS apps right from your browser.</p>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <footer class="site-footer">
-                <p>&copy; <span id="year">2026</span> Miraz Bakis · Made with HTML &amp; CSS</p>
-            </footer>
+            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ <span class="cursor" aria-hidden="true"></span></p>
         </div>
     </main>
 
-    <script src="assets/site.js"></script>
-    <script>
-        // Highlight the tab for whichever section is on screen
-        (function () {
-            var tabs = document.querySelectorAll('.tab');
-            if (!('IntersectionObserver' in window)) return;
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) {
-                    if (!e.isIntersecting) return;
-                    tabs.forEach(function (t) { t.classList.toggle('active', t.getAttribute('href') === '#' + e.target.id); });
-                });
-            }, { rootMargin: '-35% 0px -55% 0px' });
-            document.querySelectorAll('#about, #projects').forEach(function (s) { io.observe(s); });
-        })();
-    </script>
+    <script src="assets/github.js"></script>
 </body>
 </html>
