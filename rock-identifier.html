@@ -3,29 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-        (function () {
-            var t = null;
-            try { t = localStorage.getItem('theme'); } catch (e) {}
-            if (t !== 'light' && t !== 'dark') {
-                t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-            }
-            document.documentElement.setAttribute('data-theme', t);
-        })();
-    </script>
     <title>Rock Value Estimator · Miraz Bakis</title>
     <meta name="description" content="Upload a photo of a rock to identify its geological type and estimate its value, right in your browser.">
-    <meta name="color-scheme" content="light dark">
+    <meta name="color-scheme" content="dark">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪨</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/site.css">
     <!-- TensorFlow.js and MobileNet CDNs -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@latest"></script>
     <style>
-        .tool { padding: 1.5rem 0 0; }
+        .tool { max-width: 620px; margin: 0 auto; padding: 1.5rem 0 0; }
+        .eyebrow { font-size: .8rem; font-weight: 600; color: var(--muted); }
         .tool h1 {
             font-family: var(--display);
             font-weight: 700;
@@ -44,7 +35,7 @@
             border-radius: var(--radius);
             padding: 2.75rem 1.25rem;
             text-align: center;
-            background: var(--surface);
+            background: var(--card);
             cursor: pointer;
             transition: border-color .2s ease, background-color .2s ease;
         }
@@ -66,7 +57,7 @@
         .results {
             margin-top: 1.5rem;
             padding: 1.5rem;
-            background: var(--surface);
+            background: var(--card);
             border: 1px solid var(--line);
             border-radius: 18px;
         }
@@ -86,7 +77,7 @@
         .result-item span:last-child { font-family: var(--mono); color: var(--muted); }
         .confidence-bar {
             height: 6px;
-            background: var(--surface-2);
+            background: rgba(255, 255, 255, .08);
             border-radius: 999px;
             margin-top: .4rem;
             overflow: hidden;
@@ -126,8 +117,7 @@
             color: var(--muted);
             font-weight: 500;
         }
-        .error { margin-top: 1rem; text-align: center; color: #c0392b; font-size: .92rem; }
-        html[data-theme="dark"] .error { color: #f17a6a; }
+        .error { margin-top: 1rem; text-align: center; color: #f17a6a; font-size: .92rem; }
         .disclaimer {
             margin-top: 1rem;
             text-align: center;
@@ -137,20 +127,15 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="site-header">
-            <a class="wordmark" href="index.html"><span class="mark" aria-hidden="true">⛏️</span><span>Miraz Bakis</span></a>
-            <nav class="site-nav" aria-label="Primary">
-                <a href="index.html">Home</a>
-                <a href="index.html#stuff">Projects</a>
-                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
-                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                </button>
-            </nav>
-        </header>
+    <div class="backdrop" aria-hidden="true">
+        <img src="AltLoad.png" alt="">
+        <img src="Catalyst.png" alt="">
+        <img src="AltLoad.png" alt="">
     </div>
-    <div class="container">
+
+    <div class="panel">
+        <div class="panel-inner" style="padding-top: clamp(1.1rem, 3vw, 1.75rem)">
+            <a class="back-link" href="index.html">&larr; Back to Miraz's page</a>
 
         <main class="tool">
             <p class="eyebrow">Web tool · Runs in your browser</p>
@@ -181,10 +166,10 @@
             </div>
         </main>
 
-        <footer class="site-footer">
-            <p>&copy; <span id="year">2026</span> Miraz Bakis</p>
-            
-        </footer>
+            <footer class="site-footer">
+                <p>&copy; <span id="year">2026</span> Miraz Bakis</p>
+            </footer>
+        </div>
     </div>
 
     <script src="assets/site.js"></script>
