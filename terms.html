@@ -9,28 +9,28 @@
 <link rel="icon" type="image/png" href="AltLoad.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/altload.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/altload.css">
 <style>
   .doc{display:grid;grid-template-columns:230px 1fr;gap:48px;padding:40px 0 0;align-items:start}
   .toc{position:sticky;top:24px}
   .toc ol{list-style:none;counter-reset:t;margin-top:12px;border-left:1px solid var(--line)}
   .toc li{counter-increment:t}
-  .toc a{display:flex;gap:10px;padding:7px 0 7px 14px;margin-left:-1px;border-left:1px solid transparent;text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-2)}
-  .toc a::before{content:counter(t,decimal-leading-zero);font-variant-numeric:tabular-nums;font-weight:600;font-size:13px;color:var(--ink-3);padding-top:1px}
+  .toc a{display:flex;gap:10px;padding:7px 0 7px 14px;margin-left:-1px;border-left:1px solid transparent;text-decoration:none;font-size:14px;color:var(--ink-2)}
+  .toc a::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--ink-3);padding-top:2px}
   .toc a:hover,.toc a.on{color:var(--ink);border-left-color:var(--leaf)}
-  .title h1{font-size:clamp(38px,6vw,58px);margin:12px 0 12px}
-  .title p{color:var(--ink-2);font-size:19px}
+  .title h1{font-size:clamp(34px,5.5vw,52px);margin:10px 0 12px}
+  .title p{color:var(--ink-2);font-size:17px}
   .dates{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-  .dates span{font-variant-numeric:tabular-nums;font-weight:600;font-size:13px;padding:5px 10px;border-radius:8px;background:var(--raised);border:1px solid var(--line);color:var(--ink-2)}
+  .dates span{font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:8px;background:var(--raised);border:1px solid var(--line);color:var(--ink-2)}
   .short{margin:28px 0 8px;padding:22px 24px}
-  .short ul{margin:12px 0 0 18px;color:var(--ink-2);font-size:16.5px}
+  .short ul{margin:10px 0 0 18px;color:var(--ink-2);font-size:15px}
   .short li{margin:4px 0}
-  article section{padding:44px 0 0;max-width:720px;scroll-margin-top:20px}
-  article h2{display:flex;align-items:baseline;gap:14px;font-size:27px;margin-bottom:14px}
-  article h2 .n{font-variant-numeric:tabular-nums;font-size:16px;color:var(--leaf);font-weight:700}
-  article h3{font-size:18px;margin:22px 0 6px}
-  article p,article li{color:var(--ink-2);font-size:17px;line-height:1.7}
+  article section{padding:34px 0 0;scroll-margin-top:20px}
+  article h2{display:flex;align-items:baseline;gap:14px;font-size:24px;margin-bottom:12px}
+  article h2 .n{font-family:var(--mono);font-size:14px;color:var(--leaf);font-weight:500}
+  article h3{font-size:16px;margin:18px 0 6px}
+  article p,article li{color:var(--ink-2);font-size:16px}
   article p+p{margin-top:10px}
   article ul{margin:8px 0 0 20px}
   article li{margin:5px 0}
