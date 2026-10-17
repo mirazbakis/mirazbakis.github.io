@@ -77,23 +77,6 @@
             background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.55) 100%);
         }
 
-        /* ---------- click to enter ---------- */
-        .enter {
-            position: fixed; inset: 0; z-index: 50;
-            display: grid; place-items: center;
-            background: rgba(0, 0, 0, .55);
-            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-            border: 0; width: 100%;
-            color: var(--ink);
-            font: 500 15px/1 var(--mono);
-            letter-spacing: .08em;
-            cursor: pointer;
-            transition: opacity .8s ease, visibility .8s;
-        }
-        .enter span { animation: pulse 2.4s ease-in-out infinite; }
-        .entered .enter { opacity: 0; visibility: hidden; }
-        @keyframes pulse { 50% { opacity: .35; } }
-
         /* ---------- layout ---------- */
         main {
             position: relative; z-index: 2;
@@ -102,13 +85,11 @@
             grid-template-columns: minmax(0, 1fr);
             padding: 48px 16px;
             perspective: 1200px;
-            pointer-events: none;
         }
-        .ready main { pointer-events: auto; }
 
         .card {
-            width: min(100%, 560px);
-            padding: 34px 30px 26px;
+            width: min(100%, 860px);
+            padding: 28px 30px;
             border-radius: 22px;
             background: var(--glass);
             border: 1px solid var(--edge);
@@ -117,15 +98,26 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255,255,255,.06);
             text-align: center;
             transform-style: preserve-3d;
-            transition: transform .25s ease-out, opacity 1s ease .15s, translate 1s ease .15s;
-            opacity: 0; translate: 0 18px;
+            transition: transform .25s ease-out;
+            animation: rise 1s ease .15s both;
         }
-        .entered .card { opacity: 1; translate: 0 0; }
+        @keyframes rise { from { opacity: 0; translate: 0 18px; } }
+
+        /* profile row: avatar | name, badges, bio | socials */
+        .top { display: flex; align-items: center; gap: 24px; text-align: left; }
+        .top .info { flex: 1; min-width: 0; }
+        .top .avatar { margin: 0; flex: none; }
+        .top .name-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; }
+        .top .badges, .top .bio { margin-left: 0; }
+        .top .badges { margin-top: 10px; }
+        .top .bio { margin-top: 10px; max-width: none; }
+        .top .meta { justify-content: flex-start; margin-top: 8px; }
+        .top .socials { flex-direction: column; gap: 6px; margin-top: 0; }
 
         /* ---------- profile ---------- */
         .avatar {
             position: relative;
-            width: 116px; height: 116px;
+            width: 104px; height: 104px;
             margin: 0 auto 16px;
         }
         .avatar img {
@@ -148,7 +140,7 @@
         }
         @keyframes sheen { to { background-position: -220% 0; } }
 
-        .handle { margin-top: 4px; color: var(--faint); font: 400 13px var(--mono); }
+        .handle { color: var(--faint); font: 400 13px var(--mono); }
 
         .badges {
             display: flex; justify-content: center; gap: 6px;
@@ -200,7 +192,7 @@
         /* ---------- github presence (in place of discord) ---------- */
         .presence {
             display: flex; align-items: center; gap: 14px;
-            margin-top: 24px;
+            margin-top: 22px;
             padding: 14px;
             text-align: left;
             border-radius: 14px;
@@ -232,7 +224,7 @@
 
         /* ---------- projects ---------- */
         .projects {
-            display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
+            display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;
             margin-top: 12px;
             list-style: none;
             text-align: left;
@@ -267,6 +259,18 @@
 
         a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+        @media (max-width: 820px) {
+            .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 640px) {
+            .card { width: min(100%, 560px); }
+            .top { flex-direction: column; text-align: center; gap: 16px; }
+            .top .name-row, .top .meta { justify-content: center; }
+            .top .badges { margin-left: auto; margin-right: auto; }
+            .top .socials { flex-direction: row; gap: 14px; }
+        }
+
         @media (max-width: 520px) {
             .card { padding: 28px 18px 22px; }
             h1 { font-size: 29px; }
@@ -282,16 +286,18 @@
     <canvas id="space" aria-hidden="true"></canvas>
     <div class="vignette" aria-hidden="true"></div>
 
-    <button class="enter" type="button" aria-label="Enter site"><span>click to enter...</span></button>
-
     <main>
         <article class="card" id="card">
+          <header class="top">
             <div class="avatar">
                 <img data-gh="avatar_url" src="https://avatars.githubusercontent.com/u/307711826?v=4&s=320" alt="Miraz's GitHub avatar" width="116" height="116">
             </div>
 
-            <h1 data-gh="name">Miraz</h1>
-            <p class="handle">@<span data-gh="login">mirazbakis</span></p>
+            <div class="info">
+            <div class="name-row">
+                <h1 data-gh="name">Miraz</h1>
+                <p class="handle">@<span data-gh="login">mirazbakis</span></p>
+            </div>
 
             <div class="badges">
                 <span class="badge" tabindex="0" data-tip="Developer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></span>
@@ -307,6 +313,13 @@
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg><span data-gh="company">Athene Softworks</span></span>
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>Swift · Luau · HTML · CSS</span>
             </div>
+            </div>
+
+            <nav class="socials" aria-label="Links">
+                <a href="https://github.com/mirazbakis" target="_blank" rel="noopener" data-tip="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
+                <a href="https://mirazbakis.github.io/" data-tip="mirazbakis.github.io" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+            </nav>
+          </header>
 
             <a class="presence" href="https://github.com/mirazbakis" target="_blank" rel="noopener">
                 <span class="pfp"><img data-gh="avatar_url" src="https://avatars.githubusercontent.com/u/307711826?v=4&s=160" alt="" width="54" height="54"><i aria-hidden="true"></i></span>
@@ -323,11 +336,6 @@
                 <li><a href="./Catalyst/"><img src="Catalyst.png" alt="" width="38" height="38"><span><b>Catalyst</b><small>SideStore with Enterprise signing</small></span></a></li>
                 <li><a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="" width="38" height="38"><span><b>Agamemnon</b><small>Free antivirus for Mac</small></span></a></li>
             </ul>
-
-            <nav class="socials" aria-label="Links">
-                <a href="https://github.com/mirazbakis" target="_blank" rel="noopener" data-tip="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.6 18 4.9 18 4.9c.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg></a>
-                <a href="https://mirazbakis.github.io/" data-tip="mirazbakis.github.io" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
-            </nav>
         </article>
     </main>
 
@@ -508,20 +516,7 @@
     })();
 
     (function () {
-        var root = document.documentElement;
-        var btn = document.querySelector('.enter');
         var card = document.getElementById('card');
-
-        // Click to enter
-        function enter() {
-            if (root.classList.contains('entered')) return;
-            root.classList.add('entered');
-            // Don't let the same click land on a link that was hidden under the overlay
-            setTimeout(function () { root.classList.add('ready'); }, 450);
-            setTimeout(type, 700);
-        }
-        btn.addEventListener('click', enter);
-        addEventListener('keydown', function (e) { if (!root.classList.contains('entered') && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); enter(); } });
 
         // Typewriter bio
         var phrases = [
@@ -550,6 +545,7 @@
                 }
             })();
         }
+        setTimeout(type, 1200);
 
         // 3D tilt on the card
         if (matchMedia('(hover: hover)').matches) {
