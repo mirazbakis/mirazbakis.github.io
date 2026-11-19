@@ -24,105 +24,96 @@
     <meta property="og:url" content="https://mirazbakis.com/">
     <meta name="twitter:card" content="summary">
 
-    <meta name="theme-color" content="#08090c">
+    <meta name="theme-color" content="#0e0e10">
     <meta name="color-scheme" content="dark">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/site.css">
-
-    <style>
-        .hello {
-            color: var(--pink);
-            font-size: clamp(1.8rem, 6vw, 2.6rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
-        }
-
-        /* `gh api` output: avatar beside a key/value list */
-        .gh {
-            display: flex;
-            gap: 1.25rem;
-            padding: 1rem;
-            border: 1px dashed var(--line);
-            border-radius: var(--radius);
-        }
-        .gh img { width: 84px; height: 84px; flex: none; border-radius: 10px; background: #fff; }
-        .gh dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0 1.25rem; min-width: 0; }
-        .gh dt { color: var(--yellow); }
-        .gh dd { overflow-wrap: anywhere; }
-        .gh .stats span + span::before { content: " · "; color: var(--muted); }
-        .gh .more { grid-column: 1 / -1; margin-top: .35rem; }
-
-        /* `ls ~/projects` output */
-        .ls { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
-        .ls a {
-            display: flex; gap: .85rem; align-items: flex-start;
-            height: 100%;
-            padding: .85rem;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            color: var(--ink);
-            transition: border-color .15s ease, background-color .15s ease;
-        }
-        .ls a:hover { border-color: var(--blue); background: var(--accent-soft); text-decoration: none; }
-        .ls img { width: 44px; height: 44px; border-radius: 10px; flex: none; }
-        .ls b { color: var(--blue); font-weight: 700; }
-        .ls .tag { margin-left: .35rem; }
-        .ls small { display: block; margin-top: .15rem; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
-
-        @media (max-width: 600px) {
-            .ls { grid-template-columns: 1fr; }
-            .gh { flex-direction: column; }
-            .gh dl { grid-template-columns: 1fr; }
-            .gh dt { margin-top: .4rem; }
-            .gh dt:first-child { margin-top: 0; }
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/main.css">
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <main id="main" class="window">
-        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>miraz@github: ~</span></div>
-        <div class="term">
-            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ whoami</p>
-            <h1 class="out hello">Miraz ⛏️</h1>
-            <p class="out">I build apps for iPhone and Mac, mostly sideloading and signing tools, plus a free antivirus for Mac. <span class="muted">When an idea sticks, I also make games on Roblox.</span></p>
-
-            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ gh api users/mirazbakis</p>
-            <div class="out gh">
-                <img data-gh="avatar_url" src="https://avatars.githubusercontent.com/u/307711826?v=4&s=160" alt="Miraz's GitHub avatar" width="84" height="84">
-                <dl>
-                    <dt>name</dt><dd data-gh="name">Miraz</dd>
-                    <dt>login</dt><dd>@<span data-gh="login">mirazbakis</span></dd>
-                    <dt>bio</dt><dd data-gh="bio">Developer of AltLoad, a tool that installs AltStore Classic completely on-device (iOS 27).</dd>
-                    <dt>company</dt><dd data-gh="company">Athene Softworks</dd>
-                    <dt>stats</dt><dd class="stats"><span><span data-gh="public_repos">6</span> repos</span><span><span data-gh="followers">1</span> followers</span><span><span data-gh="following">2</span> following</span></dd>
-                    <dd class="more"><a href="https://github.com/mirazbakis" target="_blank" rel="noopener">→ github.com/mirazbakis</a></dd>
-                </dl>
-            </div>
-
-            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ ls ~/projects</p>
-            <ul class="out ls">
-                <li><a href="./nodes/"><img src="nodes/icon.png" alt="" width="44" height="44"><span><b>nodes/</b><span class="tag">macOS · Windows</span><small>A team of AI agents on your computer that runs on Codex, Claude Code, Gemini and 20+ free models.</small></span></a></li>
-                <li><a href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="" width="44" height="44"><span><b>odysseus/</b><span class="tag">iOS</span><small>On-device signer and app store. An advanced Feather and FreeSign fork.</small></span></a></li>
-                <li><a href="./AltLoad.html"><img src="AltLoad.png" alt="" width="44" height="44"><span><b>altload/</b><span class="tag">iOS</span><small>Installs AltStore Classic completely on-device, no computer needed.</small></span></a></li>
-                <li><a href="./Catalyst/"><img src="Catalyst.png" alt="" width="44" height="44"><span><b>catalyst/</b><span class="tag">iOS</span><small>A fork of SideStore that supports Enterprise signing.</small></span></a></li>
-                <li><a href="https://github.com/Agamemnon-Intelligence/Agamemnon-macOS" target="_blank" rel="noopener"><img src="https://raw.githubusercontent.com/Agamemnon-Intelligence/Agamemnon-macOS/main/docs/icon.png" alt="" width="44" height="44"><span><b>agamemnon/</b><span class="tag">macOS</span><small>Free, open-source antivirus with download protection and encrypted DNS.</small></span></a></li>
-            </ul>
-
-            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ cat skills.txt</p>
-            <p class="out">Swift · Luau · HTML · CSS</p>
-
-            <p class="cmd"><span class="p">miraz@github</span>:<span class="path">~</span>$ <span class="cursor" aria-hidden="true"></span></p>
+    <header>
+        <div class="wrap">
+            <a class="brand" href="/">
+                <img data-gh="avatar_url" src="https://avatars.githubusercontent.com/u/307711826?v=4&s=80" alt="" width="26" height="26">
+                Miraz Bakis
+            </a>
+            <nav aria-label="Main">
+                <ul>
+                    <li><a href="/" aria-current="page">home</a></li>
+                    <li><a href="/projects/">projects</a></li>
+                    <li><a href="https://github.com/mirazbakis" target="_blank" rel="noopener">github</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
+
+    <main id="main" class="wrap">
+        <div class="hero">
+            <h1>hey, i'm miraz <span>⛏️</span></h1>
+            <p>i make apps for <strong>iphone and mac</strong>, mostly sideloading and signing tools, plus a free antivirus for mac. when an idea sticks i also make roblox games. this is where all my stuff lives.</p>
+            <div class="actions">
+                <a class="btn primary" href="/projects/">my stuff →</a>
+                <a class="btn" href="https://github.com/mirazbakis" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    @mirazbakis
+                </a>
+            </div>
+        </div>
+
+        <section id="known-for">
+            <h2>you probably know me from</h2>
+            <p class="lede">the stuff most people find me through.</p>
+            <ul class="featured">
+                <li><a class="card" href="https://altload.org/" target="_blank" rel="noopener">
+                    <svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h9v9h-1.5V5.56l-7.47 7.47-1.06-1.06L10.44 4.5H4z"/></svg>
+                    <div class="card-head"><img src="/AltLoad.png" alt="" width="32" height="32"><span class="card-title"><span class="owner">mirazbakis / </span><b>AltLoad</b></span></div>
+                    <p>Installs AltStore Classic completely on-device, no computer needed.</p>
+                    <div class="meta"><span><i class="dot" style="background:#f05138"></i>iOS</span><span data-stars="mirazbakis/AltLoad" hidden></span></div>
+                </a></li>
+                <li><a class="card" href="https://github.com/mirazbakis/Odysseus" target="_blank" rel="noopener">
+                    <svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h9v9h-1.5V5.56l-7.47 7.47-1.06-1.06L10.44 4.5H4z"/></svg>
+                    <div class="card-head"><img src="https://raw.githubusercontent.com/mirazbakis/Odysseus/master/Images/logo.png" alt="" width="32" height="32"><span class="card-title"><span class="owner">mirazbakis / </span><b>Odysseus</b></span></div>
+                    <p>On-device signer and app store. An advanced Feather and FreeSign fork.</p>
+                    <div class="meta"><span><i class="dot" style="background:#f05138"></i>iOS</span><span data-stars="mirazbakis/Odysseus" hidden></span></div>
+                </a></li>
+            </ul>
+            <a class="more-link" href="/projects/">see everything i've made →</a>
+        </section>
+
+        <section id="lately" hidden>
+            <h2>lately on github</h2>
+            <p class="lede">what i've been pushing recently, pulled live from github.</p>
+            <ul class="activity" id="activity"></ul>
+        </section>
+
+        <section class="about" id="about">
+            <h2>about me</h2>
+            <p class="lede"><span data-gh="bio">Developer of AltLoad, a tool that installs AltStore Classic completely on-device (iOS 27).</span> i also make apps under <span data-gh="company">Athene Softworks</span>.</p>
+            <ul class="chips" aria-label="Skills">
+                <li>Swift</li><li>Luau</li><li>HTML</li><li>CSS</li>
+            </ul>
+        </section>
     </main>
 
-    <script src="assets/github.js"></script>
+    <footer>
+        <div class="wrap">
+            <span>made by miraz · © <span id="year">2026</span></span>
+            <ul>
+                <li><a href="https://github.com/mirazbakis" target="_blank" rel="noopener">github</a></li>
+                <li><a href="https://altload.org/" target="_blank" rel="noopener">altload</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="/assets/github.js"></script>
+    <script src="/assets/stars.js"></script>
+    <script src="/assets/activity.js"></script>
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
